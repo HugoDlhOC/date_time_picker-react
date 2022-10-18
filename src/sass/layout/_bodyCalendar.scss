@@ -1,0 +1,31 @@
+.week-cells,
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.cell {
+  background-color: aquamarine;
+  width: 250px;
+  height: 250px;
+  border: 3px purple solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    font-size: 32px;
+  }
+}
+
+.previous {
+  background-color: coral;
+}
+
+.after {
+  background-color: #61b6fb;
+}
+
+.name-day-week {
+  background-color: #dad3d3;
+}

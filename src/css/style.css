@@ -1,0 +1,54 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: darkgrey;
+}
+
+.navigation-datepicker {
+  border: 2px red solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navigation-datepicker .navigation-datepicker--icon {
+  padding: 15px;
+}
+
+.week-cells,
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.cell {
+  background-color: aquamarine;
+  width: 250px;
+  height: 250px;
+  border: 3px purple solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cell button {
+  font-size: 32px;
+}
+
+.previous {
+  background-color: coral;
+}
+
+.after {
+  background-color: #61b6fb;
+}
+
+.name-day-week {
+  background-color: #dad3d3;
+}
+
+/*# sourceMappingURL=style.css.map */
