@@ -5,27 +5,30 @@
 }
 
 .cell {
-  background-color: aquamarine;
-  width: 250px;
-  height: 250px;
-  border: 3px purple solid;
   display: flex;
   align-items: center;
   justify-content: center;
 
   button {
-    font-size: 32px;
+    width: 45px;
+    height: 45px;
   }
 }
 
-.previous {
-  background-color: coral;
+.previous,
+.after {
+  button {
+    color: rgba(0, 0, 0, 0.66);
+    opacity: 0.6;
+  }
 }
 
 .after {
-  background-color: #61b6fb;
 }
 
 .name-day-week {
   background-color: #dad3d3;
+  width: 45px;
+  height: 45px;
+  border: 1px #676666 solid;
 }

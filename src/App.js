@@ -1,13 +1,15 @@
 import logo from "./logo.svg";
 import Navigation from "./components/Navigation";
 import CalendarBody from "./components/CalendarBody";
-import FakeComponent from "./components/FakeComponent";
+import DateContextProvider from "./context/DateContext";
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <CalendarBody />
+      <DateContextProvider>
+        <Navigation />
+        <CalendarBody />
+      </DateContextProvider>
     </div>
   );
 }

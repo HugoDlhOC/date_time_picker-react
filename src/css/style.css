@@ -16,8 +16,13 @@ body {
   justify-content: center;
   align-items: center;
 }
-.navigation-datepicker .navigation-datepicker--icon {
-  padding: 15px;
+.navigation-datepicker .button-navigation {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.navigation-datepicker .button-navigation .button-navigation--icon {
+  padding: 5px;
 }
 
 .week-cells,
@@ -27,28 +32,26 @@ body {
 }
 
 .cell {
-  background-color: aquamarine;
-  width: 250px;
-  height: 250px;
-  border: 3px purple solid;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .cell button {
-  font-size: 32px;
+  width: 45px;
+  height: 45px;
 }
 
-.previous {
-  background-color: coral;
-}
-
-.after {
-  background-color: #61b6fb;
+.previous button,
+.after button {
+  color: rgba(0, 0, 0, 0.66);
+  opacity: 0.6;
 }
 
 .name-day-week {
   background-color: #dad3d3;
+  width: 45px;
+  height: 45px;
+  border: 1px #676666 solid;
 }
 
 /*# sourceMappingURL=style.css.map */

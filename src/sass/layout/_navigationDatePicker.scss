@@ -4,7 +4,13 @@
   justify-content: center;
   align-items: center;
 
-  .navigation-datepicker--icon {
-    padding: 15px;
+  .button-navigation {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    .button-navigation--icon {
+      padding: 5px;
+    }
   }
 }
