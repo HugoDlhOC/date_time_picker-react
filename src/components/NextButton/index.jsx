@@ -42,6 +42,8 @@ const NextButton = () => {
       type: "CHANGE_DATE",
       date: { day: dayValue, month: monthValue, year: yearValue },
     });
+
+    console.log(month);
   };
   return (
     <div>

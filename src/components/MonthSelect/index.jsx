@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { months } from "../../data/months";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DateContext } from "../../context/DateContext";
 import defineYearsSelect from "../../services/defineYearsSelect";
 

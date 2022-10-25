@@ -29,30 +29,59 @@ const CalendarBody = () => {
 
   //mise en place de l'obtention de la date lors du clic du bouton
   const [dateDisplay, setDateDisplay] = useState("");
-  const handleDisplayDate = (positionMonth, dayNumber) => {
+  //l'utilisateur peut choisir le format de la date retournée : soit "fr", soit "en"
+  const handleDisplayDate = (positionMonth, dayNumber, format) => {
     switch (positionMonth) {
       case "previous":
-        setDateDisplay(
-          String(date.year) + "/" + String(date.month) + "/" + String(dayNumber)
-        );
+        format === "en"
+          ? setDateDisplay(
+              String(date.year) +
+                "/" +
+                String(date.month) +
+                "/" +
+                String(dayNumber)
+            )
+          : setDateDisplay(
+              String(dayNumber) +
+                "/" +
+                String(date.month) +
+                "/" +
+                String(date.year)
+            );
         break;
       case "current":
-        setDateDisplay(
-          String(date.year) +
-            "/" +
-            String(date.month + 1) +
-            "/" +
-            String(dayNumber)
-        );
+        format === "en"
+          ? setDateDisplay(
+              String(date.year) +
+                "/" +
+                String(date.month + 1) +
+                "/" +
+                String(dayNumber)
+            )
+          : setDateDisplay(
+              String(dayNumber) +
+                "/" +
+                String(date.month + 1) +
+                "/" +
+                String(date.year)
+            );
         break;
       case "next":
-        setDateDisplay(
-          String(date.year) +
-            "/" +
-            String(date.month + 2) +
-            "/" +
-            String(dayNumber)
-        );
+        format === "en"
+          ? setDateDisplay(
+              String(date.year) +
+                "/" +
+                String(date.month + 2) +
+                "/" +
+                String(dayNumber)
+            )
+          : setDateDisplay(
+              String(dayNumber) +
+                "/" +
+                String(date.month + 2) +
+                "/" +
+                String(date.year)
+            );
         break;
     }
   };
@@ -67,7 +96,9 @@ const CalendarBody = () => {
             ? sortWeeks[0].values.map((item) => {
                 return (
                   <div className={"cell previous"}>
-                    <button onClick={() => handleDisplayDate("previous", item)}>
+                    <button
+                      onClick={() => handleDisplayDate("previous", item, "fr")}
+                    >
                       {item}
                     </button>
                   </div>
@@ -77,7 +108,9 @@ const CalendarBody = () => {
           {sortWeeks[1].values.map((item) => {
             return (
               <div className={"cell"}>
-                <button onClick={() => handleDisplayDate("current", item)}>
+                <button
+                  onClick={() => handleDisplayDate("current", item, "fr")}
+                >
                   {item}
                 </button>
               </div>
@@ -92,7 +125,9 @@ const CalendarBody = () => {
               {item.values.map((date) => {
                 return (
                   <div className={"cell"}>
-                    <button onClick={() => handleDisplayDate("current", date)}>
+                    <button
+                      onClick={() => handleDisplayDate("current", date, "fr")}
+                    >
                       {date}
                     </button>
                   </div>
@@ -107,7 +142,9 @@ const CalendarBody = () => {
           {sortWeeks[3].values.map((item) => {
             return (
               <div className={"cell"}>
-                <button onClick={() => handleDisplayDate("current", item)}>
+                <button
+                  onClick={() => handleDisplayDate("current", item, "fr")}
+                >
                   {item}
                 </button>
               </div>
@@ -117,7 +154,9 @@ const CalendarBody = () => {
             ? sortWeeks[4].values.map((item) => {
                 return (
                   <div className={"cell after"}>
-                    <button onClick={() => handleDisplayDate("next", item)}>
+                    <button
+                      onClick={() => handleDisplayDate("next", item, "fr")}
+                    >
                       {item}
                     </button>
                   </div>
