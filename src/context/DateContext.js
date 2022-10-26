@@ -2,11 +2,8 @@ import { createContext, useReducer } from "react";
 import { dateDataReducer } from "./dateDataReducer";
 
 export const DateContext = createContext();
-const objDate = new Date();
 const initialState = {
-  day: objDate.getDate(),
-  month: objDate.getMonth(),
-  year: objDate.getFullYear(),
+  date: new Date(),
 };
 
 const DateContextProvider = (props) => {

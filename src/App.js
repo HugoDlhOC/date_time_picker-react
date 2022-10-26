@@ -1,14 +1,11 @@
-import logo from "./logo.svg";
-import Navigation from "./components/Navigation";
-import CalendarBody from "./components/CalendarBody";
 import DateContextProvider from "./context/DateContext";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <div className="App">
       <DateContextProvider>
-        <Navigation />
-        <CalendarBody />
+        <HomePage />
       </DateContextProvider>
     </div>
   );

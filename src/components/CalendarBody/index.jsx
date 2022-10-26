@@ -8,13 +8,18 @@ import DaysNamesWeek from "../DaysNamesWeek";
 const CalendarBody = () => {
   //context pour le changement de mois et d'année
   const { date } = useContext(DateContext);
+  console.log(date.date.getFullYear());
 
-  const objDate = new Date(date.year, date.month, date.day);
+  const objDate = new Date(
+    date.date.getFullYear(),
+    date.date.getMonth(),
+    date.date.getDate()
+  );
 
   //nombre de jours dans le mois en cours
   const totalOfDaysThisMonth = allDaysCurrentMonth(objDate);
 
-  //déterminer le nombre de dimanche dans le mois.
+  //déterminer le nombre de dimanche dans le mois
   const allSundayCurrentMonthNumber = allSundayCurrentMonth(
     objDate,
     totalOfDaysThisMonth
@@ -35,52 +40,52 @@ const CalendarBody = () => {
       case "previous":
         format === "en"
           ? setDateDisplay(
-              String(date.year) +
+              String(date.date.getFullYear()) +
                 "/" +
-                String(date.month) +
+                String(date.date.getMonth()) +
                 "/" +
                 String(dayNumber)
             )
           : setDateDisplay(
               String(dayNumber) +
                 "/" +
-                String(date.month) +
+                String(date.date.getMonth()) +
                 "/" +
-                String(date.year)
+                String(date.date.getFullYear())
             );
         break;
       case "current":
         format === "en"
           ? setDateDisplay(
-              String(date.year) +
+              String(date.date.getFullYear()) +
                 "/" +
-                String(date.month + 1) +
+                String(date.date.getMonth() + 1) +
                 "/" +
                 String(dayNumber)
             )
           : setDateDisplay(
               String(dayNumber) +
                 "/" +
-                String(date.month + 1) +
+                String(date.date.getMonth() + 1) +
                 "/" +
-                String(date.year)
+                String(date.date.getFullYear())
             );
         break;
       case "next":
         format === "en"
           ? setDateDisplay(
-              String(date.year) +
+              String(date.date.getFullYear()) +
                 "/" +
-                String(date.month + 2) +
+                String(date.date.getMonth() + 2) +
                 "/" +
                 String(dayNumber)
             )
           : setDateDisplay(
               String(dayNumber) +
                 "/" +
-                String(date.month + 2) +
+                String(date.date.getMonth() + 2) +
                 "/" +
-                String(date.year)
+                String(date.date.getFullYear())
             );
         break;
     }
@@ -92,7 +97,7 @@ const CalendarBody = () => {
       <DaysNamesWeek />
       <div className={"first-days-cells"}>
         <div className={"row"}>
-          {sortWeeks[0].values.length != 0
+          {sortWeeks[0].values.length != 7
             ? sortWeeks[0].values.map((item) => {
                 return (
                   <div className={"cell previous"}>
@@ -167,7 +172,8 @@ const CalendarBody = () => {
       </div>
       <div className={"number-week-cells"}></div>
       <h1>
-        Nous sommes le {date.day}/{date.month + 1}/{date.year}
+        Nous sommes le {date.date.getDate()}/{date.date.getMonth() + 1}/
+        {date.date.getFullYear()}
       </h1>
       <h1>Vous avez cliqué sur la date {dateDisplay}</h1>
     </div>

@@ -2,9 +2,7 @@ export const dateDataReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE_DATE":
       return {
-        day: action.date.day,
-        month: action.date.month,
-        year: action.date.year,
+        date: action.date.date,
       };
     default:
       return state;

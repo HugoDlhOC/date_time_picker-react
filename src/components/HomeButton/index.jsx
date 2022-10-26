@@ -14,9 +14,7 @@ const HomeButton = () => {
     dispatch({
       type: "CHANGE_DATE",
       date: {
-        day: actualDate.getDate(),
-        month: actualDate.getMonth(),
-        year: actualDate.getFullYear(),
+        date: actualDate,
       },
     });
   };
