@@ -17,7 +17,11 @@ const YearSelect = () => {
     //donner le changement à react context
     dispatch({
       type: "CHANGE_DATE",
-      date: { date: saveDate },
+      date: {
+        date: saveDate,
+        yearMin: years[0].value,
+        yearMax: years[years.length - 1].value,
+      },
     });
   };
   return (

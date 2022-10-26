@@ -15,7 +15,11 @@ const PreviousButton = () => {
     let saveDate = date.date;
     dispatch({
       type: "CHANGE_DATE",
-      date: { date: subMonths(saveDate, 1) },
+      date: {
+        date: subMonths(saveDate, 1),
+        yearMin: date.yearMin,
+        yearMax: date.yearMax,
+      },
     });
   };
   return (

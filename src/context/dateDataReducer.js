@@ -3,6 +3,8 @@ export const dateDataReducer = (state, action) => {
     case "CHANGE_DATE":
       return {
         date: action.date.date,
+        yearMin: action.date.yearMin,
+        yearMax: action.date.yearMax,
       };
     default:
       return state;

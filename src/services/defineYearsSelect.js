@@ -10,7 +10,7 @@ const defineYearsSelect = (interval) => {
   for (let i = currentDayYear - interval; i < currentDayYear; i++) {
     years.push({ label: i, value: i });
   }
-  for (let i = currentDayYear; i < currentDayYear + interval; i++) {
+  for (let i = currentDayYear; i <= currentDayYear + interval; i++) {
     years.push({ label: i, value: i });
   }
 

@@ -1,7 +1,7 @@
 import { es, ru, fr } from "date-fns/esm/locale";
 
 const monthsNames = [...Array(12).keys()].map((i) =>
-  fr.localize.month(i, { width: "full" })
+  es.localize.month(i, { width: "full" })
 );
 
 export const months = [];

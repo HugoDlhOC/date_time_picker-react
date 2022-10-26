@@ -1,7 +1,7 @@
-import { es, ru, fr } from "date-fns/esm/locale";
+import { enUS, es, ru, fr } from "date-fns/esm/locale";
 const DaysNamesWeek = () => {
   const weekdays = [...Array(7).keys()].map((i) =>
-    fr.localize.day(i, { width: "abbreviated" })
+    es.localize.day(i, { width: "abbreviated" })
   );
   return (
     <div className={"week-cells"}>

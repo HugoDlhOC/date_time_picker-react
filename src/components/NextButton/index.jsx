@@ -18,10 +18,15 @@ const NextButton = () => {
     let saveDate = date.date;
     dispatch({
       type: "CHANGE_DATE",
-      date: { date: addMonths(saveDate, 1) },
+      date: {
+        date: addMonths(saveDate, 1),
+        yearMin: date.yearMin,
+        yearMax: date.yearMax,
+      },
     });
     console.log(date);
   };
+  console.log(date);
   return (
     <div>
       <button onClick={handleNextMonth} className={"button-navigation"}>

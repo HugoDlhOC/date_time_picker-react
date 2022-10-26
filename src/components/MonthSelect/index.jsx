@@ -15,7 +15,7 @@ const MonthSelect = () => {
     //donner le changement à react context
     dispatch({
       type: "CHANGE_DATE",
-      date: { date: saveDate },
+      date: { date: saveDate, yearMin: date.yearMin, yearMax: date.yearMax },
     });
   };
   console.log(date.date);

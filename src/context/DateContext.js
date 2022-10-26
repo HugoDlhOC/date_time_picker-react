@@ -4,6 +4,8 @@ import { dateDataReducer } from "./dateDataReducer";
 export const DateContext = createContext();
 const initialState = {
   date: new Date(),
+  yearMin: undefined,
+  yearMax: undefined,
 };
 
 const DateContextProvider = (props) => {
