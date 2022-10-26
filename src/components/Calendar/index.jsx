@@ -2,12 +2,12 @@ import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
 import { useContext } from "react";
 import { DateContext } from "../../context/DateContext";
+import { LanguageContext } from "../../context/LanguageContext";
 
-const Calendar = ({ language }) => {
-  //context
-  const { date, dispatch } = useContext(DateContext);
+const Calendar = ({ languageChoice }) => {
+  const { language, setLanguage } = useContext(LanguageContext);
+  setLanguage(languageChoice);
   console.log(language);
-  console.log(date);
   return (
     <div>
       <Navigation />

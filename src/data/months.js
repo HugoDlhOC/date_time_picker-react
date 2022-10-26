@@ -1,4 +1,4 @@
-import { es, ru, fr } from "date-fns/esm/locale";
+import { enUS, es, fr } from "date-fns/esm/locale";
 
 const monthsNames = [...Array(12).keys()].map((i) =>
   es.localize.month(i, { width: "full" })

@@ -1,11 +1,30 @@
 import Select from "react-select";
-import { months } from "../../data/months";
 import { useContext, useEffect, useState } from "react";
 import { DateContext } from "../../context/DateContext";
+import { LanguageContext } from "../../context/LanguageContext";
+import { enUS, es, fr } from "date-fns/esm/locale";
 
 const MonthSelect = () => {
   //context
   const { date, dispatch } = useContext(DateContext);
+
+  //context
+  const { language } = useContext(LanguageContext);
+
+  //définition de la liste des mois pour le select
+  const monthsNames = [...Array(12).keys()].map((i) => {
+    switch (language) {
+      case "fr":
+        return fr.localize.month(i, { width: "full" });
+      case "es":
+        return es.localize.month(i, { width: "full" });
+      default:
+        return enUS.localize.month(i, { width: "full" });
+    }
+  });
+
+  const months = [];
+  monthsNames.map((item, index) => months.push({ label: item, value: index }));
 
   //changement de mois
   const handleSelectChangeMonth = (option) => {
