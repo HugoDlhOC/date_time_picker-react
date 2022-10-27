@@ -1,17 +1,30 @@
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DateContext } from "../../context/DateContext";
 import { LanguageContext } from "../../context/LanguageContext";
+import { ReturnDateContext } from "../../context/ReturnDateContext";
 
 const Calendar = ({ languageChoice }) => {
-  const { language, setLanguage } = useContext(LanguageContext);
+  //context
+  const { setLanguage } = useContext(LanguageContext);
   setLanguage(languageChoice);
-  console.log(language);
+
+  //context
+  const { returnDate } = useContext(ReturnDateContext);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openCalendar = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <div>
-      <Navigation />
-      <CalendarBody />
+    <div className={"input-calendar"}>
+      <input type={"text"} onClick={openCalendar} value={returnDate} />
+      <div className={"calendar"}>
+        <Navigation isOpen={isOpen} />
+        <CalendarBody isOpen={isOpen} setIsOpen={setIsOpen} />
+      </div>
     </div>
   );
 };

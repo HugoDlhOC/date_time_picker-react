@@ -4,11 +4,20 @@ import allDaysCurrentMonth from "../../services/allDaysCurrentMonth";
 import allSundayCurrentMonth from "../../services/allSundayCurrentMonth";
 import sortWeeksCalendar from "../../services/sortWeeksCalendar";
 import DaysNamesWeek from "../DaysNamesWeek";
+import { ReturnDateContext } from "../../context/ReturnDateContext";
+import { format } from "date-fns";
+import { LanguageContext } from "../../context/LanguageContext";
 
-const CalendarBody = () => {
+const CalendarBody = ({ isOpen, setIsOpen }) => {
   //context pour le changement de mois et d'année
-  const { date } = useContext(DateContext);
+  const { date, dispatch } = useContext(DateContext);
   console.log(date.date.getFullYear());
+
+  //context
+  const { returnDate, setReturnDate } = useContext(ReturnDateContext);
+
+  //context
+  const { language } = useContext(LanguageContext);
 
   const objDate = new Date(
     date.date.getFullYear(),
@@ -33,67 +42,42 @@ const CalendarBody = () => {
   );
 
   //mise en place de l'obtention de la date lors du clic du bouton
-  const [dateDisplay, setDateDisplay] = useState("");
-  //l'utilisateur peut choisir le format de la date retournée : soit "fr", soit "en"
-  const handleDisplayDate = (positionMonth, dayNumber, format) => {
+  const handleDisplayDate = (positionMonth, dayNumber) => {
+    let clickDate = new Date(
+      date.date.getFullYear(),
+      date.date.getMonth(),
+      dayNumber
+    );
+
     switch (positionMonth) {
       case "previous":
-        format === "en"
-          ? setDateDisplay(
-              String(date.date.getFullYear()) +
-                "/" +
-                String(date.date.getMonth()) +
-                "/" +
-                String(dayNumber)
-            )
-          : setDateDisplay(
-              String(dayNumber) +
-                "/" +
-                String(date.date.getMonth()) +
-                "/" +
-                String(date.date.getFullYear())
-            );
+        clickDate.setMonth(clickDate.getMonth() - 1);
         break;
       case "current":
-        format === "en"
-          ? setDateDisplay(
-              String(date.date.getFullYear()) +
-                "/" +
-                String(date.date.getMonth() + 1) +
-                "/" +
-                String(dayNumber)
-            )
-          : setDateDisplay(
-              String(dayNumber) +
-                "/" +
-                String(date.date.getMonth() + 1) +
-                "/" +
-                String(date.date.getFullYear())
-            );
         break;
       case "next":
-        format === "en"
-          ? setDateDisplay(
-              String(date.date.getFullYear()) +
-                "/" +
-                String(date.date.getMonth() + 2) +
-                "/" +
-                String(dayNumber)
-            )
-          : setDateDisplay(
-              String(dayNumber) +
-                "/" +
-                String(date.date.getMonth() + 2) +
-                "/" +
-                String(date.date.getFullYear())
-            );
+        clickDate.setMonth(clickDate.getMonth() + 1);
         break;
     }
+
+    switch (language) {
+      case "enUS":
+        setReturnDate(format(clickDate, "MM/dd/yyyy"));
+        break;
+
+      case "fr":
+        setReturnDate(format(clickDate, "dd/MM/yyyy"));
+        break;
+
+      default:
+        setReturnDate(format(clickDate, "MM/dd/yyyy"));
+        break;
+    }
+    setIsOpen(false);
   };
-  console.log(sortWeeks);
 
   return (
-    <div>
+    <div className={isOpen === true ? "body-calendar" : "body-calendar hide"}>
       <DaysNamesWeek />
       <div className={"first-days-cells"}>
         <div className={"row"}>
@@ -101,9 +85,7 @@ const CalendarBody = () => {
             ? sortWeeks[0].values.map((item) => {
                 return (
                   <div className={"cell previous"}>
-                    <button
-                      onClick={() => handleDisplayDate("previous", item, "fr")}
-                    >
+                    <button onClick={() => handleDisplayDate("previous", item)}>
                       {item}
                     </button>
                   </div>
@@ -114,7 +96,14 @@ const CalendarBody = () => {
             return (
               <div className={"cell"}>
                 <button
-                  onClick={() => handleDisplayDate("current", item, "fr")}
+                  className={
+                    date.date.getMonth() === new Date().getMonth() &&
+                    date.date.getFullYear() === new Date().getFullYear() &&
+                    item === new Date().getDate()
+                      ? "button-today"
+                      : ""
+                  }
+                  onClick={() => handleDisplayDate("current", item)}
                 >
                   {item}
                 </button>
@@ -127,13 +116,20 @@ const CalendarBody = () => {
         {sortWeeks[2].values.map((item, index) => {
           return (
             <div className={"row"}>
-              {item.values.map((date) => {
+              {item.values.map((dateItem) => {
                 return (
                   <div className={"cell"}>
                     <button
-                      onClick={() => handleDisplayDate("current", date, "fr")}
+                      className={
+                        date.date.getMonth() === new Date().getMonth() &&
+                        date.date.getFullYear() === new Date().getFullYear() &&
+                        dateItem === new Date().getDate()
+                          ? "button-today"
+                          : ""
+                      }
+                      onClick={() => handleDisplayDate("current", dateItem)}
                     >
-                      {date}
+                      {dateItem}
                     </button>
                   </div>
                 );
@@ -148,7 +144,14 @@ const CalendarBody = () => {
             return (
               <div className={"cell"}>
                 <button
-                  onClick={() => handleDisplayDate("current", item, "fr")}
+                  className={
+                    date.date.getMonth() === new Date().getMonth() &&
+                    date.date.getFullYear() === new Date().getFullYear() &&
+                    item === new Date().getDate()
+                      ? "button-today"
+                      : ""
+                  }
+                  onClick={() => handleDisplayDate("current", item)}
                 >
                   {item}
                 </button>
@@ -159,9 +162,7 @@ const CalendarBody = () => {
             ? sortWeeks[4].values.map((item) => {
                 return (
                   <div className={"cell after"}>
-                    <button
-                      onClick={() => handleDisplayDate("next", item, "fr")}
-                    >
+                    <button onClick={() => handleDisplayDate("next", item)}>
                       {item}
                     </button>
                   </div>
@@ -171,11 +172,6 @@ const CalendarBody = () => {
         </div>
       </div>
       <div className={"number-week-cells"}></div>
-      <h1>
-        Nous sommes le {date.date.getDate()}/{date.date.getMonth() + 1}/
-        {date.date.getFullYear()}
-      </h1>
-      <h1>Vous avez cliqué sur la date {dateDisplay}</h1>
     </div>
   );
 };

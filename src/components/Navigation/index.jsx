@@ -6,12 +6,16 @@ import YearSelect from "../YearSelect";
 import { useContext } from "react";
 import { DateContext } from "../../context/DateContext";
 
-const Navigation = () => {
+const Navigation = ({ isOpen }) => {
   //context
   const { date } = useContext(DateContext);
 
   return (
-    <nav className={"navigation-datepicker"}>
+    <nav
+      className={
+        isOpen === true ? "navigation-datepicker" : "navigation-datepicker hide"
+      }
+    >
       {date.date.getFullYear() === date.yearMin &&
       date.date.getMonth() === 0 ? (
         ""

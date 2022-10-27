@@ -28,7 +28,8 @@ const PreviousButton = () => {
         <FontAwesomeIcon
           icon={faCircleArrowLeft}
           className={"button-navigation--icon"}
-          size={"2x"}
+          size={"xl"}
+          color={"white"}
         ></FontAwesomeIcon>
       </button>
     </div>

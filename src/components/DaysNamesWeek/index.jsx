@@ -18,7 +18,7 @@ const DaysNamesWeek = () => {
   return (
     <div className={"week-cells"}>
       {weekdays.map((item) => (
-        <div className={"cell name-day-week"}>{item}</div>
+        <span className={"cell name-day-week"}>{item}</span>
       ))}
     </div>
   );
