@@ -2,17 +2,12 @@ import DateContextProvider from "./context/DateContext";
 import HomePage from "./pages/HomePage";
 import LanguageContextProvider from "./context/LanguageContext";
 import ReturnDateContextProvider from "./context/ReturnDateContext";
+import YearsIntervalContextProvider from "./context/YearsIntervalContext";
 
 function App() {
   return (
     <div className="App">
-      <DateContextProvider>
-        <LanguageContextProvider>
-          <ReturnDateContextProvider>
-            <HomePage />
-          </ReturnDateContextProvider>
-        </LanguageContextProvider>
-      </DateContextProvider>
+      <HomePage />
     </div>
   );
 }

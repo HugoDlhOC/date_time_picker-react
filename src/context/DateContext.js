@@ -1,18 +1,12 @@
-import { createContext, useReducer } from "react";
-import { dateDataReducer } from "./dateDataReducer";
+import { createContext, useReducer, useState } from "react";
 
 export const DateContext = createContext();
-const initialState = {
-  date: new Date(),
-  yearMin: undefined,
-  yearMax: undefined,
-};
 
 const DateContextProvider = (props) => {
-  const [date, dispatch] = useReducer(dateDataReducer, initialState);
+  const [date, setDate] = useState(new Date());
 
   return (
-    <DateContext.Provider value={{ date, dispatch }}>
+    <DateContext.Provider value={{ date, setDate }}>
       {props.children}
     </DateContext.Provider>
   );

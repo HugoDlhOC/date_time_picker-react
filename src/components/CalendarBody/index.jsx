@@ -7,23 +7,29 @@ import DaysNamesWeek from "../DaysNamesWeek";
 import { ReturnDateContext } from "../../context/ReturnDateContext";
 import { format } from "date-fns";
 import { LanguageContext } from "../../context/LanguageContext";
+import { useDispatch, useSelector } from "react-redux";
+import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";
 
-const CalendarBody = ({ isOpen, setIsOpen }) => {
+const CalendarBody = () => {
+  //redux
+  const dispatch = useDispatch();
+
+  //redux
+  const isOpen = useSelector((state) => state.calendar.isOpen);
+
   //context pour le changement de mois et d'année
-  const { date, dispatch } = useContext(DateContext);
-  console.log(date.date.getFullYear());
+  //const { date } = useContext(DateContext);
+  //redux
+  const date = useSelector((state) => state.calendar.date);
 
   //context
-  const { returnDate, setReturnDate } = useContext(ReturnDateContext);
+  //const { setReturnDate } = useContext(ReturnDateContext);
 
   //context
-  const { language } = useContext(LanguageContext);
+  //const { language } = useContext(LanguageContext);
+  const language = useSelector((state) => state.calendar.language);
 
-  const objDate = new Date(
-    date.date.getFullYear(),
-    date.date.getMonth(),
-    date.date.getDate()
-  );
+  const objDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
   //nombre de jours dans le mois en cours
   const totalOfDaysThisMonth = allDaysCurrentMonth(objDate);
@@ -43,11 +49,7 @@ const CalendarBody = ({ isOpen, setIsOpen }) => {
 
   //mise en place de l'obtention de la date lors du clic du bouton
   const handleDisplayDate = (positionMonth, dayNumber) => {
-    let clickDate = new Date(
-      date.date.getFullYear(),
-      date.date.getMonth(),
-      dayNumber
-    );
+    let clickDate = new Date(date.getFullYear(), date.getMonth(), dayNumber);
 
     switch (positionMonth) {
       case "previous":
@@ -62,18 +64,29 @@ const CalendarBody = ({ isOpen, setIsOpen }) => {
 
     switch (language) {
       case "enUS":
-        setReturnDate(format(clickDate, "MM/dd/yyyy"));
+        dispatch(
+          defineReturnDate({ returnDate: format(clickDate, "MM/dd/yyyy") })
+        );
+        //setReturnDate(format(clickDate, "MM/dd/yyyy"));
         break;
 
       case "fr":
-        setReturnDate(format(clickDate, "dd/MM/yyyy"));
+        dispatch(
+          defineReturnDate({ returnDate: format(clickDate, "dd/MM/yyyy") })
+        );
+        //setReturnDate(format(clickDate, "dd/MM/yyyy"));
         break;
 
       default:
-        setReturnDate(format(clickDate, "MM/dd/yyyy"));
+        //setReturnDate(format(clickDate, "MM/dd/yyyy"));
+        dispatch(
+          defineReturnDate({ returnDate: format(clickDate, "MM/dd/yyyy") })
+        );
         break;
     }
-    setIsOpen(false);
+    //redux
+    dispatch(openCalendar({ isOpen: false }));
+    //setIsOpen(false);
   };
 
   return (
@@ -97,8 +110,8 @@ const CalendarBody = ({ isOpen, setIsOpen }) => {
               <div className={"cell"}>
                 <button
                   className={
-                    date.date.getMonth() === new Date().getMonth() &&
-                    date.date.getFullYear() === new Date().getFullYear() &&
+                    date.getMonth() === new Date().getMonth() &&
+                    date.getFullYear() === new Date().getFullYear() &&
                     item === new Date().getDate()
                       ? "button-today"
                       : ""
@@ -121,8 +134,8 @@ const CalendarBody = ({ isOpen, setIsOpen }) => {
                   <div className={"cell"}>
                     <button
                       className={
-                        date.date.getMonth() === new Date().getMonth() &&
-                        date.date.getFullYear() === new Date().getFullYear() &&
+                        date.getMonth() === new Date().getMonth() &&
+                        date.getFullYear() === new Date().getFullYear() &&
                         dateItem === new Date().getDate()
                           ? "button-today"
                           : ""
@@ -145,8 +158,8 @@ const CalendarBody = ({ isOpen, setIsOpen }) => {
               <div className={"cell"}>
                 <button
                   className={
-                    date.date.getMonth() === new Date().getMonth() &&
-                    date.date.getFullYear() === new Date().getFullYear() &&
+                    date.getMonth() === new Date().getMonth() &&
+                    date.getFullYear() === new Date().getFullYear() &&
                     item === new Date().getDate()
                       ? "button-today"
                       : ""

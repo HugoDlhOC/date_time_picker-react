@@ -1,32 +1,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { months } from "../../data/months";
 import { useContext, useState } from "react";
 import { DateContext } from "../../context/DateContext";
-import defineYearsSelect from "../../services/defineYearsSelect";
 import { addMonths } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
+import { changeDate } from "../../feature/calendarSlice";
 
 const NextButton = () => {
+  //redux
+  const dispatch = useDispatch();
+
   //context
-  const { date, dispatch } = useContext(DateContext);
+  //const { setDate } = useContext(DateContext);
+  const date = useSelector((state) => state.calendar.date);
 
   //récupérer le numéro du mois en cours et son label - pour trouver le label il faut faire correspondre le chiffre du mois en cours avec le bon mois
   //on obtient une structure différente de type tableau objet alors qu'on ne veut qu'un objet : [{}]
 
   //bouton mois suivant
   const handleNextMonth = () => {
-    let saveDate = date.date;
-    dispatch({
-      type: "CHANGE_DATE",
-      date: {
-        date: addMonths(saveDate, 1),
-        yearMin: date.yearMin,
-        yearMax: date.yearMax,
-      },
-    });
-    console.log(date);
+    let saveDate = date;
+    dispatch(changeDate({ date: addMonths(saveDate, 1) }));
+    //setDate(addMonths(saveDate, 1));
   };
-  console.log(date);
+
   return (
     <div>
       <button onClick={handleNextMonth} className={"button-navigation"}>

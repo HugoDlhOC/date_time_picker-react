@@ -5,22 +5,22 @@ import { useContext, useState } from "react";
 import { DateContext } from "../../context/DateContext";
 import defineYearsSelect from "../../services/defineYearsSelect";
 import { subMonths } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
+import { changeDate } from "../../feature/calendarSlice";
 
 const PreviousButton = () => {
+  //redux
+  const dispatch = useDispatch();
+
   //context
-  const { date, dispatch } = useContext(DateContext);
+  //const { setDate } = useContext(DateContext);
+  const date = useSelector((state) => state.calendar.date);
 
   //bouton mois précédent
   const handlePreviousMonth = () => {
-    let saveDate = date.date;
-    dispatch({
-      type: "CHANGE_DATE",
-      date: {
-        date: subMonths(saveDate, 1),
-        yearMin: date.yearMin,
-        yearMax: date.yearMax,
-      },
-    });
+    let saveDate = date;
+    dispatch(changeDate({ date: subMonths(saveDate, 1) }));
+    //setDate(subMonths(saveDate, 1));
   };
   return (
     <div>
