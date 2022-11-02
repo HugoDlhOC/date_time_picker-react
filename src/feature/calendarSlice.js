@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { format } from "date-fns";
 
 const initialState = {
   isOpen: false,
   date: new Date(),
   language: "enUS",
-  returnDate: format(new Date(), "MM/dd/yyyy"),
+  returnDate: "",
   yearMin: new Date().getFullYear() - 50,
   yearMax: new Date().getFullYear() + 50,
+  returnFormat: "MM/dd/yyyy",
 };
 
 export const calendarSlice = createSlice({
@@ -40,6 +40,11 @@ export const calendarSlice = createSlice({
       state.yearMin = yearMin;
       state.yearMax = yearMax;
     },
+
+    changeReturnFormat: (state, action) => {
+      const { returnFormat } = action.payload;
+      state.returnFormat = returnFormat;
+    },
   },
 });
 
@@ -50,4 +55,5 @@ export const {
   defineReturnDate,
   openCalendar,
   defineYearsInterval,
+  changeReturnFormat,
 } = calendarSlice.actions;

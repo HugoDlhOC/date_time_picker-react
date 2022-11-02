@@ -1,46 +1,32 @@
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
-import { useContext, useState } from "react";
-import { LanguageContext } from "../../context/LanguageContext";
-import { ReturnDateContext } from "../../context/ReturnDateContext";
-import { YearsIntervalContext } from "../../context/YearsIntervalContext";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import {
   changeLanguage,
-  defineReturnDate,
+  changeReturnFormat,
   defineYearsInterval,
   openCalendar,
 } from "../../feature/calendarSlice";
 
-const Calendar = ({ languageChoice, intervalBefore, intervalAfter }) => {
+const Calendar = ({ languageChoice, yearMin, yearMax, returnFormat }) => {
   //redux
   const dispatch = useDispatch();
 
-  //context
-  //const { setLanguage } = useContext(LanguageContext);
-  //setLanguage(languageChoice);
   //redux
   dispatch(changeLanguage({ language: languageChoice }));
 
-  //context
-  //const { returnDate } = useContext(ReturnDateContext);
   //redux
   const returnDate = useSelector((state) => state.calendar.returnDate);
 
-  //context
-  //const { setYearsInterval } = useContext(YearsIntervalContext);
+  //redux
+  dispatch(changeReturnFormat({ returnFormat }));
 
-  const [setIsOpen] = useState(false);
   const isOpen = useSelector((state) => state.calendar.isOpen);
 
-  //définir avec redux !!
-  //setYearsInterval({ yearMin: intervalBefore, yearMax: intervalAfter });
-  dispatch(
-    defineYearsInterval({ yearMin: intervalBefore, yearMax: intervalAfter })
-  );
+  dispatch(defineYearsInterval({ yearMin, yearMax }));
   const handleOpenCalendar = () => {
     dispatch(openCalendar({ isOpen: !isOpen }));
-    //setIsOpen(!isOpen);
   };
   return (
     <div className={"input-calendar"}>
@@ -54,3 +40,10 @@ const Calendar = ({ languageChoice, intervalBefore, intervalAfter }) => {
 };
 
 export default Calendar;
+
+Calendar.propTypes = {
+  languageChoice: PropTypes.any,
+  yearMin: PropTypes.number,
+  yearMax: PropTypes.number,
+  returnFormat: PropTypes.string,
+};

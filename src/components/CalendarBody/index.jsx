@@ -1,12 +1,8 @@
-import { useContext, useState } from "react";
-import { DateContext } from "../../context/DateContext";
 import allDaysCurrentMonth from "../../services/allDaysCurrentMonth";
 import allSundayCurrentMonth from "../../services/allSundayCurrentMonth";
 import sortWeeksCalendar from "../../services/sortWeeksCalendar";
 import DaysNamesWeek from "../DaysNamesWeek";
-import { ReturnDateContext } from "../../context/ReturnDateContext";
 import { format } from "date-fns";
-import { LanguageContext } from "../../context/LanguageContext";
 import { useDispatch, useSelector } from "react-redux";
 import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";
 
@@ -17,17 +13,11 @@ const CalendarBody = () => {
   //redux
   const isOpen = useSelector((state) => state.calendar.isOpen);
 
-  //context pour le changement de mois et d'année
-  //const { date } = useContext(DateContext);
   //redux
   const date = useSelector((state) => state.calendar.date);
 
-  //context
-  //const { setReturnDate } = useContext(ReturnDateContext);
-
-  //context
-  //const { language } = useContext(LanguageContext);
-  const language = useSelector((state) => state.calendar.language);
+  //redux
+  const returnFormat = useSelector((state) => state.calendar.returnFormat);
 
   const objDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
@@ -62,31 +52,10 @@ const CalendarBody = () => {
         break;
     }
 
-    switch (language) {
-      case "enUS":
-        dispatch(
-          defineReturnDate({ returnDate: format(clickDate, "MM/dd/yyyy") })
-        );
-        //setReturnDate(format(clickDate, "MM/dd/yyyy"));
-        break;
+    dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
 
-      case "fr":
-        dispatch(
-          defineReturnDate({ returnDate: format(clickDate, "dd/MM/yyyy") })
-        );
-        //setReturnDate(format(clickDate, "dd/MM/yyyy"));
-        break;
-
-      default:
-        //setReturnDate(format(clickDate, "MM/dd/yyyy"));
-        dispatch(
-          defineReturnDate({ returnDate: format(clickDate, "MM/dd/yyyy") })
-        );
-        break;
-    }
     //redux
     dispatch(openCalendar({ isOpen: false }));
-    //setIsOpen(false);
   };
 
   return (

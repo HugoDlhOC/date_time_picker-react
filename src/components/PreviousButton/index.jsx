@@ -1,9 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { months } from "../../data/months";
-import { useContext, useState } from "react";
-import { DateContext } from "../../context/DateContext";
-import defineYearsSelect from "../../services/defineYearsSelect";
 import { subMonths } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
@@ -12,15 +8,12 @@ const PreviousButton = () => {
   //redux
   const dispatch = useDispatch();
 
-  //context
-  //const { setDate } = useContext(DateContext);
   const date = useSelector((state) => state.calendar.date);
 
   //bouton mois précédent
   const handlePreviousMonth = () => {
     let saveDate = date;
     dispatch(changeDate({ date: subMonths(saveDate, 1) }));
-    //setDate(subMonths(saveDate, 1));
   };
   return (
     <div>

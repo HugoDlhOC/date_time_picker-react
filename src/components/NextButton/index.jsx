@@ -1,7 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from "react";
-import { DateContext } from "../../context/DateContext";
 import { addMonths } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
@@ -10,8 +8,6 @@ const NextButton = () => {
   //redux
   const dispatch = useDispatch();
 
-  //context
-  //const { setDate } = useContext(DateContext);
   const date = useSelector((state) => state.calendar.date);
 
   //récupérer le numéro du mois en cours et son label - pour trouver le label il faut faire correspondre le chiffre du mois en cours avec le bon mois
@@ -21,7 +17,6 @@ const NextButton = () => {
   const handleNextMonth = () => {
     let saveDate = date;
     dispatch(changeDate({ date: addMonths(saveDate, 1) }));
-    //setDate(addMonths(saveDate, 1));
   };
 
   return (
