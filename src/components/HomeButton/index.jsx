@@ -9,7 +9,7 @@ const HomeButton = () => {
 
   //bouton home = permet de revenir à la date actuelle
   const handleHome = () => {
-    const actualDate = new Date();
+    const actualDate = new Date().toISOString();
 
     dispatch(changeDate({ date: actualDate }));
   };

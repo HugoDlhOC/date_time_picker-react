@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isOpen: false,
-  date: new Date(),
-  //date: new Date().toISOString(),
+  date: new Date().toISOString(),
   language: "enUS",
   returnDate: "",
   yearMin: new Date().getFullYear() - 50,

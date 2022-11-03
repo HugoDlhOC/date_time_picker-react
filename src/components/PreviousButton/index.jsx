@@ -9,11 +9,12 @@ const PreviousButton = () => {
   const dispatch = useDispatch();
 
   const date = useSelector((state) => state.calendar.date);
+  const dateConvert = new Date(date);
 
   //bouton mois précédent
   const handlePreviousMonth = () => {
-    let saveDate = date;
-    dispatch(changeDate({ date: subMonths(saveDate, 1) }));
+    let saveDate = dateConvert;
+    dispatch(changeDate({ date: subMonths(saveDate, 1).toISOString() }));
   };
   return (
     <div>

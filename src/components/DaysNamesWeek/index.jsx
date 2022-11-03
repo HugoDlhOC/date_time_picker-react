@@ -1,14 +1,28 @@
 import { useSelector } from "react-redux";
+import * as listOfLanguage from "date-fns/esm/locale";
+
 const DaysNamesWeek = () => {
-  const language = useSelector((state) => state.calendar.language);
+  //redux
+  const choiceUserLanguage = useSelector((state) => state.calendar.language);
+
+  const indexListOfLanguage = Object.keys(listOfLanguage).findIndex(
+    (item, index) => item === choiceUserLanguage
+  );
 
   const weekdays = [...Array(7).keys()].map((i) => {
-    return language.localize.day(i, { width: "abbreviated" });
+    return listOfLanguage[
+      Object.keys(listOfLanguage)[indexListOfLanguage]
+    ].localize.day(i, {
+      width: "abbreviated",
+    });
   });
+
   return (
     <div className={"week-cells"}>
-      {weekdays.map((item) => (
-        <span className={"cell name-day-week"}>{item}</span>
+      {weekdays.map((item, key) => (
+        <span className={"cell name-day-week"} key={key}>
+          {item}
+        </span>
       ))}
     </div>
   );

@@ -8,6 +8,7 @@ const YearSelect = () => {
   const dispatch = useDispatch();
 
   const date = useSelector((state) => state.calendar.date);
+  const dateConvert = new Date(date);
 
   const yearMin = useSelector((state) => state.calendar.yearMin);
   const yearMax = useSelector((state) => state.calendar.yearMax);
@@ -16,11 +17,11 @@ const YearSelect = () => {
 
   //changement d'année
   const handleSelectChangeYear = (option) => {
-    let saveDate = date;
+    let saveDate = dateConvert;
     saveDate.setYear(option.value);
 
     //donner le changement à react context
-    dispatch(changeDate({ date: new Date(saveDate) }));
+    dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
     dispatch(
       defineYearsInterval({
         yearMin: years[0].value,
@@ -33,7 +34,7 @@ const YearSelect = () => {
       <Select
         defaultValue={years.find((item) => item.value === 2022)}
         onChange={handleSelectChangeYear}
-        value={years.find((item) => item.value === date.getFullYear())}
+        value={years.find((item) => item.value === dateConvert.getFullYear())}
         options={years}
         isSearchable={false}
         isClearable={false}

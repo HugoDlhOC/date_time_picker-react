@@ -19,7 +19,7 @@ const CalendarBody = () => {
   //redux
   const returnFormat = useSelector((state) => state.calendar.returnFormat);
 
-  const objDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const objDate = new Date(date);
 
   //nombre de jours dans le mois en cours
   const totalOfDaysThisMonth = allDaysCurrentMonth(objDate);
@@ -40,8 +40,8 @@ const CalendarBody = () => {
   //mise en place de l'obtention de la date lors du clic du bouton
   const handleDisplayDate = (positionMonth, dayNumber) => {
     //let clickDate = new Date(date.getFullYear(), date.getMonth(), dayNumber);
-    let clickDate = new Date(date.getFullYear(), date.getMonth(), 1);
-    console.log(clickDate);
+    let clickDate = new Date(objDate.getFullYear(), objDate.getMonth(), 1);
+
     switch (positionMonth) {
       case "previous":
         clickDate.setMonth(clickDate.getMonth() - 1);
@@ -57,7 +57,6 @@ const CalendarBody = () => {
 
     clickDate.setDate(dayNumber);
 
-    console.log(clickDate);
     dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
 
     //redux
@@ -69,10 +68,10 @@ const CalendarBody = () => {
       <DaysNamesWeek />
       <div className={"first-days-cells"}>
         <div className={"row"}>
-          {sortWeeks[0].values.length != 7
-            ? sortWeeks[0].values.map((item) => {
+          {sortWeeks[0].values.length !== 7
+            ? sortWeeks[0].values.map((item, key) => {
                 return (
-                  <div className={"cell previous"}>
+                  <div className={"cell previous"} key={key}>
                     <button onClick={() => handleDisplayDate("previous", item)}>
                       {item}
                     </button>
@@ -80,13 +79,13 @@ const CalendarBody = () => {
                 );
               })
             : ""}
-          {sortWeeks[1].values.map((item) => {
+          {sortWeeks[1].values.map((item, key) => {
             return (
-              <div className={"cell"}>
+              <div className={"cell"} key={key}>
                 <button
                   className={
-                    date.getMonth() === new Date().getMonth() &&
-                    date.getFullYear() === new Date().getFullYear() &&
+                    objDate.getMonth() === new Date().getMonth() &&
+                    objDate.getFullYear() === new Date().getFullYear() &&
                     item === new Date().getDate()
                       ? "button-today"
                       : ""
@@ -101,16 +100,16 @@ const CalendarBody = () => {
         </div>
       </div>
       <div className={"day-cells"}>
-        {sortWeeks[2].values.map((item, index) => {
+        {sortWeeks[2].values.map((item, key) => {
           return (
-            <div className={"row"}>
-              {item.values.map((dateItem) => {
+            <div className={"row"} key={key}>
+              {item.values.map((dateItem, key) => {
                 return (
-                  <div className={"cell"}>
+                  <div className={"cell"} key={key}>
                     <button
                       className={
-                        date.getMonth() === new Date().getMonth() &&
-                        date.getFullYear() === new Date().getFullYear() &&
+                        objDate.getMonth() === new Date().getMonth() &&
+                        objDate.getFullYear() === new Date().getFullYear() &&
                         dateItem === new Date().getDate()
                           ? "button-today"
                           : ""
@@ -128,13 +127,13 @@ const CalendarBody = () => {
       </div>
       <div className={"last-days-cells"}>
         <div className={"row"}>
-          {sortWeeks[3].values.map((item) => {
+          {sortWeeks[3].values.map((item, key) => {
             return (
-              <div className={"cell"}>
+              <div className={"cell"} key={key}>
                 <button
                   className={
-                    date.getMonth() === new Date().getMonth() &&
-                    date.getFullYear() === new Date().getFullYear() &&
+                    objDate.getMonth() === new Date().getMonth() &&
+                    objDate.getFullYear() === new Date().getFullYear() &&
                     item === new Date().getDate()
                       ? "button-today"
                       : ""
@@ -146,10 +145,10 @@ const CalendarBody = () => {
               </div>
             );
           })}
-          {sortWeeks[3].values.length != 0
-            ? sortWeeks[4].values.map((item) => {
+          {sortWeeks[3].values.length !== 0
+            ? sortWeeks[4].values.map((item, key) => {
                 return (
-                  <div className={"cell after"}>
+                  <div className={"cell after"} key={key}>
                     <button onClick={() => handleDisplayDate("next", item)}>
                       {item}
                     </button>

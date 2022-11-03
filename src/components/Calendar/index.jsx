@@ -10,6 +10,15 @@ import {
 } from "../../feature/calendarSlice";
 
 const Calendar = ({ languageChoice, yearMin, yearMax, returnFormat }) => {
+  //CONTROL
+  const date = new Date();
+  if (yearMin < date.getFullYear() - 1000) {
+    throw "La valeur donnée est trop basse";
+  }
+
+  if (yearMax > date.getFullYear() + 1000) {
+    throw "La valeur donnée est trop haute";
+  }
   //redux
   const dispatch = useDispatch();
 

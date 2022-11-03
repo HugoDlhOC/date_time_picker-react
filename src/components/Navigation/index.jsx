@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const Navigation = ({ isOpen }) => {
   const date = useSelector((state) => state.calendar.date);
+  const dateConvert = new Date(date);
 
   const yearMin = useSelector((state) => state.calendar.yearMin);
   const yearMax = useSelector((state) => state.calendar.yearMax);
@@ -18,7 +19,7 @@ const Navigation = ({ isOpen }) => {
         isOpen === true ? "navigation-datepicker" : "navigation-datepicker hide"
       }
     >
-      {date.getFullYear() === yearMin && date.getMonth() === 0 ? (
+      {dateConvert.getFullYear() === yearMin && dateConvert.getMonth() === 0 ? (
         ""
       ) : (
         <PreviousButton />
@@ -26,7 +27,8 @@ const Navigation = ({ isOpen }) => {
       <HomeButton />
       <MonthSelect />
       <YearSelect />
-      {date.getFullYear() === yearMax && date.getMonth() === 11 ? (
+      {dateConvert.getFullYear() === yearMax &&
+      dateConvert.getMonth() === 11 ? (
         ""
       ) : (
         <NextButton />

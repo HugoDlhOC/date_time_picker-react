@@ -9,14 +9,15 @@ const NextButton = () => {
   const dispatch = useDispatch();
 
   const date = useSelector((state) => state.calendar.date);
+  const dateConvert = new Date(date);
 
   //récupérer le numéro du mois en cours et son label - pour trouver le label il faut faire correspondre le chiffre du mois en cours avec le bon mois
   //on obtient une structure différente de type tableau objet alors qu'on ne veut qu'un objet : [{}]
 
   //bouton mois suivant
   const handleNextMonth = () => {
-    let saveDate = date;
-    dispatch(changeDate({ date: addMonths(saveDate, 1) }));
+    let saveDate = dateConvert;
+    dispatch(changeDate({ date: addMonths(saveDate, 1).toISOString() }));
   };
 
   return (
