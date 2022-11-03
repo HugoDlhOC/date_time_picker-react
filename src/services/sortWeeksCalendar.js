@@ -28,9 +28,6 @@ const sortWeeksCalendar = (
   for (let i = unsortedWeeksEndMonth[0]; i < totalOfDaysThisMonth; i++) {
     lastWeekCurrentMonth.push(i);
   }
-  console.log(unsortedWeeksEndMonth[0]);
-  console.log(totalOfDaysThisMonth);
-  console.log(lastWeekCurrentMonth);
 
   //on calcule combien de jours du mois suivant peuvent être ajoutés, sachant qu'une semaine occupe 7 jours
   const numberOfDaysLeftToAddNextMonth = 7 - lastWeekCurrentMonth.length;
@@ -41,7 +38,7 @@ const sortWeeksCalendar = (
   for (let i = 1; i <= numberOfDaysLeftToAddNextMonth; i++) {
     allDaysDisplayNextMonth.push(i);
   }
-  console.log(lastWeekCurrentMonth);
+
   //il nous reste la semaine incomplète du début (s'il y en a une.)
   //il faut donc écrire toutes les valeurs que l'on obtient avant le premier dimanche
   const firstWeekCurrentMonth = [];

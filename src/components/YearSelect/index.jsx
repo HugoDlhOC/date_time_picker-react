@@ -20,7 +20,7 @@ const YearSelect = () => {
     saveDate.setYear(option.value);
 
     //donner le changement à react context
-    dispatch(changeDate({ date: saveDate }));
+    dispatch(changeDate({ date: new Date(saveDate) }));
     dispatch(
       defineYearsInterval({
         yearMin: years[0].value,
@@ -31,9 +31,9 @@ const YearSelect = () => {
   return (
     <div>
       <Select
-        defaultValue={years.filter((item) => item.value === 2022)}
+        defaultValue={years.find((item) => item.value === 2022)}
         onChange={handleSelectChangeYear}
-        value={years.filter((item) => item.value === date.getFullYear())}
+        value={years.find((item) => item.value === date.getFullYear())}
         options={years}
         isSearchable={false}
         isClearable={false}

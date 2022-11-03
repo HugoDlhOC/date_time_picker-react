@@ -39,8 +39,9 @@ const CalendarBody = () => {
 
   //mise en place de l'obtention de la date lors du clic du bouton
   const handleDisplayDate = (positionMonth, dayNumber) => {
-    let clickDate = new Date(date.getFullYear(), date.getMonth(), dayNumber);
-
+    //let clickDate = new Date(date.getFullYear(), date.getMonth(), dayNumber);
+    let clickDate = new Date(date.getFullYear(), date.getMonth(), 1);
+    console.log(clickDate);
     switch (positionMonth) {
       case "previous":
         clickDate.setMonth(clickDate.getMonth() - 1);
@@ -50,8 +51,13 @@ const CalendarBody = () => {
       case "next":
         clickDate.setMonth(clickDate.getMonth() + 1);
         break;
+      default:
+        break;
     }
 
+    clickDate.setDate(dayNumber);
+
+    console.log(clickDate);
     dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
 
     //redux
