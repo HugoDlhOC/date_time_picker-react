@@ -1,8 +1,13 @@
 import Select from "react-select";
-import defineYearsSelect from "../../services/defineYearsSelect";
+// @ts-ignore
+import defineYearsSelect from "../../services/defineYearsSelect.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate, defineYearsInterval } from "../../feature/calendarSlice";
 
+/**
+ * An interval has been defined by the developer per props.
+ * @returns JSX
+ */
 const YearSelect = () => {
   //redux
   const dispatch = useDispatch();
@@ -15,12 +20,11 @@ const YearSelect = () => {
 
   const years = defineYearsSelect(yearMin, yearMax);
 
-  //changement d'année
+  //change of year
   const handleSelectChangeYear = (option) => {
     let saveDate = dateConvert;
     saveDate.setYear(option.value);
 
-    //donner le changement à react context
     dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
     dispatch(
       defineYearsInterval({

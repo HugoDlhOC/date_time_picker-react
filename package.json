@@ -1,5 +1,5 @@
 {
-  "name": "date-picker-components-version",
+  "name": "@hugodelahaye/react-datepicker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -46,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4"
   }
 }

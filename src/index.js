@@ -1,16 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./css/style.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
+import Calendar from "./components/Calendar/index.tsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Calendar
+        yearMin={2020}
+        yearMax={2030}
+        returnFormat={"dd/MM/yyyy"}
+        languageChoice={"af"}
+      />
     </Provider>
   </React.StrictMode>
 );

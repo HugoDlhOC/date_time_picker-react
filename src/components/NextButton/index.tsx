@@ -4,6 +4,10 @@ import { addMonths } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
 
+/**
+ * This component allows to define the behavior of the next arrow. When the user clicks on it, the days of the next month will be displayed.
+ * @returns JSX
+ */
 const NextButton = () => {
   //redux
   const dispatch = useDispatch();
@@ -11,10 +15,7 @@ const NextButton = () => {
   const date = useSelector((state) => state.calendar.date);
   const dateConvert = new Date(date);
 
-  //récupérer le numéro du mois en cours et son label - pour trouver le label il faut faire correspondre le chiffre du mois en cours avec le bon mois
-  //on obtient une structure différente de type tableau objet alors qu'on ne veut qu'un objet : [{}]
-
-  //bouton mois suivant
+  //next month button
   const handleNextMonth = () => {
     let saveDate = dateConvert;
     dispatch(changeDate({ date: addMonths(saveDate, 1).toISOString() }));

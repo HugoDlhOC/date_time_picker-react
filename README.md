@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+# React-DatePicker-hDelahaye
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React-DatePicker, created by Hugo DELAHAYE aims to provide your project with the possibility to have a calendar based on an Input, visually identifiable.
 
-## Available Scripts
+Features include:
 
-In the project directory, you can run:
+- The user can navigate the calendar by moving to the next and previous month with two arrow icons
+- The user can return to the current month by clicking on the house icon
+- The user can choose the month via a selector that offers all possible months
+- The user can choose the year via a selector that offers all possible years
+- As a developer, you have the possibility to choose the minimum year that will be proposed in the calendar and the maximum year
+- As a developer, you have the possibility to choose the language of the calendar. This will impact the days of the week as well as the list of months
+- As a developer, you have the possibility to customize the calendar via the class-toggle
+- The returned date will have the format you want. This format is based on method of date-fns library
 
-### `npm start`
+# Installation and usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can add this package to your project with this command :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+yarn add react-datepicker-hdelahaye
+```
+or this command :
+```
+npm install react-datepicker-hdelahaye
+```
 
-### `npm test`
+Then use it in your app:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```js
+import React, { useState } from 'react';
+import Select from 'react-select';
 
-### `npm run build`
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export default function App() {
+  const [selectedOption, setSelectedOption] = useState(null);
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  return (
+    <div className="App">
+      <Select
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+      />
+    </div>
+  );
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Props
 
-### `npm run eject`
+Common props you may want to specify include:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `autoFocus` - focus the control when it mounts
+- `className` - apply a className to the control
+- `classNamePrefix` - apply classNames to inner elements with the given prefix
+- `isDisabled` - disable the control
+- `isMulti` - allow the user to select multiple values
+- `isSearchable` - allow the user to search for matching options
+- `name` - generate an HTML input with this name, containing the current value
+- `onChange` - subscribe to change events
+- `options` - specify the options the user can select from
+- `placeholder` - change the text displayed when no option is selected
+- `noOptionsMessage` - ({ inputValue: string }) => string | null - Text to display when there are no options
+- `value` - control the current value
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+See the [props documentation](https://www.react-select.com/props) for complete documentation on the props react-select supports.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Controllable Props
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You can control the following props by providing values for them. If you don't, react-select will manage them for you.
 
-## Learn More
+- `value` / `onChange` - specify the current value of the control
+- `menuIsOpen` / `onMenuOpen` / `onMenuClose` - control whether the menu is open
+- `inputValue` / `onInputChange` - control the value of the search input (changing this will update the available options)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If you don't provide these props, you can set the initial value of the state they control:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `defaultValue` - set the initial value of the control
+- `defaultMenuIsOpen` - set the initial open value of the menu
+- `defaultInputValue` - set the initial value of the search input
 
-### Code Splitting
+## Methods
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+React-select exposes two public methods:
 
-### Analyzing the Bundle Size
+- `focus()` - focus the control programmatically
+- `blur()` - blur the control programmatically
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Customisation
 
-### Making a Progressive Web App
+Check the docs for more information on:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [Customising the styles](https://www.react-select.com/styles)
+- [Using custom components](https://www.react-select.com/components)
+- [Using the built-in animated components](https://www.react-select.com/home#animated-components)
+- [Creating an async select](https://www.react-select.com/async)
+- [Allowing users to create new options](https://www.react-select.com/creatable)
+- [Advanced use-cases](https://www.react-select.com/advanced)
+- [TypeScript guide](https://www.react-select.com/typescript)
 
-### Advanced Configuration
+## TypeScript
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The v5 release represents a rewrite from JavaScript to TypeScript. The types for v4 and earlier releases are available at [@types](https://www.npmjs.com/package/@types/react-select). See the [TypeScript guide](https://www.react-select.com/typescript) for how to use the types starting with v5.
 
-### Deployment
+# Thanks
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Thank you to everyone who has contributed to this project. It's been a wild ride.
 
-### `npm run build` fails to minify
+If you like React Select, you should [follow me on Twitter](https://twitter.com/jedwatson)!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Shout out to [Joss Mackison](https://github.com/jossmac), [Charles Lee](https://github.com/gwyneplaine), [Ben Conolly](https://github.com/Noviny), [Tom Walker](https://github.com/bladey), [Nathan Bierema](https://github.com/Methuselah96), [Eric Bonow](https://github.com/ebonow), [Mitchell Hamilton](https://github.com/mitchellhamilton), [Dave Brotherstone](https://github.com/bruderstein), [Brian Vaughn](https://github.com/bvaughn), and the [Atlassian Design System](https://atlassian.design) team who along with many other contributors have made this possible ❤️
+
+## License
+
+MIT Licensed. Copyright (c) Jed Watson 2022.

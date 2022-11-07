@@ -1,11 +1,19 @@
-import allDaysCurrentMonth from "../../services/allDaysCurrentMonth";
-import allSundayCurrentMonth from "../../services/allSundayCurrentMonth";
-import sortWeeksCalendar from "../../services/sortWeeksCalendar";
-import DaysNamesWeek from "../DaysNamesWeek";
+// @ts-ignore
+import allDaysCurrentMonth from "../../services/allDaysCurrentMonth.ts";
+// @ts-ignore
+import allSundayCurrentMonth from "../../services/allSundayCurrentMonth.ts";
+// @ts-ignore
+import sortWeeksCalendar from "../../services/sortWeeksCalendar.ts";
+// @ts-ignore
+import DaysNamesWeek from "../DaysNamesWeek/index.tsx";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";
 
+/**
+ * This component represents the body of the calendar (all selecting days).
+ * @returns JSX
+ */
 const CalendarBody = () => {
   //redux
   const dispatch = useDispatch();
@@ -21,25 +29,23 @@ const CalendarBody = () => {
 
   const objDate = new Date(date);
 
-  //nombre de jours dans le mois en cours
+  //number of days in the current month
   const totalOfDaysThisMonth = allDaysCurrentMonth(objDate);
 
-  //déterminer le nombre de dimanche dans le mois
+  //determine the number of Sundays in the month
   const allSundayCurrentMonthNumber = allSundayCurrentMonth(
     objDate,
     totalOfDaysThisMonth
   );
 
-  //tri pour une bonne organisation des jours de la semaine
+  //sorting for a good organization of the days of the week
   const sortWeeks = sortWeeksCalendar(
     objDate,
     allSundayCurrentMonthNumber,
     totalOfDaysThisMonth
   );
 
-  //mise en place de l'obtention de la date lors du clic du bouton
   const handleDisplayDate = (positionMonth, dayNumber) => {
-    //let clickDate = new Date(date.getFullYear(), date.getMonth(), dayNumber);
     let clickDate = new Date(objDate.getFullYear(), objDate.getMonth(), 1);
 
     switch (positionMonth) {

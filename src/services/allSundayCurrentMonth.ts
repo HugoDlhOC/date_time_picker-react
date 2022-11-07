@@ -1,6 +1,11 @@
 import { eachWeekendOfInterval } from "date-fns";
 
-const allSundayCurrentMonth = (date, totalOfDaysThisMonth) => {
+/**
+ * This function retrieves the list of all the Sundays of the current month. A table of Sundays is returned.
+ * @param date
+ * @returns {Array}
+ */
+const allSundayCurrentMonth = (date: Date, totalOfDaysThisMonth: number) => {
   //on détermine tous les samedis et dimanches du mois en cours
   const result = eachWeekendOfInterval({
     start: new Date(date.getFullYear(), date.getMonth(), 1),
@@ -19,7 +24,7 @@ const allSundayCurrentMonth = (date, totalOfDaysThisMonth) => {
   const allSundayCurrentMonthNumber = allSundayCurrentMonthDateComplete.map(
     (item) => item.getDate()
   );
-
+  console.log(allSundayCurrentMonthNumber);
   return allSundayCurrentMonthNumber;
 };
 

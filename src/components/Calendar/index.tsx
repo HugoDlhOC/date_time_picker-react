@@ -1,5 +1,7 @@
-import Navigation from "../Navigation";
-import CalendarBody from "../CalendarBody";
+// @ts-ignore
+import Navigation from "../Navigation/index.tsx";
+// @ts-ignore
+import CalendarBody from "../CalendarBody/index.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -9,31 +11,52 @@ import {
   openCalendar,
 } from "../../feature/calendarSlice";
 
-const Calendar = ({ languageChoice, yearMin, yearMax, returnFormat }) => {
+interface CalendarDemo {
+  languageChoice: string;
+  yearMin: number;
+  yearMax: number;
+  returnFormat: string;
+}
+/**
+ * This component represents the entire calendar.
+ * @param languageChoice
+ * @param yearMin
+ * @param yearMax
+ * @param returnFormat
+ * @returns JSX
+ */
+const Calendar = (props: CalendarDemo) => {
   //CONTROL
   const date = new Date();
-  if (yearMin < date.getFullYear() - 1000) {
-    throw "La valeur donnée est trop basse";
+  if (props.yearMin < date.getFullYear() - 1000) {
+    throw new Error(
+      "The given value is too low, it cannot be lower than the current year - 1000"
+    );
   }
 
-  if (yearMax > date.getFullYear() + 1000) {
-    throw "La valeur donnée est trop haute";
+  if (props.yearMax > date.getFullYear() + 1000) {
+    throw new Error(
+      "The given value is too high, it cannot be higher than the current year + 1000"
+    );
   }
+
   //redux
   const dispatch = useDispatch();
 
   //redux
-  dispatch(changeLanguage({ language: languageChoice }));
+  dispatch(changeLanguage({ language: props.languageChoice }));
 
   //redux
   const returnDate = useSelector((state) => state.calendar.returnDate);
 
   //redux
-  dispatch(changeReturnFormat({ returnFormat }));
+  dispatch(changeReturnFormat({ returnFormat: props.returnFormat }));
 
   const isOpen = useSelector((state) => state.calendar.isOpen);
 
-  dispatch(defineYearsInterval({ yearMin, yearMax }));
+  dispatch(
+    defineYearsInterval({ yearMin: props.yearMin, yearMax: props.yearMax })
+  );
   const handleOpenCalendar = () => {
     dispatch(openCalendar({ isOpen: !isOpen }));
   };

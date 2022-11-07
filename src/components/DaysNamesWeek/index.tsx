@@ -1,6 +1,10 @@
 import { useSelector } from "react-redux";
 import * as listOfLanguage from "date-fns/esm/locale";
 
+/**
+ * This component represents all the days of the week.
+ * @returns JSX
+ */
 const DaysNamesWeek = () => {
   //redux
   const choiceUserLanguage = useSelector((state) => state.calendar.language);
