@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./css/style.css";
+import "./lib/css/style.css";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./app/store";
+import { store } from "./lib/app/store";
 import { Provider } from "react-redux";
-import Calendar from "./components/Calendar/index.tsx";
+import Calendar from "./lib/components/Calendar/index.tsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
