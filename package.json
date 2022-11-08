@@ -1,6 +1,6 @@
 {
   "name": "@hugo.delahaye53/react-datepicker",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -33,7 +33,7 @@
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass": "sass --watch src/lib/sass/main.scss:./src/css/style.css"
+    "sass": "sass --watch src/lib/sass/main.scss:./src/lib/css/style.css"
   },
   "eslintConfig": {
     "extends": [

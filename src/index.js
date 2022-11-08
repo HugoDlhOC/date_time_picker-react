@@ -13,8 +13,8 @@ root.render(
       <Calendar
         yearMin={2020}
         yearMax={2030}
-        returnFormat={"dd/MM/yyyy"}
-        languageChoice={"af"}
+        returnFormat={"MM/dd/yyyy"}
+        languageChoice={"enUS"}
       />
     </Provider>
   </React.StrictMode>
