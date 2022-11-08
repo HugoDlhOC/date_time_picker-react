@@ -11,7 +11,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <Calendar
-        yearMin={2020}
+        yearMin={2001}
         yearMax={2030}
         returnFormat={"MM/dd/yyyy"}
         languageChoice={"enUS"}

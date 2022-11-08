@@ -27,14 +27,17 @@ interface CalendarDemo {
  */
 const Calendar = (props: CalendarDemo) => {
   //CONTROL
+  const yearMinConvert = parseInt(props.yearMin);
+  const yearMaxConvert = parseInt(props.yearMax);
+
   const date = new Date();
-  if (props.yearMin < date.getFullYear() - 1000) {
+  if (yearMinConvert < date.getFullYear() - 1000) {
     throw new Error(
       "The given value is too low, it cannot be lower than the current year - 1000"
     );
   }
 
-  if (props.yearMax > date.getFullYear() + 1000) {
+  if (yearMaxConvert > date.getFullYear() + 1000) {
     throw new Error(
       "The given value is too high, it cannot be higher than the current year + 1000"
     );
@@ -55,7 +58,7 @@ const Calendar = (props: CalendarDemo) => {
   const isOpen = useSelector((state) => state.calendar.isOpen);
 
   dispatch(
-    defineYearsInterval({ yearMin: props.yearMin, yearMax: props.yearMax })
+    defineYearsInterval({ yearMin: yearMinConvert, yearMax: yearMaxConvert })
   );
   const handleOpenCalendar = () => {
     dispatch(openCalendar({ isOpen: !isOpen }));
