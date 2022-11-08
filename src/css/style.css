@@ -1,0 +1,86 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: purple;
+}
+
+.navigation-datepicker {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.52);
+  padding: 3px;
+  align-items: center;
+  border-radius: 5px 5px 0px 0px;
+  justify-content: space-around;
+}
+.navigation-datepicker .button-navigation {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.navigation-datepicker .button-navigation .button-navigation--icon {
+  padding: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.body-calendar {
+  display: block;
+}
+.body-calendar .week-cells,
+.body-calendar .row {
+  display: flex;
+}
+.body-calendar .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.body-calendar .cell button {
+  width: 45px;
+  height: 45px;
+  border-radius: 2px;
+  border: 1px white solid;
+}
+.body-calendar .cell button:hover {
+  background-color: #d24e37;
+  color: white;
+}
+.body-calendar .cell .button-today {
+  color: white;
+  background-color: #d24e37;
+}
+.body-calendar .previous button,
+.body-calendar .after button {
+  color: rgba(0, 0, 0, 0.66);
+  opacity: 0.6;
+}
+.body-calendar .name-day-week {
+  background-color: #d24e37;
+  width: 45px;
+  height: 45px;
+  border: 1px #676666 solid;
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.input-calendar {
+  position: relative;
+  margin-left: 200px;
+  margin-top: 100px;
+}
+.input-calendar .calendar {
+  position: absolute;
+}
+
+/*# sourceMappingURL=style.css.map */

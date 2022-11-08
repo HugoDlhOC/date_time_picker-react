@@ -2,7 +2,7 @@
 
 React-DatePicker, created by Hugo DELAHAYE aims to provide your project with the possibility to have a calendar based on an Input, visually identifiable.
 
-![alt text](public/illustrate-demo.png)
+![demo calendar](public/illustrate-demo.png)
 Features include:
 
 - The user can navigate the calendar by moving to the next and previous month with two arrow icons
