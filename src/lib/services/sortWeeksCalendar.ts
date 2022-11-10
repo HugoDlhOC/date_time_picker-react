@@ -13,10 +13,10 @@ const sortWeeksCalendar = (
   totalOfDaysThisMonth: number
 ) => {
   //tri pour bonne organisation des jours de la semaine
-  let sortWeeks = [];
-  let unsortedWeeksEndMonth = [];
+  let sortWeeks: Array<any> = [];
+  let unsortedWeeksEndMonth: Array<any> = [];
 
-  allSundayCurrentMonthNumber.forEach((item, index) => {
+  allSundayCurrentMonthNumber.forEach((item: number, index: number) => {
     let values = [];
     if (item < totalOfDaysThisMonth - 6) {
       for (let j = item; j < item + 7; j++) {
@@ -90,7 +90,6 @@ const sortWeeksCalendar = (
     },
     { description: "days month next", values: allDaysDisplayNextMonth },
   ];
-  console.log(result);
 
   return result;
 };

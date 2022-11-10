@@ -24,7 +24,6 @@ const allSundayCurrentMonth = (date: Date, totalOfDaysThisMonth: number) => {
   const allSundayCurrentMonthNumber = allSundayCurrentMonthDateComplete.map(
     (item) => item.getDate()
   );
-  console.log(allSundayCurrentMonthNumber);
   return allSundayCurrentMonthNumber;
 };
 

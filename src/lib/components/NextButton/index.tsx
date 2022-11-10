@@ -3,6 +3,7 @@ import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { addMonths } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
+import { RootState } from "../../app/store";
 
 /**
  * This component allows to define the behavior of the next arrow. When the user clicks on it, the days of the next month will be displayed.
@@ -11,8 +12,7 @@ import { changeDate } from "../../feature/calendarSlice";
 const NextButton = () => {
   //redux
   const dispatch = useDispatch();
-
-  const date = useSelector((state) => state.calendar.date);
+  const date = useSelector((state: RootState) => state.calendar.date);
   const dateConvert = new Date(date);
 
   //next month button

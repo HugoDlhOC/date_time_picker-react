@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type Calendar = {
+  isOpen: boolean;
+  date: string;
+  language: string;
+  returnDate: string;
+  yearMin: number;
+  yearMax: number;
+  returnFormat: string;
+};
+
+const initialState: Calendar = {
   isOpen: false,
   date: new Date().toISOString(),
   language: "enUS",

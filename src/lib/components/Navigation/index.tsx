@@ -1,15 +1,11 @@
-// @ts-ignore
-import HomeButton from "../HomeButton/index.tsx";
-// @ts-ignore
-import NextButton from "../NextButton/index.tsx";
-// @ts-ignore
-import PreviousButton from "../PreviousButton/index.tsx";
-// @ts-ignore
-import MonthSelect from "../MonthSelect/index.tsx";
-// @ts-ignore
-import YearSelect from "../YearSelect/index.tsx";
+import HomeButton from "../HomeButton/index";
+import NextButton from "../NextButton/index";
+import PreviousButton from "../PreviousButton/index";
+import MonthSelect from "../MonthSelect/index";
+import YearSelect from "../YearSelect/index";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 interface NavigationDemo {
   isOpen: boolean;
@@ -21,11 +17,10 @@ interface NavigationDemo {
  * @returns JSX
  */
 const Navigation = (props: NavigationDemo) => {
-  const date = useSelector((state) => state.calendar.date);
+  const date = useSelector((state: RootState) => state.calendar.date);
   const dateConvert = new Date(date);
-
-  const yearMin = useSelector((state) => state.calendar.yearMin);
-  const yearMax = useSelector((state) => state.calendar.yearMax);
+  const yearMin = useSelector((state: RootState) => state.calendar.yearMin);
+  const yearMax = useSelector((state: RootState) => state.calendar.yearMax);
 
   return (
     <nav

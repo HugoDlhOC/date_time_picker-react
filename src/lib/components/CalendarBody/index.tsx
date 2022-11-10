@@ -1,14 +1,11 @@
-// @ts-ignore
-import allDaysCurrentMonth from "../../services/allDaysCurrentMonth.ts";
-// @ts-ignore
-import allSundayCurrentMonth from "../../services/allSundayCurrentMonth.ts";
-// @ts-ignore
-import sortWeeksCalendar from "../../services/sortWeeksCalendar.ts";
-// @ts-ignore
-import DaysNamesWeek from "../DaysNamesWeek/index.tsx";
+import allDaysCurrentMonth from "../../services/allDaysCurrentMonth";
+import allSundayCurrentMonth from "../../services/allSundayCurrentMonth";
+import sortWeeksCalendar from "../../services/sortWeeksCalendar";
+import DaysNamesWeek from "../DaysNamesWeek/index";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";
+import { RootState } from "../../app/store";
 
 /**
  * This component represents the body of the calendar (all selecting days).
@@ -19,13 +16,15 @@ const CalendarBody = () => {
   const dispatch = useDispatch();
 
   //redux
-  const isOpen = useSelector((state) => state.calendar.isOpen);
+  const isOpen = useSelector((state: RootState) => state.calendar.isOpen);
 
   //redux
-  const date = useSelector((state) => state.calendar.date);
+  const date = useSelector((state: RootState) => state.calendar.date);
 
   //redux
-  const returnFormat = useSelector((state) => state.calendar.returnFormat);
+  const returnFormat = useSelector(
+    (state: RootState) => state.calendar.returnFormat
+  );
 
   const objDate = new Date(date);
 
@@ -45,7 +44,7 @@ const CalendarBody = () => {
     totalOfDaysThisMonth
   );
 
-  const handleDisplayDate = (positionMonth, dayNumber) => {
+  const handleDisplayDate = (positionMonth: string, dayNumber: number) => {
     let clickDate = new Date(objDate.getFullYear(), objDate.getMonth(), 1);
 
     switch (positionMonth) {
@@ -109,7 +108,8 @@ const CalendarBody = () => {
         {sortWeeks[2].values.map((item, key) => {
           return (
             <div className={"row"} key={key}>
-              {item.values.map((dateItem, key) => {
+              {item.values.map((dateItem: number, key: number) => {
+                console.log(key);
                 return (
                   <div className={"cell"} key={key}>
                     <button

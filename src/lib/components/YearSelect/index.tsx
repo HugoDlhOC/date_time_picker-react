@@ -1,8 +1,8 @@
 import Select from "react-select";
-// @ts-ignore
-import defineYearsSelect from "../../services/defineYearsSelect.ts";
+import defineYearsSelect from "../../services/defineYearsSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate, defineYearsInterval } from "../../feature/calendarSlice";
+import { RootState } from "../../app/store";
 
 /**
  * An interval has been defined by the developer per props.
@@ -12,18 +12,22 @@ const YearSelect = () => {
   //redux
   const dispatch = useDispatch();
 
-  const date = useSelector((state) => state.calendar.date);
+  const date = useSelector((state: RootState) => state.calendar.date);
   const dateConvert = new Date(date);
-
-  const yearMin = useSelector((state) => state.calendar.yearMin);
-  const yearMax = useSelector((state) => state.calendar.yearMax);
+  const yearMin = useSelector((state: RootState) => state.calendar.yearMin);
+  const yearMax = useSelector((state: RootState) => state.calendar.yearMax);
 
   const years = defineYearsSelect(yearMin, yearMax);
 
+  type Option = {
+    label: string;
+    value: number;
+  };
+
   //change of year
-  const handleSelectChangeYear = (option) => {
+  const handleSelectChangeYear = (option: Option) => {
     let saveDate = dateConvert;
-    saveDate.setYear(option.value);
+    saveDate.setFullYear(option.value);
 
     dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
     dispatch(
@@ -37,6 +41,7 @@ const YearSelect = () => {
     <div>
       <Select
         defaultValue={years.find((item) => item.value === 2022)}
+        //@ts-ignore
         onChange={handleSelectChangeYear}
         value={years.find((item) => item.value === dateConvert.getFullYear())}
         options={years}

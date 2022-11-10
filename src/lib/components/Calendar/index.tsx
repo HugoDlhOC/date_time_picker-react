@@ -1,7 +1,5 @@
-// @ts-ignore
-import Navigation from "../Navigation/index.tsx";
-// @ts-ignore
-import CalendarBody from "../CalendarBody/index.tsx";
+import Navigation from "../Navigation/index";
+import CalendarBody from "../CalendarBody/index";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -9,35 +7,47 @@ import {
   changeReturnFormat,
   defineYearsInterval,
   openCalendar,
+  defineReturnDate,
 } from "../../feature/calendarSlice";
+import { format } from "date-fns";
+import { SetStateAction, useEffect, useState } from "react";
+import { RootState } from "../../app/store";
 
 interface CalendarDemo {
   languageChoice: string;
   yearMin: number;
   yearMax: number;
   returnFormat: string;
+  classToggle: string;
+  defaultDate: Date;
 }
+
+const MAX_YEAR = 1000;
 /**
  * This component represents the entire calendar.
  * @param languageChoice
  * @param yearMin
  * @param yearMax
  * @param returnFormat
+ * @param classChange
+ * @param defaultDate
  * @returns JSX
  */
 const Calendar = (props: CalendarDemo) => {
+  const [inputValue, setInputValue] = useState();
+
   //CONTROL
-  const yearMinConvert = parseInt(props.yearMin);
-  const yearMaxConvert = parseInt(props.yearMax);
+  const yearMinConvert: number = parseInt(String(props.yearMin));
+  const yearMaxConvert: number = parseInt(String(props.yearMax));
 
   const date = new Date();
-  if (yearMinConvert < date.getFullYear() - 1000) {
+  if (yearMinConvert < date.getFullYear() - MAX_YEAR) {
     throw new Error(
       "The given value is too low, it cannot be lower than the current year - 1000"
     );
   }
 
-  if (yearMaxConvert > date.getFullYear() + 1000) {
+  if (yearMaxConvert > date.getFullYear() + MAX_YEAR) {
     throw new Error(
       "The given value is too high, it cannot be higher than the current year + 1000"
     );
@@ -50,12 +60,31 @@ const Calendar = (props: CalendarDemo) => {
   dispatch(changeLanguage({ language: props.languageChoice }));
 
   //redux
-  const returnDate = useSelector((state) => state.calendar.returnDate);
+  const returnDate = useSelector(
+    (state: RootState) => state.calendar.returnDate
+  );
 
   //redux
   dispatch(changeReturnFormat({ returnFormat: props.returnFormat }));
 
-  const isOpen = useSelector((state) => state.calendar.isOpen);
+  //attention : il faut bien prendre compte que le mois de janvier correspond à 0 pour ce props et 11 à décembre, sinon incrémentation d'une année...
+  useEffect(() => {
+    if (props.defaultDate === undefined) {
+      dispatch(
+        defineReturnDate({ returnDate: format(new Date(), props.returnFormat) })
+      );
+    } else {
+      dispatch(
+        defineReturnDate({
+          returnDate: format(props.defaultDate, props.returnFormat),
+        })
+      );
+    }
+  }, []);
+
+  const testformat = format(props.defaultDate, "dd/MM/yyyy");
+
+  const isOpen = useSelector((state: RootState) => state.calendar.isOpen);
 
   dispatch(
     defineYearsInterval({ yearMin: yearMinConvert, yearMax: yearMaxConvert })
@@ -63,10 +92,27 @@ const Calendar = (props: CalendarDemo) => {
   const handleOpenCalendar = () => {
     dispatch(openCalendar({ isOpen: !isOpen }));
   };
+
+  const onChangeInput = (e: {
+    target: { value: SetStateAction<undefined> };
+  }) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <div className={"input-calendar"}>
-      <input type={"text"} onClick={handleOpenCalendar} value={returnDate} />
-      <div className={"calendar"}>
+      <input
+        type={"text"}
+        onClick={handleOpenCalendar}
+        defaultValue={returnDate}
+        // @ts-ignore
+        onChange={onChangeInput}
+      />
+      <div
+        className={
+          props.classToggle === undefined ? "calendar" : props.classToggle
+        }
+      >
         <Navigation isOpen={isOpen} />
         <CalendarBody />
       </div>

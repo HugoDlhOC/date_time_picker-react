@@ -11,7 +11,6 @@ const defineYearsSelect = (startYear: number, endYear: number) => {
   for (let i = startYear; i <= endYear; i++) {
     years.push({ label: i, value: i });
   }
-  console.log(years);
   return years;
 };
 
