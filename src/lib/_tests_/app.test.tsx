@@ -1,12 +1,3 @@
-//tester le rendu des composants : éléments de navigations (home, next, previous, selects), corps du calendrier
-//tests sur les années maximales
-//test sur la langue
-//test sur le format
-//test de disparition de la flèche droite quand l'année max et le mois max est arrivé (de même pour minimum)
-//test contenu dans input quand date cliquée
-//test de fermeture du calendrier quand date cliquée
-//test ouverture calendrier quand input cliqué
-
 import { render as reduxRender } from "@testing-library/react";
 import Calendar from "../components/Calendar";
 import { Provider } from "react-redux";
@@ -15,120 +6,90 @@ import { store } from "../app/store";
 const render = (component) =>
   reduxRender(<Provider store={store}>{component}</Provider>);
 
-test("test de rendu app", () => {
-  render(
-    <Calendar
-      languageChoice={"fr"}
-      yearMin={1990}
-      yearMax={2080}
-      returnFormat={"dd/MM/yyyy"}
-      classToggle={"calendar"}
-      defaultDate={new Date()}
-    />
-  );
-  const element = document.querySelector(".calendar");
+describe("Given I am on a page", () => {
+  describe("When I use the calendar component", () => {
+    test("Then the calendar should be rendered", () => {
+      render(
+        <Calendar
+          languageChoice={"fr"}
+          yearMin={1990}
+          yearMax={2080}
+          returnFormat={"dd/MM/yyyy"}
+          classToggle={"calendar"}
+          defaultDate={new Date()}
+        />
+      );
+      const element = document.querySelector(".calendar");
 
-  expect(element).not.toBeNull();
+      expect(element).not.toBeNull();
+    });
+
+    test("Then, if the maximum year is greater than current year + 1000, then we must have an error displayed", () => {
+      expect(() => {
+        render(
+          <Calendar
+            languageChoice={"fr"}
+            yearMin={1990}
+            yearMax={new Date().getFullYear() + 2000}
+            returnFormat={"dd/MM/yyyy"}
+            classToggle={"calendar"}
+            defaultDate={new Date()}
+          />
+        );
+      }).toThrow(
+        "The given value is too high, it cannot be higher than the current year + 1000"
+      );
+    });
+
+    test("Then, if the minimum year is lower than current year - 1000, then we must have an error displayed", () => {
+      expect(() => {
+        render(
+          <Calendar
+            languageChoice={"fr"}
+            yearMin={new Date().getFullYear() - 2000}
+            yearMax={2030}
+            returnFormat={"dd/MM/yyyy"}
+            classToggle={"calendar"}
+            defaultDate={new Date()}
+          />
+        );
+      }).toThrow(
+        "The given value is too low, it cannot be lower than the current year - 1000"
+      );
+    });
+
+    test("Then, if the chosen language is not available in the proposed languages, then an error is displayed", () => {
+      expect(() => {
+        render(
+          <Calendar
+            languageChoice={"france"}
+            yearMin={2001}
+            yearMax={2030}
+            returnFormat={"dd/MM/yyyy"}
+            classToggle={"calendar"}
+            defaultDate={new Date()}
+          />
+        );
+      }).toThrow(
+        "language not found, inspect date-fns documentation for a list of languages available"
+      );
+    });
+
+    test("Then, if the format the user wants is not available in date-fns, then an error is displayed", () => {
+      expect(() => {
+        render(
+          <Calendar
+            languageChoice={"fr"}
+            yearMin={2001}
+            yearMax={2030}
+            returnFormat={"day/month/years"}
+            classToggle={"calendar"}
+            defaultDate={new Date()}
+          />
+        );
+      }).toThrow(
+        "The format passed in props does not conform to the expectations of date-fns, consult the documentation of date-fns."
+      );
+    });
+  });
 });
-/*
-test("si l'année minimum est supérieur à année actuelle + 1000, alors on doit avoir une erreur affichée", () => {
-  render(
-    <Calendar
-      languageChoice={"fr"}
-      yearMin={1990}
-      yearMax={new Date().getFullYear() + 2000}
-      returnFormat={"dd/MM/yyyy"}
-      classToggle={"calendar"}
-      defaultDate={new Date()}
-    />
-  );
-  const element = document.querySelector(".calendar");
-
-  expect(element).not.toBeNull();
-});
-
-test("si l'année minimum est supérieur à année actuelle - 1000, alors on doit avoir une erreur affichée", () => {
-  render(
-    <Calendar
-      languageChoice={"fr"}
-      yearMin={new Date().getFullYear() - 2000}
-      yearMax={2080}
-      returnFormat={"dd/MM/yyyy"}
-      classToggle={"calendar"}
-      defaultDate={new Date()}
-    />
-  );
-  const element = document.querySelector(".calendar");
-
-  expect(element).not.toBeNull();
-});
-
-test("si la langue choisi n'est pas disponible dans les langues proposées, alors une erreur de date-fns est affichée", () => {
-  render(
-    <Calendar
-      languageChoice={"france"}
-      yearMin={1990}
-      yearMax={2080}
-      returnFormat={"dd/MM/yyyy"}
-      classToggle={"calendar"}
-      defaultDate={new Date()}
-    />
-  );
-  const element = document.querySelector(".calendar");
-
-  expect(element).not.toBeNull();
-});
-
-test("si le format voulu par l'utilisateur n'est pas disponible dans date-fns, alors une erreur de date-fns est affichée", () => {
-  render(
-    <Calendar
-      languageChoice={"fr"}
-      yearMin={1990}
-      yearMax={2080}
-      returnFormat={"jj/MM/yyyy"}
-      classToggle={"calendar"}
-      defaultDate={new Date()}
-    />
-  );
-  const element = document.querySelector(".calendar");
-
-  expect(element).not.toBeNull();
-});
-
-//.toThrow(error?) ---> https://jestjs.io/fr/docs/expect#tothrowerror on voit si la fonction de date-fns lève bien une exception
-
-test("si l'utilisateur arrive au dernier mois et à la dernière année disponible, alors la flèche droite ne doit plus être affichée", () => {
-  render(
-    <Calendar
-      languageChoice={"fr"}
-      yearMin={1990}
-      yearMax={2080}
-      returnFormat={"dd/MM/yyyy"}
-      classToggle={"calendar"}
-      defaultDate={new Date()}
-    />
-  );
-  const element = document.querySelector("#button-next-arrow");
-
-  //faire la manip de l'utilisateur qui choisi le dernier élément du select mois et le dernier élément du select année
-
-  expect(element).toBeNull();
-});
-
-test("si l'utilisateur arrive au premier mois et à la première année disponible, alors la flèche gauche ne doit plus être affichée", () => {
-  render(
-    <Calendar
-      languageChoice={"fr"}
-      yearMin={1990}
-      yearMax={2080}
-      returnFormat={"dd/MM/yyyy"}
-      classToggle={"calendar"}
-      defaultDate={new Date()}
-    />
-  );
-  const element = document.querySelector("#button-previous-arrow");
-
-  //faire la manip de l'utilisateur qui choisi le premier élément du select mois et le premier élément du select année
-
-  expect(element).toBeNull();
-});*/

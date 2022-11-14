@@ -12,6 +12,7 @@ import {
 import { format } from "date-fns";
 import { SetStateAction, useEffect, useState } from "react";
 import { RootState } from "../../app/store";
+import * as listOfLanguage from "date-fns/esm/locale";
 
 interface CalendarDemo {
   languageChoice: string;
@@ -37,6 +38,7 @@ const Calendar = (props: CalendarDemo) => {
   const [inputValue, setInputValue] = useState();
 
   //CONTROL
+  //YEARS
   const yearMinConvert: number = parseInt(String(props.yearMin));
   const yearMaxConvert: number = parseInt(String(props.yearMax));
 
@@ -50,6 +52,17 @@ const Calendar = (props: CalendarDemo) => {
   if (yearMaxConvert > date.getFullYear() + MAX_YEAR) {
     throw new Error(
       "The given value is too high, it cannot be higher than the current year + 1000"
+    );
+  }
+
+  //LANGUAGE
+  const indexListOfLanguage = Object.keys(listOfLanguage).findIndex(
+    (item, index) => item === props.languageChoice
+  );
+
+  if (indexListOfLanguage === -1) {
+    throw new Error(
+      "language not found, inspect date-fns documentation for a list of languages available"
     );
   }
 
@@ -69,20 +82,26 @@ const Calendar = (props: CalendarDemo) => {
 
   //attention : il faut bien prendre compte que le mois de janvier correspond à 0 pour ce props et 11 à décembre, sinon incrémentation d'une année...
   useEffect(() => {
-    if (props.defaultDate === undefined) {
-      dispatch(
-        defineReturnDate({ returnDate: format(new Date(), props.returnFormat) })
-      );
-    } else {
-      dispatch(
-        defineReturnDate({
-          returnDate: format(props.defaultDate, props.returnFormat),
-        })
+    try {
+      if (props.defaultDate === undefined) {
+        dispatch(
+          defineReturnDate({
+            returnDate: format(new Date(), props.returnFormat),
+          })
+        );
+      } else {
+        dispatch(
+          defineReturnDate({
+            returnDate: format(props.defaultDate, props.returnFormat),
+          })
+        );
+      }
+    } catch (e) {
+      throw new Error(
+        "The format passed in props does not conform to the expectations of date-fns, consult the documentation of date-fns."
       );
     }
   }, []);
-
-  const testformat = format(props.defaultDate, "dd/MM/yyyy");
 
   const isOpen = useSelector((state: RootState) => state.calendar.isOpen);
 

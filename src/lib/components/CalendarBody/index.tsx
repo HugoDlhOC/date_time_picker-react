@@ -109,7 +109,6 @@ const CalendarBody = () => {
           return (
             <div className={"row"} key={key}>
               {item.values.map((dateItem: number, key: number) => {
-                console.log(key);
                 return (
                   <div className={"cell"} key={key}>
                     <button
