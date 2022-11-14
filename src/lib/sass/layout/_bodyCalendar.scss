@@ -1,0 +1,50 @@
+.body-calendar {
+  display: block;
+  .week-cells,
+  .row {
+    display: flex;
+  }
+
+  .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      width: 45px;
+      height: 45px;
+      border-radius: 2px;
+      border: 1px white solid;
+    }
+
+    button:hover {
+      background-color: #d24e37;
+      color: white;
+    }
+
+    .button-today {
+      color: white;
+      background-color: #d24e37;
+    }
+  }
+
+  .previous,
+  .after {
+    button {
+      color: rgba(0, 0, 0, 0.66);
+      opacity: 0.6;
+    }
+  }
+
+  .name-day-week {
+    background-color: #d24e37;
+    width: 45px;
+    height: 45px;
+    border: 1px #676666 solid;
+    color: white;
+  }
+}
+
+.hide {
+  display: none;
+}
