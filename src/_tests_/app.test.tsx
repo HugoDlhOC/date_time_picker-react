@@ -1,7 +1,7 @@
 import { render as reduxRender } from "@testing-library/react";
-import Calendar from "../components/Calendar";
+import Calendar from "../lib/components/Calendar";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
+import { store } from "../lib/app/store";
 
 const render = (component: any) =>
   reduxRender(<Provider store={store}>{component}</Provider>);

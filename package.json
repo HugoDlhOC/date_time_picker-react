@@ -12,6 +12,7 @@
     "url": "https://github.com/HugoDlhOC/react-datepicker"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -39,10 +40,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!date-fns)/\"",
     "eject": "react-scripts eject",
-    "sass": "sass --watch src/sass/main.scss:./src/lib/css/style.css"
+    "sass": "sass --watch src/lib/sass/main.scss:./src/lib/css/style.css"
   },
   "eslintConfig": {
     "extends": [
@@ -61,5 +62,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2"
   }
 }
