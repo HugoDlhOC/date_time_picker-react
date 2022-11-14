@@ -44,7 +44,6 @@ const MonthSelect = () => {
   const handleSelectChangeMonth = (option: Option) => {
     let saveDate = new Date(date);
     saveDate.setMonth(option.value);
-    console.log(option);
 
     dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
   };

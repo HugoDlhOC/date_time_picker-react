@@ -1,8 +1,8 @@
-import HomeButton from "../HomeButton/index";
-import NextButton from "../NextButton/index";
-import PreviousButton from "../PreviousButton/index";
-import MonthSelect from "../MonthSelect/index";
-import YearSelect from "../YearSelect/index";
+import HomeButton from "../HomeButton";
+import NextButton from "../NextButton";
+import PreviousButton from "../PreviousButton";
+import MonthSelect from "../MonthSelect";
+import YearSelect from "../YearSelect";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";

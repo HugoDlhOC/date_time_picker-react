@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./lib/css/style.css";
+import "./css/style.css";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./lib/app/store";
+import { store } from "./app/store";
 import { Provider } from "react-redux";
-import Calendar from "./lib/components/Calendar";
+import Calendar from "./components/Calendar";
 
+// @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ root.render(
         returnFormat={"MM/dd/yyyy"}
         languageChoice={"enUS"}
         defaultDate={new Date(2022, 0, 20)}
+        classToggle={"calendar"}
       />
     </Provider>
   </React.StrictMode>

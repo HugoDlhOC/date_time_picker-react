@@ -39,10 +39,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!date-fns)/\"",
     "eject": "react-scripts eject",
-    "sass": "sass --watch src/lib/sass/main.scss:./src/lib/css/style.css"
+    "sass": "sass --watch src/sass/main.scss:./src/lib/css/style.css"
   },
   "eslintConfig": {
     "extends": [

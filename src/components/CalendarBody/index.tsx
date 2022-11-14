@@ -1,7 +1,7 @@
 import allDaysCurrentMonth from "../../services/allDaysCurrentMonth";
 import allSundayCurrentMonth from "../../services/allSundayCurrentMonth";
 import sortWeeksCalendar from "../../services/sortWeeksCalendar";
-import DaysNamesWeek from "../DaysNamesWeek/index";
+import DaysNamesWeek from "../DaysNamesWeek";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";

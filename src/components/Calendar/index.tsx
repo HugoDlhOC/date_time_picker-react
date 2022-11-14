@@ -1,5 +1,5 @@
-import Navigation from "../Navigation/index";
-import CalendarBody from "../CalendarBody/index";
+import Navigation from "../Navigation";
+import CalendarBody from "../CalendarBody";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -35,7 +35,7 @@ const MAX_YEAR = 1000;
  * @returns JSX
  */
 const Calendar = (props: CalendarDemo) => {
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState("");
 
   //CONTROL
   //YEARS
@@ -115,7 +115,7 @@ const Calendar = (props: CalendarDemo) => {
   const onChangeInput = (e: {
     target: { value: SetStateAction<undefined> };
   }) => {
-    setInputValue(e.target.value);
+    dispatch(defineReturnDate({ returnDate: e.target.value }));
   };
 
   return (
@@ -123,9 +123,9 @@ const Calendar = (props: CalendarDemo) => {
       <input
         type={"text"}
         onClick={handleOpenCalendar}
-        defaultValue={returnDate}
         // @ts-ignore
         onChange={onChangeInput}
+        value={returnDate}
       />
       <div
         className={

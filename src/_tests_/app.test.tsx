@@ -3,7 +3,7 @@ import Calendar from "../components/Calendar";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 
-const render = (component) =>
+const render = (component: any) =>
   reduxRender(<Provider store={store}>{component}</Provider>);
 
 describe("Given I am on a page", () => {
