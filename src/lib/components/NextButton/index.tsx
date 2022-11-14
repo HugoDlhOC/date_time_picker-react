@@ -23,7 +23,11 @@ const NextButton = () => {
 
   return (
     <div>
-      <button onClick={handleNextMonth} className={"button-navigation"}>
+      <button
+        onClick={handleNextMonth}
+        className={"button-navigation"}
+        id={"button-next-arrow"}
+      >
         <FontAwesomeIcon
           icon={faCircleArrowRight}
           className={"button-navigation--icon"}

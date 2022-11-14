@@ -22,7 +22,11 @@ const PreviousButton = () => {
   };
   return (
     <div>
-      <button onClick={handlePreviousMonth} className={"button-navigation"}>
+      <button
+        onClick={handlePreviousMonth}
+        className={"button-navigation"}
+        id={"button-previous-arrow"}
+      >
         <FontAwesomeIcon
           icon={faCircleArrowLeft}
           className={"button-navigation--icon"}
