@@ -125,11 +125,13 @@ const CalendarComponent = (props: CalendarDemo) => {
         // @ts-ignore
         onChange={onChangeInput}
         value={returnDate}
+        role={"textbox"}
       />
       <div
         className={
           props.classToggle === undefined ? "calendar" : props.classToggle
         }
+        data-testid={"calendar"}
       >
         <Navigation isOpen={isOpen} />
         <CalendarBody />

@@ -78,7 +78,10 @@ const CalendarBody = () => {
             ? sortWeeks[0].values.map((item, key) => {
                 return (
                   <div className={"cell previous"} key={key}>
-                    <button onClick={() => handleDisplayDate("previous", item)}>
+                    <button
+                      aria-label="Date Element"
+                      onClick={() => handleDisplayDate("previous", item)}
+                    >
                       {item}
                     </button>
                   </div>
@@ -97,6 +100,7 @@ const CalendarBody = () => {
                       : ""
                   }
                   onClick={() => handleDisplayDate("current", item)}
+                  aria-label="Date Element"
                 >
                   {item}
                 </button>
@@ -121,6 +125,7 @@ const CalendarBody = () => {
                           : ""
                       }
                       onClick={() => handleDisplayDate("current", dateItem)}
+                      aria-label="Date Element"
                     >
                       {dateItem}
                     </button>
@@ -145,6 +150,7 @@ const CalendarBody = () => {
                       : ""
                   }
                   onClick={() => handleDisplayDate("current", item)}
+                  aria-label="Date Element"
                 >
                   {item}
                 </button>
@@ -155,7 +161,10 @@ const CalendarBody = () => {
             ? sortWeeks[4].values.map((item, key) => {
                 return (
                   <div className={"cell after"} key={key}>
-                    <button onClick={() => handleDisplayDate("next", item)}>
+                    <button
+                      aria-label="Date Element"
+                      onClick={() => handleDisplayDate("next", item)}
+                    >
                       {item}
                     </button>
                   </div>

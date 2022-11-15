@@ -28,6 +28,8 @@ const NextButton = () => {
         onClick={handleNextMonth}
         className={"button-navigation"}
         id={"button-next-arrow"}
+        data-testid={"button-next-arrow"}
+        aria-label="Next Month"
       >
         <FontAwesomeIcon
           icon={faCircleArrowRight}

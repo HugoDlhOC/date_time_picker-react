@@ -59,6 +59,7 @@ const MonthSelect = () => {
         options={months}
         isSearchable={false}
         isClearable={false}
+        data-testid={"months-select"}
       />
     </div>
   );

@@ -27,6 +27,8 @@ const PreviousButton = () => {
         onClick={handlePreviousMonth}
         className={"button-navigation"}
         id={"button-previous-arrow"}
+        data-testid={"button-previous-arrow"}
+        aria-label="Previous Month"
       >
         <FontAwesomeIcon
           icon={faCircleArrowLeft}

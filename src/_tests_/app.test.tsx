@@ -1,4 +1,4 @@
-import { render as reduxRender } from "@testing-library/react";
+import { render as reduxRender, screen } from "@testing-library/react";
 import CalendarComponent from "../lib/components/Calendar";
 import { Provider } from "react-redux";
 import { store } from "../lib/app/store";
@@ -21,8 +21,7 @@ describe("Given I am on a page", () => {
         />
       );
 
-      // eslint-disable-next-line testing-library/no-node-access
-      const element = document.querySelector(".calendar");
+      const element = screen.getAllByTestId("calendar");
 
       expect(element).not.toBeNull();
     });

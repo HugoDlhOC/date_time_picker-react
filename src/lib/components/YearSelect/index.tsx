@@ -48,6 +48,7 @@ const YearSelect = () => {
         options={years}
         isSearchable={false}
         isClearable={false}
+        data-testid={"years-select"}
       />
     </div>
   );
