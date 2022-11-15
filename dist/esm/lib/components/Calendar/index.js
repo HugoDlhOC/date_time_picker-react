@@ -1,7 +1,6 @@
 import Navigation from "../Navigation";
-import { store } from "../../app/store";
 import CalendarBody from "../CalendarBody";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { changeLanguage, changeReturnFormat, defineYearsInterval, openCalendar, defineReturnDate, } from "../../feature/calendarSlice";
 import { format } from "date-fns";
@@ -19,7 +18,7 @@ var MAX_YEAR = 1000;
  * @param defaultDate
  * @returns JSX
  */
-var Calendar = function (props) {
+var CalendarComponent = function (props) {
     //CONTROL
     //YEARS
     var yearMinConvert = parseInt(String(props.yearMin));
@@ -70,17 +69,16 @@ var Calendar = function (props) {
     var onChangeInput = function (e) {
         dispatch(defineReturnDate({ returnDate: e.target.value }));
     };
-    return (React.createElement(Provider, { store: store },
-        React.createElement("div", { className: "input-calendar" },
-            React.createElement("input", { type: "text", onClick: handleOpenCalendar, 
-                // @ts-ignore
-                onChange: onChangeInput, value: returnDate }),
-            React.createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle },
-                React.createElement(Navigation, { isOpen: isOpen }),
-                React.createElement(CalendarBody, null)))));
+    return (React.createElement("div", { className: "input-calendar" },
+        React.createElement("input", { type: "text", onClick: handleOpenCalendar, 
+            // @ts-ignore
+            onChange: onChangeInput, value: returnDate }),
+        React.createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle },
+            React.createElement(Navigation, { isOpen: isOpen }),
+            React.createElement(CalendarBody, null))));
 };
-export default Calendar;
-Calendar.propTypes = {
+export default CalendarComponent;
+CalendarComponent.propTypes = {
     languageChoice: PropTypes.any,
     yearMin: PropTypes.number,
     yearMax: PropTypes.number,

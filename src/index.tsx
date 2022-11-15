@@ -4,14 +4,14 @@ import "./lib/css/style.css";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./lib/app/store";
 import { Provider } from "react-redux";
-import Calendar from "./lib/components/Calendar";
+import CalendarComponent from "./lib/components/Calendar";
 
 // @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Calendar
+      <CalendarComponent
         yearMin={2001}
         yearMax={2030}
         returnFormat={"MM/dd/yyyy"}

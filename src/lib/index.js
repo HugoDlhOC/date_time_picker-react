@@ -1,3 +1,11 @@
-import Calendar from "./components/Calendar";
+import CalendarComponent from "./components/Calendar";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
-export { Calendar };
+export const Calendar = () => {
+  return (
+    <Provider store={store}>
+      <CalendarComponent />
+    </Provider>
+  );
+};
