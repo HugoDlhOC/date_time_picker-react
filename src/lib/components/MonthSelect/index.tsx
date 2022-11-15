@@ -50,6 +50,7 @@ const MonthSelect = () => {
   };
   return (
     <div>
+      <label htmlFor={"months"}></label>
       <Select
         defaultValue={months.find(
           (item) => item.value === dateConvert.getMonth()
@@ -60,6 +61,8 @@ const MonthSelect = () => {
         isSearchable={false}
         isClearable={false}
         data-testid={"months-select"}
+        id={"months"}
+        aria-label={"months"}
       />
     </div>
   );

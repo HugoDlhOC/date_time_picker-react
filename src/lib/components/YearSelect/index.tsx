@@ -40,6 +40,7 @@ const YearSelect = () => {
   };
   return (
     <div>
+      <label htmlFor={"years"}></label>
       <Select
         defaultValue={years.find((item) => item.value === 2022)}
         //@ts-ignore
@@ -49,6 +50,8 @@ const YearSelect = () => {
         isSearchable={false}
         isClearable={false}
         data-testid={"years-select"}
+        id={"years"}
+        aria-label={"years"}
       />
     </div>
   );

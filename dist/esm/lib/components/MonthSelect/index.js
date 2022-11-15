@@ -29,7 +29,8 @@ var MonthSelect = function () {
         dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
     };
     return (React.createElement("div", null,
-        React.createElement(Select, { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select" })));
+        React.createElement("label", { htmlFor: "months" }),
+        React.createElement(Select, { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months" })));
 };
 export default MonthSelect;
 //# sourceMappingURL=index.js.map

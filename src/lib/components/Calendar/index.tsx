@@ -119,6 +119,7 @@ const CalendarComponent = (props: CalendarDemo) => {
 
   return (
     <div className={"input-calendar"}>
+      <label htmlFor={"input-calendar"}>Date</label>
       <input
         type={"text"}
         onClick={handleOpenCalendar}
@@ -126,6 +127,7 @@ const CalendarComponent = (props: CalendarDemo) => {
         onChange={onChangeInput}
         value={returnDate}
         role={"textbox"}
+        id={"input-calendar"}
       />
       <div
         className={

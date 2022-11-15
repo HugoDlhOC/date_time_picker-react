@@ -26,9 +26,10 @@ var YearSelect = function () {
         }));
     };
     return (React.createElement("div", null,
+        React.createElement("label", { htmlFor: "years" }),
         React.createElement(Select, { defaultValue: years.find(function (item) { return item.value === 2022; }), 
             //@ts-ignore
-            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select" })));
+            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select", id: "years", "aria-label": "years" })));
 };
 export default YearSelect;
 //# sourceMappingURL=index.js.map

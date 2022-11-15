@@ -29,9 +29,10 @@ var YearSelect = function () {
         }));
     };
     return (react_1["default"].createElement("div", null,
+        react_1["default"].createElement("label", { htmlFor: "years" }),
         react_1["default"].createElement(react_select_1["default"], { defaultValue: years.find(function (item) { return item.value === 2022; }), 
             //@ts-ignore
-            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select" })));
+            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select", id: "years", "aria-label": "years" })));
 };
 exports["default"] = YearSelect;
 //# sourceMappingURL=index.js.map

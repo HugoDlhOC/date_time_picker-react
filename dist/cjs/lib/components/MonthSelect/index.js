@@ -32,7 +32,8 @@ var MonthSelect = function () {
         dispatch((0, calendarSlice_1.changeDate)({ date: new Date(saveDate).toISOString() }));
     };
     return (react_1["default"].createElement("div", null,
-        react_1["default"].createElement(react_select_1["default"], { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select" })));
+        react_1["default"].createElement("label", { htmlFor: "months" }),
+        react_1["default"].createElement(react_select_1["default"], { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months" })));
 };
 exports["default"] = MonthSelect;
 //# sourceMappingURL=index.js.map

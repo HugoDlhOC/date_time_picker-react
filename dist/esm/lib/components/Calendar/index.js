@@ -70,9 +70,10 @@ var CalendarComponent = function (props) {
         dispatch(defineReturnDate({ returnDate: e.target.value }));
     };
     return (React.createElement("div", { className: "input-calendar" },
+        React.createElement("label", { htmlFor: "input-calendar" }, "Date"),
         React.createElement("input", { type: "text", onClick: handleOpenCalendar, 
             // @ts-ignore
-            onChange: onChangeInput, value: returnDate, role: "textbox" }),
+            onChange: onChangeInput, value: returnDate, role: "textbox", id: "input-calendar" }),
         React.createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle, "data-testid": "calendar" },
             React.createElement(Navigation, { isOpen: isOpen }),
             React.createElement(CalendarBody, null))));
