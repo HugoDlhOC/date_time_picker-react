@@ -13,8 +13,7 @@ describe("Given I am on a page", function () {
     describe("When I use the calendar component", function () {
         test("Then the calendar should be rendered", function () {
             render(react_2["default"].createElement(Calendar_1["default"], { languageChoice: "fr", yearMin: 1990, yearMax: 2080, returnFormat: "dd/MM/yyyy", classToggle: "calendar", defaultDate: new Date() }));
-            // eslint-disable-next-line testing-library/no-node-access
-            var element = document.querySelector(".calendar");
+            var element = react_1.screen.getAllByTestId("calendar");
             expect(element).not.toBeNull();
         });
         test("Then, if the maximum year is greater than current year + 1000, then we must have an error displayed", function () {

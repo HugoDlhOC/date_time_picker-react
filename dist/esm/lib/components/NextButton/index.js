@@ -19,7 +19,7 @@ var NextButton = function () {
         dispatch(changeDate({ date: addMonths(saveDate, 1).toISOString() }));
     };
     return (React.createElement("div", null,
-        React.createElement("button", { onClick: handleNextMonth, className: "button-navigation", id: "button-next-arrow" },
+        React.createElement("button", { onClick: handleNextMonth, className: "button-navigation", id: "button-next-arrow", "data-testid": "button-next-arrow", "aria-label": "Next Month" },
             React.createElement(FontAwesomeIcon, { icon: faCircleArrowRight, className: "button-navigation--icon", size: "xl", color: "white" }))));
 };
 export default NextButton;

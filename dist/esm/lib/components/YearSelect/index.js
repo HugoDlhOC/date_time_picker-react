@@ -28,7 +28,7 @@ var YearSelect = function () {
     return (React.createElement("div", null,
         React.createElement(Select, { defaultValue: years.find(function (item) { return item.value === 2022; }), 
             //@ts-ignore
-            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false })));
+            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select" })));
 };
 export default YearSelect;
 //# sourceMappingURL=index.js.map

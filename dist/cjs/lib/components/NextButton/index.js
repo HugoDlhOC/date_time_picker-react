@@ -22,7 +22,7 @@ var NextButton = function () {
         dispatch((0, calendarSlice_1.changeDate)({ date: (0, date_fns_1.addMonths)(saveDate, 1).toISOString() }));
     };
     return (react_1["default"].createElement("div", null,
-        react_1["default"].createElement("button", { onClick: handleNextMonth, className: "button-navigation", id: "button-next-arrow" },
+        react_1["default"].createElement("button", { onClick: handleNextMonth, className: "button-navigation", id: "button-next-arrow", "data-testid": "button-next-arrow", "aria-label": "Next Month" },
             react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faCircleArrowRight, className: "button-navigation--icon", size: "xl", color: "white" }))));
 };
 exports["default"] = NextButton;

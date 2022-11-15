@@ -52,7 +52,7 @@ var CalendarBody = function () {
                 sortWeeks[0].values.length !== 7
                     ? sortWeeks[0].values.map(function (item, key) {
                         return (React.createElement("div", { className: "cell previous", key: key },
-                            React.createElement("button", { onClick: function () { return handleDisplayDate("previous", item); } }, item)));
+                            React.createElement("button", { "aria-label": "Date Element", onClick: function () { return handleDisplayDate("previous", item); } }, item)));
                     })
                     : "",
                 sortWeeks[1].values.map(function (item, key) {
@@ -61,7 +61,7 @@ var CalendarBody = function () {
                                 objDate.getFullYear() === new Date().getFullYear() &&
                                 item === new Date().getDate()
                                 ? "button-today"
-                                : "", onClick: function () { return handleDisplayDate("current", item); } }, item)));
+                                : "", onClick: function () { return handleDisplayDate("current", item); }, "aria-label": "Date Element" }, item)));
                 }))),
         React.createElement("div", { className: "day-cells" }, sortWeeks[2].values.map(function (item, key) {
             return (React.createElement("div", { className: "row", key: key }, item.values.map(function (dateItem, key) {
@@ -70,7 +70,7 @@ var CalendarBody = function () {
                             objDate.getFullYear() === new Date().getFullYear() &&
                             dateItem === new Date().getDate()
                             ? "button-today"
-                            : "", onClick: function () { return handleDisplayDate("current", dateItem); } }, dateItem)));
+                            : "", onClick: function () { return handleDisplayDate("current", dateItem); }, "aria-label": "Date Element" }, dateItem)));
             })));
         })),
         React.createElement("div", { className: "last-days-cells" },
@@ -81,12 +81,12 @@ var CalendarBody = function () {
                                 objDate.getFullYear() === new Date().getFullYear() &&
                                 item === new Date().getDate()
                                 ? "button-today"
-                                : "", onClick: function () { return handleDisplayDate("current", item); } }, item)));
+                                : "", onClick: function () { return handleDisplayDate("current", item); }, "aria-label": "Date Element" }, item)));
                 }),
                 sortWeeks[3].values.length !== 0
                     ? sortWeeks[4].values.map(function (item, key) {
                         return (React.createElement("div", { className: "cell after", key: key },
-                            React.createElement("button", { onClick: function () { return handleDisplayDate("next", item); } }, item)));
+                            React.createElement("button", { "aria-label": "Date Element", onClick: function () { return handleDisplayDate("next", item); } }, item)));
                     })
                     : "")),
         React.createElement("div", { className: "number-week-cells" })));

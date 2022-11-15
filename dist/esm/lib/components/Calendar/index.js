@@ -72,8 +72,8 @@ var CalendarComponent = function (props) {
     return (React.createElement("div", { className: "input-calendar" },
         React.createElement("input", { type: "text", onClick: handleOpenCalendar, 
             // @ts-ignore
-            onChange: onChangeInput, value: returnDate }),
-        React.createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle },
+            onChange: onChangeInput, value: returnDate, role: "textbox" }),
+        React.createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle, "data-testid": "calendar" },
             React.createElement(Navigation, { isOpen: isOpen }),
             React.createElement(CalendarBody, null))));
 };

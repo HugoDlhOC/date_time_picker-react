@@ -1,4 +1,4 @@
-import { render as reduxRender } from "@testing-library/react";
+import { render as reduxRender, screen } from "@testing-library/react";
 import CalendarComponent from "../lib/components/Calendar";
 import { Provider } from "react-redux";
 import { store } from "../lib/app/store";
@@ -10,8 +10,7 @@ describe("Given I am on a page", function () {
     describe("When I use the calendar component", function () {
         test("Then the calendar should be rendered", function () {
             render(React.createElement(CalendarComponent, { languageChoice: "fr", yearMin: 1990, yearMax: 2080, returnFormat: "dd/MM/yyyy", classToggle: "calendar", defaultDate: new Date() }));
-            // eslint-disable-next-line testing-library/no-node-access
-            var element = document.querySelector(".calendar");
+            var element = screen.getAllByTestId("calendar");
             expect(element).not.toBeNull();
         });
         test("Then, if the maximum year is greater than current year + 1000, then we must have an error displayed", function () {
