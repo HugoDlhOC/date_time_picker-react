@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var tslib_1 = require("tslib");
 var Navigation_1 = tslib_1.__importDefault(require("../Navigation"));
+var store_1 = require("../../app/store");
 var CalendarBody_1 = tslib_1.__importDefault(require("../CalendarBody"));
 var react_redux_1 = require("react-redux");
 var prop_types_1 = tslib_1.__importDefault(require("prop-types"));
@@ -72,13 +73,14 @@ var Calendar = function (props) {
     var onChangeInput = function (e) {
         dispatch((0, calendarSlice_1.defineReturnDate)({ returnDate: e.target.value }));
     };
-    return (react_2["default"].createElement("div", { className: "input-calendar" },
-        react_2["default"].createElement("input", { type: "text", onClick: handleOpenCalendar, 
-            // @ts-ignore
-            onChange: onChangeInput, value: returnDate }),
-        react_2["default"].createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle },
-            react_2["default"].createElement(Navigation_1["default"], { isOpen: isOpen }),
-            react_2["default"].createElement(CalendarBody_1["default"], null))));
+    return (react_2["default"].createElement(react_redux_1.Provider, { store: store_1.store },
+        react_2["default"].createElement("div", { className: "input-calendar" },
+            react_2["default"].createElement("input", { type: "text", onClick: handleOpenCalendar, 
+                // @ts-ignore
+                onChange: onChangeInput, value: returnDate }),
+            react_2["default"].createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle },
+                react_2["default"].createElement(Navigation_1["default"], { isOpen: isOpen }),
+                react_2["default"].createElement(CalendarBody_1["default"], null)))));
 };
 exports["default"] = Calendar;
 Calendar.propTypes = {
