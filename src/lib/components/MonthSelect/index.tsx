@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
 import * as listOfLanguage from "date-fns/esm/locale";
 import { RootState } from "../../app/store";
+import React from "react";
 
 /**
  * This component represents the select offering the different months that the user can select.
@@ -20,7 +21,7 @@ const MonthSelect = () => {
   );
 
   const indexListOfLanguage = Object.keys(listOfLanguage).findIndex(
-    (item, index) => item === choiceUserLanguage
+    (item) => item === choiceUserLanguage
   );
 
   //definition of the list of months for the select

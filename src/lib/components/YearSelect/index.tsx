@@ -3,6 +3,7 @@ import defineYearsSelect from "../../services/defineYearsSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate, defineYearsInterval } from "../../feature/calendarSlice";
 import { RootState } from "../../app/store";
+import React from "react";
 
 /**
  * An interval has been defined by the developer per props.

@@ -1,8 +1,9 @@
 {
   "name": "@hugo.delahaye53/react-datepicker",
   "version": "0.1.6",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "files": [
     "dist",
     "README.md"
@@ -11,6 +12,16 @@
     "type": "git",
     "url": "https://github.com/HugoDlhOC/react-datepicker"
   },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "awesome-project",
+    "datepicker"
+  ],
+  "author": "Hugo DELAHAYE (hugo.delahaye53)",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -39,11 +50,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!date-fns)/\"",
     "eject": "react-scripts eject",
-    "sass": "sass --watch src/lib/sass/main.scss:./src/lib/css/style.css"
+    "sass": "sass --watch src/lib/sass/main.scss:./src/lib/css/style.css",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run prettier && npm run lint"
   },
   "eslintConfig": {
     "extends": [

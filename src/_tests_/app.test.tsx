@@ -2,6 +2,7 @@ import { render as reduxRender } from "@testing-library/react";
 import Calendar from "../lib/components/Calendar";
 import { Provider } from "react-redux";
 import { store } from "../lib/app/store";
+import React from "react";
 
 const render = (component: any) =>
   reduxRender(<Provider store={store}>{component}</Provider>);
@@ -19,6 +20,8 @@ describe("Given I am on a page", () => {
           defaultDate={new Date()}
         />
       );
+
+      // eslint-disable-next-line testing-library/no-node-access
       const element = document.querySelector(".calendar");
 
       expect(element).not.toBeNull();

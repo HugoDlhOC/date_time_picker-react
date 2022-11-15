@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";
 import { RootState } from "../../app/store";
+import React from "react";
 
 /**
  * This component represents the body of the calendar (all selecting days).

@@ -10,9 +10,10 @@ import {
   defineReturnDate,
 } from "../../feature/calendarSlice";
 import { format } from "date-fns";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect } from "react";
 import { RootState } from "../../app/store";
 import * as listOfLanguage from "date-fns/esm/locale";
+import React from "react";
 
 interface CalendarDemo {
   languageChoice: string;
@@ -35,8 +36,6 @@ const MAX_YEAR = 1000;
  * @returns JSX
  */
 const Calendar = (props: CalendarDemo) => {
-  const [inputValue, setInputValue] = useState("");
-
   //CONTROL
   //YEARS
   const yearMinConvert: number = parseInt(String(props.yearMin));
@@ -57,7 +56,7 @@ const Calendar = (props: CalendarDemo) => {
 
   //LANGUAGE
   const indexListOfLanguage = Object.keys(listOfLanguage).findIndex(
-    (item, index) => item === props.languageChoice
+    (item) => item === props.languageChoice
   );
 
   if (indexListOfLanguage === -1) {

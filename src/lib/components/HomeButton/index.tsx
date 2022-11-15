@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
+import React from "react";
 
 /**
  * This component represents the Home Button, when the user will click on the Home button, he will be redirected to the current month.

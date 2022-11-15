@@ -4,6 +4,7 @@ import { subMonths } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
 import { RootState } from "../../app/store";
+import React from "react";
 
 /**
  * This component allows to define the behavior of the previous arrow. When the user clicks on it, the days of the previous month will be displayed.

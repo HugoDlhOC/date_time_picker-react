@@ -4,6 +4,7 @@ import { addMonths } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
 import { RootState } from "../../app/store";
+import React from "react";
 
 /**
  * This component allows to define the behavior of the next arrow. When the user clicks on it, the days of the next month will be displayed.
