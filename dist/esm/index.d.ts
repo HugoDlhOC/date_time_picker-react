@@ -1,2 +1,2 @@
-import Calendar from "./lib/components/Calendar";
-export { Calendar };
+/// <reference types="react" />
+export declare const Calendar: () => JSX.Element;

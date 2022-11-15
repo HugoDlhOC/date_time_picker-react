@@ -18,7 +18,7 @@ interface CalendarDemo {
  * @param defaultDate
  * @returns JSX
  */
-declare const Calendar: {
+declare const CalendarComponent: {
     (props: CalendarDemo): JSX.Element;
     propTypes: {
         languageChoice: PropTypes.Requireable<any>;
@@ -27,4 +27,4 @@ declare const Calendar: {
         returnFormat: PropTypes.Requireable<string>;
     };
 };
-export default Calendar;
+export default CalendarComponent;

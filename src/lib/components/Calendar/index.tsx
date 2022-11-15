@@ -1,6 +1,6 @@
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   changeLanguage,
@@ -11,7 +11,7 @@ import {
 } from "../../feature/calendarSlice";
 import { format } from "date-fns";
 import { SetStateAction, useEffect } from "react";
-import { RootState, store } from "../../app/store";
+import { RootState } from "../../app/store";
 import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
 
@@ -35,7 +35,7 @@ const MAX_YEAR = 1000;
  * @param defaultDate
  * @returns JSX
  */
-const Calendar = (props: CalendarDemo) => {
+const CalendarComponent = (props: CalendarDemo) => {
   //CONTROL
   //YEARS
   const yearMinConvert: number = parseInt(String(props.yearMin));
@@ -118,31 +118,29 @@ const Calendar = (props: CalendarDemo) => {
   };
 
   return (
-    <Provider store={store}>
-      <div className={"input-calendar"}>
-        <input
-          type={"text"}
-          onClick={handleOpenCalendar}
-          // @ts-ignore
-          onChange={onChangeInput}
-          value={returnDate}
-        />
-        <div
-          className={
-            props.classToggle === undefined ? "calendar" : props.classToggle
-          }
-        >
-          <Navigation isOpen={isOpen} />
-          <CalendarBody />
-        </div>
+    <div className={"input-calendar"}>
+      <input
+        type={"text"}
+        onClick={handleOpenCalendar}
+        // @ts-ignore
+        onChange={onChangeInput}
+        value={returnDate}
+      />
+      <div
+        className={
+          props.classToggle === undefined ? "calendar" : props.classToggle
+        }
+      >
+        <Navigation isOpen={isOpen} />
+        <CalendarBody />
       </div>
-    </Provider>
+    </div>
   );
 };
 
-export default Calendar;
+export default CalendarComponent;
 
-Calendar.propTypes = {
+CalendarComponent.propTypes = {
   languageChoice: PropTypes.any,
   yearMin: PropTypes.number,
   yearMax: PropTypes.number,
