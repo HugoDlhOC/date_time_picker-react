@@ -8,6 +8,7 @@ var prop_types_1 = tslib_1.__importDefault(require("prop-types"));
 var calendarSlice_1 = require("../../feature/calendarSlice");
 var date_fns_1 = require("date-fns");
 var react_1 = require("react");
+var store_1 = require("../../app/store");
 var listOfLanguage = tslib_1.__importStar(require("date-fns/esm/locale"));
 var react_2 = tslib_1.__importDefault(require("react"));
 var MAX_YEAR = 1000;
@@ -21,7 +22,7 @@ var MAX_YEAR = 1000;
  * @param defaultDate
  * @returns JSX
  */
-var CalendarComponent = function (props) {
+var Calendar = function (props) {
     //CONTROL
     //YEARS
     var yearMinConvert = parseInt(String(props.yearMin));
@@ -72,16 +73,17 @@ var CalendarComponent = function (props) {
     var onChangeInput = function (e) {
         dispatch((0, calendarSlice_1.defineReturnDate)({ returnDate: e.target.value }));
     };
-    return (react_2["default"].createElement("div", { className: "input-calendar" },
-        react_2["default"].createElement("input", { type: "text", onClick: handleOpenCalendar, 
-            // @ts-ignore
-            onChange: onChangeInput, value: returnDate }),
-        react_2["default"].createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle },
-            react_2["default"].createElement(Navigation_1["default"], { isOpen: isOpen }),
-            react_2["default"].createElement(CalendarBody_1["default"], null))));
+    return (react_2["default"].createElement(react_redux_1.Provider, { store: store_1.store },
+        react_2["default"].createElement("div", { className: "input-calendar" },
+            react_2["default"].createElement("input", { type: "text", onClick: handleOpenCalendar, 
+                // @ts-ignore
+                onChange: onChangeInput, value: returnDate }),
+            react_2["default"].createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle },
+                react_2["default"].createElement(Navigation_1["default"], { isOpen: isOpen }),
+                react_2["default"].createElement(CalendarBody_1["default"], null)))));
 };
-exports["default"] = CalendarComponent;
-CalendarComponent.propTypes = {
+exports["default"] = Calendar;
+Calendar.propTypes = {
     languageChoice: prop_types_1["default"].any,
     yearMin: prop_types_1["default"].number,
     yearMax: prop_types_1["default"].number,
