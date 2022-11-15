@@ -1,6 +1,7 @@
 import Navigation from "../Navigation";
+import { store } from "../../app/store";
 import CalendarBody from "../CalendarBody";
-import { useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   changeLanguage,
@@ -118,23 +119,25 @@ const Calendar = (props: CalendarDemo) => {
   };
 
   return (
-    <div className={"input-calendar"}>
-      <input
-        type={"text"}
-        onClick={handleOpenCalendar}
-        // @ts-ignore
-        onChange={onChangeInput}
-        value={returnDate}
-      />
-      <div
-        className={
-          props.classToggle === undefined ? "calendar" : props.classToggle
-        }
-      >
-        <Navigation isOpen={isOpen} />
-        <CalendarBody />
+    <Provider store={store}>
+      <div className={"input-calendar"}>
+        <input
+          type={"text"}
+          onClick={handleOpenCalendar}
+          // @ts-ignore
+          onChange={onChangeInput}
+          value={returnDate}
+        />
+        <div
+          className={
+            props.classToggle === undefined ? "calendar" : props.classToggle
+          }
+        >
+          <Navigation isOpen={isOpen} />
+          <CalendarBody />
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 };
 

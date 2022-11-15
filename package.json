@@ -55,9 +55,7 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!date-fns)/\"",
     "eject": "react-scripts eject",
-    "sass": "sass --watch src/lib/sass/main.scss:./src/lib/css/style.css",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run prettier && npm run lint"
+    "sass": "sass --watch src/lib/sass/main.scss:./src/lib/css/style.css"
   },
   "eslintConfig": {
     "extends": [
