@@ -15,14 +15,22 @@ import { RootState } from "../../app/store";
 import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
 
-interface CalendarDemo {
+interface CalendarDemoRequiredProps {
   languageChoice: string;
   yearMin: number;
   yearMax: number;
   returnFormat: string;
-  classToggle: string;
   defaultDate: Date;
+  labelContent: string;
 }
+
+interface CalendarDemoOptionalProps {
+  classToggle?: string;
+}
+
+interface CalendarDemo
+  extends CalendarDemoRequiredProps,
+    CalendarDemoOptionalProps {}
 
 const MAX_YEAR = 1000;
 /**
@@ -33,6 +41,7 @@ const MAX_YEAR = 1000;
  * @param returnFormat
  * @param classChange
  * @param defaultDate
+ * @param labelContent
  * @returns JSX
  */
 const CalendarComponent = (props: CalendarDemo) => {
@@ -52,6 +61,10 @@ const CalendarComponent = (props: CalendarDemo) => {
     throw new Error(
       "The given value is too high, it cannot be higher than the current year + 1000"
     );
+  }
+
+  if (props.yearMin > props.yearMax) {
+    throw new Error("The yearMin value can't be bigger than yearMax value");
   }
 
   //LANGUAGE
@@ -119,7 +132,7 @@ const CalendarComponent = (props: CalendarDemo) => {
 
   return (
     <div className={"input-calendar"}>
-      <label htmlFor={"input-calendar"}>Date</label>
+      <label htmlFor={"input-calendar"}>{props.labelContent}</label>
       <input
         type={"text"}
         onClick={handleOpenCalendar}

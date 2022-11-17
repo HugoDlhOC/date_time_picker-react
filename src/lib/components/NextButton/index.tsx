@@ -34,7 +34,7 @@ const NextButton = () => {
         <FontAwesomeIcon
           icon={faCircleArrowRight}
           className={"button-navigation--icon"}
-          size={"xl"}
+          size={"lg"}
           color={"white"}
         ></FontAwesomeIcon>
       </button>

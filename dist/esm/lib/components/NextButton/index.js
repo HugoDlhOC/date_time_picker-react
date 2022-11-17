@@ -20,7 +20,7 @@ var NextButton = function () {
     };
     return (React.createElement("div", null,
         React.createElement("button", { onClick: handleNextMonth, className: "button-navigation", id: "button-next-arrow", "data-testid": "button-next-arrow", "aria-label": "Next Month" },
-            React.createElement(FontAwesomeIcon, { icon: faCircleArrowRight, className: "button-navigation--icon", size: "xl", color: "white" }))));
+            React.createElement(FontAwesomeIcon, { icon: faCircleArrowRight, className: "button-navigation--icon", size: "lg", color: "white" }))));
 };
 export default NextButton;
 //# sourceMappingURL=index.js.map

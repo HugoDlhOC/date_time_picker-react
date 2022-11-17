@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDate } from "../../feature/calendarSlice";
 import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
+import styleMonthSelect from "../../services/configStyleMonthSelect";
 /**
  * This component represents the select offering the different months that the user can select.
  * @returns JSX
@@ -30,7 +31,7 @@ var MonthSelect = function () {
     };
     return (React.createElement("div", null,
         React.createElement("label", { htmlFor: "months" }),
-        React.createElement(Select, { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months" })));
+        React.createElement(Select, { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months", styles: styleMonthSelect })));
 };
 export default MonthSelect;
 //# sourceMappingURL=index.js.map

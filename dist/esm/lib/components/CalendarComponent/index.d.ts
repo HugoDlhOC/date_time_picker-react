@@ -1,12 +1,17 @@
 /// <reference types="react" />
 import PropTypes from "prop-types";
-interface CalendarDemo {
+interface CalendarDemoRequiredProps {
     languageChoice: string;
     yearMin: number;
     yearMax: number;
     returnFormat: string;
-    classToggle: string;
     defaultDate: Date;
+    labelContent: string;
+}
+interface CalendarDemoOptionalProps {
+    classToggle?: string;
+}
+interface CalendarDemo extends CalendarDemoRequiredProps, CalendarDemoOptionalProps {
 }
 /**
  * This component represents the entire calendar.
@@ -16,6 +21,7 @@ interface CalendarDemo {
  * @param returnFormat
  * @param classChange
  * @param defaultDate
+ * @param labelContent
  * @returns JSX
  */
 declare const CalendarComponent: {

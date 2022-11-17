@@ -20,7 +20,7 @@ var HomeButton = function () {
     };
     return (react_1["default"].createElement("div", null,
         react_1["default"].createElement("button", { onClick: handleHome, className: "button-navigation", "aria-label": "Home Current Month" },
-            react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faHome, className: "button-navigation--icon", size: "xl", color: "white" }))));
+            react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faHome, className: "button-navigation--icon", size: "lg", color: "white" }))));
 };
 exports["default"] = HomeButton;
 //# sourceMappingURL=index.js.map

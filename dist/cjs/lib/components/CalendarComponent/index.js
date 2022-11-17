@@ -19,6 +19,7 @@ var MAX_YEAR = 1000;
  * @param returnFormat
  * @param classChange
  * @param defaultDate
+ * @param labelContent
  * @returns JSX
  */
 var CalendarComponent = function (props) {
@@ -32,6 +33,9 @@ var CalendarComponent = function (props) {
     }
     if (yearMaxConvert > date.getFullYear() + MAX_YEAR) {
         throw new Error("The given value is too high, it cannot be higher than the current year + 1000");
+    }
+    if (props.yearMin > props.yearMax) {
+        throw new Error("The yearMin value can't be bigger than yearMax value");
     }
     //LANGUAGE
     var indexListOfLanguage = Object.keys(listOfLanguage).findIndex(function (item) { return item === props.languageChoice; });
@@ -73,7 +77,7 @@ var CalendarComponent = function (props) {
         dispatch((0, calendarSlice_1.defineReturnDate)({ returnDate: e.target.value }));
     };
     return (react_2["default"].createElement("div", { className: "input-calendar" },
-        react_2["default"].createElement("label", { htmlFor: "input-calendar" }, "Date"),
+        react_2["default"].createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
         react_2["default"].createElement("input", { type: "text", onClick: handleOpenCalendar, 
             // @ts-ignore
             onChange: onChangeInput, value: returnDate, role: "textbox", id: "input-calendar" }),

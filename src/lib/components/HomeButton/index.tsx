@@ -29,7 +29,7 @@ const HomeButton = () => {
         <FontAwesomeIcon
           icon={faHome}
           className={"button-navigation--icon"}
-          size={"xl"}
+          size={"lg"}
           color={"white"}
         ></FontAwesomeIcon>
       </button>

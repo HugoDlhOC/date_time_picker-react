@@ -32,16 +32,19 @@ Then use it in your app:
 
 ```js
 import React from 'react';
-import Calendar from '@hugo.delahaye53/react-datepicker';
+import {Calendar} from "@hugo.delahaye53/react-datepicker";
+import "@hugo.delahaye53/react-datepicker/dist/cjs/styles/style.css";
 
 export default function App() {
   return (
     <div className="App">
       <Calendar
-        yearMin = {1950}
-        yearMax= {2050}
+        yearMin={1950}
+        yearMax={2050}
         languageChoice={"enUS"}
-        returnFormat={"dd/MM/yyyy"}
+        returnFormat={"MM/dd/yyyy"}
+        defaultDate={new Date()}
+        labelContent={"Date"}
       />
     </div>
   );
@@ -56,9 +59,12 @@ Common props you may want to specify include:
 - `yearMax` - define the last available year in the calendar
 - `language` - define the language of the calendar; this will concern the days of the week as well as the name of the months
 - `returnFormat` - define the output format of the expected date
+- `defaultDate` - define the date display by default in the input
+- `labelContent` - define the text of the label
+- `classChange` - give your own class for custom the calendar (props not required)
 
 
-## How the props work
+## More explication for many props
 
 - `yearMin` / `yearMax` - As previously mentioned, they allow you to create an interval between the starting year and the proposed end year. The expected values are numbers. An interval of 1000 years is defined with respect to the current year. This means that if we are in 2022, the first year cannot be less than 1022, and the last year cannot be more than 3022. This is for performance reasons.
 - `language` - The choice of language can be very useful depending on which audience will use your application. The available languages are provided through the date-fns library where you can consult the documentation to see what languages are available via [this link](https://date-fns.org/docs/Getting-Started).
@@ -66,10 +72,10 @@ Common props you may want to specify include:
 - `returnFormat` - The returned date format is based on a method of the date-fns library named format. The documentation is at this link: [this link](https://date-fns.org/v2.29.3/docs/format).
 
 ## Customisation
-//
+You can add your class with the props classToggle.
 # Mentions
 
-This project uses an npm [react-select package](https://www.npmjs.com/package/react-select) to create a drop-down menu with items and offers many features.
+This project uses npm [react-select package](https://www.npmjs.com/package/react-select) to create a drop-down menu with items and offers many features.
 
 ## License
 

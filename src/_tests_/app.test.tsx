@@ -1,5 +1,5 @@
 import { render as reduxRender, screen } from "@testing-library/react";
-import CalendarComponent from "../lib/components/Calendar";
+import CalendarComponent from "../lib/components/CalendarComponent";
 import { Provider } from "react-redux";
 import { store } from "../lib/app/store";
 import React from "react";
@@ -16,8 +16,8 @@ describe("Given I am on a page", () => {
           yearMin={1990}
           yearMax={2080}
           returnFormat={"dd/MM/yyyy"}
-          classToggle={"calendar"}
           defaultDate={new Date()}
+          labelContent={"Date"}
         />
       );
 
@@ -34,8 +34,8 @@ describe("Given I am on a page", () => {
             yearMin={1990}
             yearMax={new Date().getFullYear() + 2000}
             returnFormat={"dd/MM/yyyy"}
-            classToggle={"calendar"}
             defaultDate={new Date()}
+            labelContent={"Date"}
           />
         );
       }).toThrow(
@@ -51,8 +51,8 @@ describe("Given I am on a page", () => {
             yearMin={new Date().getFullYear() - 2000}
             yearMax={2030}
             returnFormat={"dd/MM/yyyy"}
-            classToggle={"calendar"}
             defaultDate={new Date()}
+            labelContent={"Date"}
           />
         );
       }).toThrow(
@@ -68,8 +68,8 @@ describe("Given I am on a page", () => {
             yearMin={2001}
             yearMax={2030}
             returnFormat={"dd/MM/yyyy"}
-            classToggle={"calendar"}
             defaultDate={new Date()}
+            labelContent={"Date"}
           />
         );
       }).toThrow(
@@ -85,8 +85,8 @@ describe("Given I am on a page", () => {
             yearMin={2001}
             yearMax={2030}
             returnFormat={"day/month/years"}
-            classToggle={"calendar"}
             defaultDate={new Date()}
+            labelContent={"Date"}
           />
         );
       }).toThrow(

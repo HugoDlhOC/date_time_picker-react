@@ -6,6 +6,7 @@ var defineYearsSelect_1 = tslib_1.__importDefault(require("../../services/define
 var react_redux_1 = require("react-redux");
 var calendarSlice_1 = require("../../feature/calendarSlice");
 var react_1 = tslib_1.__importDefault(require("react"));
+var configStyleYearSelect_1 = tslib_1.__importDefault(require("../../services/configStyleYearSelect"));
 /**
  * An interval has been defined by the developer per props.
  * @returns JSX
@@ -32,7 +33,7 @@ var YearSelect = function () {
         react_1["default"].createElement("label", { htmlFor: "years" }),
         react_1["default"].createElement(react_select_1["default"], { defaultValue: years.find(function (item) { return item.value === 2022; }), 
             //@ts-ignore
-            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select", id: "years", "aria-label": "years" })));
+            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select", id: "years", "aria-label": "years", styles: configStyleYearSelect_1["default"] })));
 };
 exports["default"] = YearSelect;
 //# sourceMappingURL=index.js.map

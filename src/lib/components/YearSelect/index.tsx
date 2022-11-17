@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDate, defineYearsInterval } from "../../feature/calendarSlice";
 import { RootState } from "../../app/store";
 import React from "react";
+import configStyleYearSelect from "../../services/configStyleYearSelect";
 
 /**
  * An interval has been defined by the developer per props.
@@ -14,6 +15,7 @@ const YearSelect = () => {
   const dispatch = useDispatch();
 
   const date = useSelector((state: RootState) => state.calendar.date);
+
   const dateConvert = new Date(date);
   const yearMin = useSelector((state: RootState) => state.calendar.yearMin);
   const yearMax = useSelector((state: RootState) => state.calendar.yearMax);
@@ -38,6 +40,7 @@ const YearSelect = () => {
       })
     );
   };
+
   return (
     <div>
       <label htmlFor={"years"}></label>
@@ -52,6 +55,7 @@ const YearSelect = () => {
         data-testid={"years-select"}
         id={"years"}
         aria-label={"years"}
+        styles={configStyleYearSelect}
       />
     </div>
   );

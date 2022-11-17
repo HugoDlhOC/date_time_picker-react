@@ -6,6 +6,7 @@ var react_redux_1 = require("react-redux");
 var calendarSlice_1 = require("../../feature/calendarSlice");
 var listOfLanguage = tslib_1.__importStar(require("date-fns/esm/locale"));
 var react_1 = tslib_1.__importDefault(require("react"));
+var configStyleMonthSelect_1 = tslib_1.__importDefault(require("../../services/configStyleMonthSelect"));
 /**
  * This component represents the select offering the different months that the user can select.
  * @returns JSX
@@ -33,7 +34,7 @@ var MonthSelect = function () {
     };
     return (react_1["default"].createElement("div", null,
         react_1["default"].createElement("label", { htmlFor: "months" }),
-        react_1["default"].createElement(react_select_1["default"], { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months" })));
+        react_1["default"].createElement(react_select_1["default"], { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months", styles: configStyleMonthSelect_1["default"] })));
 };
 exports["default"] = MonthSelect;
 //# sourceMappingURL=index.js.map

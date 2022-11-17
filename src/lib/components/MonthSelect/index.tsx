@@ -4,6 +4,7 @@ import { changeDate } from "../../feature/calendarSlice";
 import * as listOfLanguage from "date-fns/esm/locale";
 import { RootState } from "../../app/store";
 import React from "react";
+import styleMonthSelect from "../../services/configStyleMonthSelect";
 
 /**
  * This component represents the select offering the different months that the user can select.
@@ -48,6 +49,7 @@ const MonthSelect = () => {
 
     dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
   };
+
   return (
     <div>
       <label htmlFor={"months"}></label>
@@ -63,6 +65,7 @@ const MonthSelect = () => {
         data-testid={"months-select"}
         id={"months"}
         aria-label={"months"}
+        styles={styleMonthSelect}
       />
     </div>
   );
