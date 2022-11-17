@@ -1,6 +1,6 @@
 .navigation-datepicker {
   display: flex;
-  background-color: rgba(0, 0, 0, 0.52);
+  background-color: #564949;
   padding: 3px;
   align-items: center;
   border-radius: 5px 5px 0px 0px;
@@ -45,8 +45,7 @@
 }
 .body-calendar .previous button,
 .body-calendar .after button {
-  color: rgba(0, 0, 0, 0.66);
-  opacity: 0.6;
+  color: gray;
 }
 .body-calendar .name-day-week {
   background-color: #d24e37;
@@ -70,6 +69,7 @@
 .input-calendar .calendar {
   position: absolute;
   top: 40px;
+  z-index: 1;
 }
 
 /*# sourceMappingURL=style.css.map */
