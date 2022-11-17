@@ -25,6 +25,7 @@ const NextButton = () => {
   return (
     <div>
       <button
+        type={"button"}
         onClick={handleNextMonth}
         className={"button-navigation"}
         id={"button-next-arrow"}

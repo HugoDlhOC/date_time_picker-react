@@ -81,6 +81,7 @@ const CalendarBody = () => {
                     <button
                       aria-label="Date Element"
                       onClick={() => handleDisplayDate("previous", item)}
+                      type={"button"}
                     >
                       {item}
                     </button>
@@ -92,6 +93,7 @@ const CalendarBody = () => {
             return (
               <div className={"cell"} key={key}>
                 <button
+                  type={"button"}
                   className={
                     objDate.getMonth() === new Date().getMonth() &&
                     objDate.getFullYear() === new Date().getFullYear() &&
@@ -117,6 +119,7 @@ const CalendarBody = () => {
                 return (
                   <div className={"cell"} key={key}>
                     <button
+                      type={"button"}
                       className={
                         objDate.getMonth() === new Date().getMonth() &&
                         objDate.getFullYear() === new Date().getFullYear() &&
@@ -142,6 +145,7 @@ const CalendarBody = () => {
             return (
               <div className={"cell"} key={key}>
                 <button
+                  type={"button"}
                   className={
                     objDate.getMonth() === new Date().getMonth() &&
                     objDate.getFullYear() === new Date().getFullYear() &&
@@ -162,6 +166,7 @@ const CalendarBody = () => {
                 return (
                   <div className={"cell after"} key={key}>
                     <button
+                      type={"button"}
                       aria-label="Date Element"
                       onClick={() => handleDisplayDate("next", item)}
                     >

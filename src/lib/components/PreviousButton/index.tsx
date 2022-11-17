@@ -24,6 +24,7 @@ const PreviousButton = () => {
   return (
     <div>
       <button
+        type={"button"}
         onClick={handlePreviousMonth}
         className={"button-navigation"}
         id={"button-previous-arrow"}

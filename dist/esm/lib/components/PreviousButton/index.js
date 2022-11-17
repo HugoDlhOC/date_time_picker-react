@@ -19,7 +19,7 @@ var PreviousButton = function () {
         dispatch(changeDate({ date: subMonths(saveDate, 1).toISOString() }));
     };
     return (React.createElement("div", null,
-        React.createElement("button", { onClick: handlePreviousMonth, className: "button-navigation", id: "button-previous-arrow", "data-testid": "button-previous-arrow", "aria-label": "Previous Month" },
+        React.createElement("button", { type: "button", onClick: handlePreviousMonth, className: "button-navigation", id: "button-previous-arrow", "data-testid": "button-previous-arrow", "aria-label": "Previous Month" },
             React.createElement(FontAwesomeIcon, { icon: faCircleArrowLeft, className: "button-navigation--icon", size: "lg", color: "white" }))));
 };
 export default PreviousButton;

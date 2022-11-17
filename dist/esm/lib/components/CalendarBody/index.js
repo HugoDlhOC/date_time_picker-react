@@ -52,12 +52,12 @@ var CalendarBody = function () {
                 sortWeeks[0].values.length !== 7
                     ? sortWeeks[0].values.map(function (item, key) {
                         return (React.createElement("div", { className: "cell previous", key: key },
-                            React.createElement("button", { "aria-label": "Date Element", onClick: function () { return handleDisplayDate("previous", item); } }, item)));
+                            React.createElement("button", { "aria-label": "Date Element", onClick: function () { return handleDisplayDate("previous", item); }, type: "button" }, item)));
                     })
                     : "",
                 sortWeeks[1].values.map(function (item, key) {
                     return (React.createElement("div", { className: "cell", key: key },
-                        React.createElement("button", { className: objDate.getMonth() === new Date().getMonth() &&
+                        React.createElement("button", { type: "button", className: objDate.getMonth() === new Date().getMonth() &&
                                 objDate.getFullYear() === new Date().getFullYear() &&
                                 item === new Date().getDate()
                                 ? "button-today"
@@ -66,7 +66,7 @@ var CalendarBody = function () {
         React.createElement("div", { className: "day-cells" }, sortWeeks[2].values.map(function (item, key) {
             return (React.createElement("div", { className: "row", key: key }, item.values.map(function (dateItem, key) {
                 return (React.createElement("div", { className: "cell", key: key },
-                    React.createElement("button", { className: objDate.getMonth() === new Date().getMonth() &&
+                    React.createElement("button", { type: "button", className: objDate.getMonth() === new Date().getMonth() &&
                             objDate.getFullYear() === new Date().getFullYear() &&
                             dateItem === new Date().getDate()
                             ? "button-today"
@@ -77,7 +77,7 @@ var CalendarBody = function () {
             React.createElement("div", { className: "row" },
                 sortWeeks[3].values.map(function (item, key) {
                     return (React.createElement("div", { className: "cell", key: key },
-                        React.createElement("button", { className: objDate.getMonth() === new Date().getMonth() &&
+                        React.createElement("button", { type: "button", className: objDate.getMonth() === new Date().getMonth() &&
                                 objDate.getFullYear() === new Date().getFullYear() &&
                                 item === new Date().getDate()
                                 ? "button-today"
@@ -86,7 +86,7 @@ var CalendarBody = function () {
                 sortWeeks[3].values.length !== 0
                     ? sortWeeks[4].values.map(function (item, key) {
                         return (React.createElement("div", { className: "cell after", key: key },
-                            React.createElement("button", { "aria-label": "Date Element", onClick: function () { return handleDisplayDate("next", item); } }, item)));
+                            React.createElement("button", { type: "button", "aria-label": "Date Element", onClick: function () { return handleDisplayDate("next", item); } }, item)));
                     })
                     : "")),
         React.createElement("div", { className: "number-week-cells" })));

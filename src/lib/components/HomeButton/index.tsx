@@ -25,6 +25,7 @@ const HomeButton = () => {
         onClick={handleHome}
         className={"button-navigation"}
         aria-label="Home Current Month"
+        type={"button"}
       >
         <FontAwesomeIcon
           icon={faHome}

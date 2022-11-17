@@ -22,7 +22,7 @@ var PreviousButton = function () {
         dispatch((0, calendarSlice_1.changeDate)({ date: (0, date_fns_1.subMonths)(saveDate, 1).toISOString() }));
     };
     return (react_1["default"].createElement("div", null,
-        react_1["default"].createElement("button", { onClick: handlePreviousMonth, className: "button-navigation", id: "button-previous-arrow", "data-testid": "button-previous-arrow", "aria-label": "Previous Month" },
+        react_1["default"].createElement("button", { type: "button", onClick: handlePreviousMonth, className: "button-navigation", id: "button-previous-arrow", "data-testid": "button-previous-arrow", "aria-label": "Previous Month" },
             react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faCircleArrowLeft, className: "button-navigation--icon", size: "lg", color: "white" }))));
 };
 exports["default"] = PreviousButton;
