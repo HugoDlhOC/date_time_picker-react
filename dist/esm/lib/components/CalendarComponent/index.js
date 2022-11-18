@@ -42,11 +42,15 @@ var CalendarComponent = function (props) {
     //redux
     var dispatch = useDispatch();
     //redux
-    dispatch(changeLanguage({ language: props.languageChoice }));
+    useEffect(function () {
+        dispatch(changeLanguage({ language: props.languageChoice }));
+        //redux
+        dispatch(changeReturnFormat({ returnFormat: props.returnFormat }));
+        //redux
+        dispatch(defineYearsInterval({ yearMin: yearMinConvert, yearMax: yearMaxConvert }));
+    }, []);
     //redux
     var returnDate = useSelector(function (state) { return state.calendar.returnDate; });
-    //redux
-    dispatch(changeReturnFormat({ returnFormat: props.returnFormat }));
     //attention : il faut bien prendre compte que le mois de janvier correspond à 0 pour ce props et 11 à décembre, sinon incrémentation d'une année...
     useEffect(function () {
         try {
@@ -64,9 +68,8 @@ var CalendarComponent = function (props) {
         catch (e) {
             throw new Error("The format passed in props does not conform to the expectations of date-fns, consult the documentation of date-fns.");
         }
-    }, []);
+    }, [props.defaultDate]);
     var isOpen = useSelector(function (state) { return state.calendar.isOpen; });
-    dispatch(defineYearsInterval({ yearMin: yearMinConvert, yearMax: yearMaxConvert }));
     var handleOpenCalendar = function () {
         dispatch(openCalendar({ isOpen: !isOpen }));
     };

@@ -45,11 +45,15 @@ var CalendarComponent = function (props) {
     //redux
     var dispatch = (0, react_redux_1.useDispatch)();
     //redux
-    dispatch((0, calendarSlice_1.changeLanguage)({ language: props.languageChoice }));
+    (0, react_1.useEffect)(function () {
+        dispatch((0, calendarSlice_1.changeLanguage)({ language: props.languageChoice }));
+        //redux
+        dispatch((0, calendarSlice_1.changeReturnFormat)({ returnFormat: props.returnFormat }));
+        //redux
+        dispatch((0, calendarSlice_1.defineYearsInterval)({ yearMin: yearMinConvert, yearMax: yearMaxConvert }));
+    }, []);
     //redux
     var returnDate = (0, react_redux_1.useSelector)(function (state) { return state.calendar.returnDate; });
-    //redux
-    dispatch((0, calendarSlice_1.changeReturnFormat)({ returnFormat: props.returnFormat }));
     //attention : il faut bien prendre compte que le mois de janvier correspond à 0 pour ce props et 11 à décembre, sinon incrémentation d'une année...
     (0, react_1.useEffect)(function () {
         try {
@@ -67,9 +71,8 @@ var CalendarComponent = function (props) {
         catch (e) {
             throw new Error("The format passed in props does not conform to the expectations of date-fns, consult the documentation of date-fns.");
         }
-    }, []);
+    }, [props.defaultDate]);
     var isOpen = (0, react_redux_1.useSelector)(function (state) { return state.calendar.isOpen; });
-    dispatch((0, calendarSlice_1.defineYearsInterval)({ yearMin: yearMinConvert, yearMax: yearMaxConvert }));
     var handleOpenCalendar = function () {
         dispatch((0, calendarSlice_1.openCalendar)({ isOpen: !isOpen }));
     };
