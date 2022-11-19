@@ -22,16 +22,20 @@ var MAX_YEAR = 1000;
  */
 var CalendarComponent = function (props) {
     var calendarContext = useContext(CalendarContext);
-    console.log(props.classChange);
     //control clicks if multiples calendar are present
     useEffect(function () {
         var handleOpenCalendar = function (e) {
             var calendarsOpened = document.querySelectorAll(".navigation-datepicker.display");
             //@ts-ignore
-            var isClickOnCalendar = e.path.find(function (item) { return item.className === "input-calendar"; });
+            var isClickOnCalendar = e.path.find(function (item) {
+                return item.className !== undefined
+                    ? item.className.includes("input-calendar")
+                    : undefined;
+            });
             //@ts-ignore
-            if (calendarsOpened.length > 1 || isClickOnCalendar === undefined)
+            if (calendarsOpened.length > 1 || isClickOnCalendar === undefined) {
                 calendarContext.setIsOpen(false);
+            }
         };
         // @ts-ignore
         document.body.addEventListener("click", handleOpenCalendar);

@@ -1,2 +1,1 @@
-import Calendar from "./lib/components/Calendar";
-export { Calendar };
+import "./lib/css/style.css";

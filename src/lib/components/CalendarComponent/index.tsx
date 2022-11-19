@@ -41,21 +41,24 @@ const MAX_YEAR = 1000;
  */
 const CalendarComponent = (props: CalendarDemo) => {
   const calendarContext = useContext(CalendarContext);
-  console.log(props.classChange);
   //control clicks if multiples calendar are present
   useEffect(() => {
     const handleOpenCalendar = (e: PointerEvent<HTMLDivElement>) => {
       const calendarsOpened = document.querySelectorAll(
         ".navigation-datepicker.display"
       );
+
       //@ts-ignore
-      const isClickOnCalendar = e.path.find(
-        (item: any) => item.className === "input-calendar"
+      const isClickOnCalendar = e.path.find((item: any) =>
+        item.className !== undefined
+          ? item.className.includes("input-calendar")
+          : undefined
       );
 
       //@ts-ignore
-      if (calendarsOpened.length > 1 || isClickOnCalendar === undefined)
+      if (calendarsOpened.length > 1 || isClickOnCalendar === undefined) {
         calendarContext.setIsOpen(false);
+      }
     };
 
     // @ts-ignore
