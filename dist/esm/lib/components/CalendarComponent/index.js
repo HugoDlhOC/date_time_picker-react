@@ -7,6 +7,7 @@ import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
 import { useContext } from "react";
 import CalendarContext from "../../context/CalendarContext";
+import defineYearsSelect from "../../services/defineYearsSelect";
 var MAX_YEAR = 1000;
 /**
  * This component represents the entire calendar.
@@ -21,15 +22,16 @@ var MAX_YEAR = 1000;
  */
 var CalendarComponent = function (props) {
     var calendarContext = useContext(CalendarContext);
+    console.log(props.classChange);
+    //control clicks if multiples calendar are present
     useEffect(function () {
         var handleOpenCalendar = function (e) {
-            console.log(e);
             var calendarsOpened = document.querySelectorAll(".navigation-datepicker.display");
-            console.log(calendarsOpened.length);
             //@ts-ignore
-            if (e.path[0].tagName !== "INPUT" || calendarsOpened.length > 1) {
+            var isClickOnCalendar = e.path.find(function (item) { return item.className === "input-calendar"; });
+            //@ts-ignore
+            if (calendarsOpened.length > 1 || isClickOnCalendar === undefined)
                 calendarContext.setIsOpen(false);
-            }
         };
         // @ts-ignore
         document.body.addEventListener("click", handleOpenCalendar);
@@ -50,6 +52,10 @@ var CalendarComponent = function (props) {
     if (props.yearMin > props.yearMax) {
         throw new Error("The yearMin value can't be bigger than yearMax value");
     }
+    var controlPresentCurrentYear = defineYearsSelect(props.yearMin, props.yearMax);
+    var valueControl = controlPresentCurrentYear.filter(function (item) { return item.value === new Date().getFullYear(); });
+    if (valueControl.length === 0)
+        throw new Error("In your interval of yearMin and yearMax, the current year is not present");
     //LANGUAGE
     var indexListOfLanguage = Object.keys(listOfLanguage).findIndex(function (item) { return item === props.languageChoice; });
     if (indexListOfLanguage === -1) {
@@ -82,14 +88,16 @@ var CalendarComponent = function (props) {
     };
     return (
     // @ts-ignore
-    React.createElement("div", { className: "input-calendar" },
+    React.createElement("div", { className: props.classChange === undefined
+            ? "input-calendar"
+            : "input-calendar ".concat(props.classChange) },
         React.createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
         React.createElement("input", { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
             onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", className: calendarContext.isOpen
                 ? "input-calendar-open"
                 : "input-calendar-close" }),
-        React.createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle, "data-testid": "calendar" },
+        React.createElement("div", { className: "calendar", "data-testid": "calendar" },
             React.createElement(Navigation, { isOpen: calendarContext.isOpen }),
             React.createElement(CalendarBody, null))));
 };

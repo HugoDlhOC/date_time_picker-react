@@ -8,7 +8,7 @@ interface CalendarDemoRequiredProps {
     labelContent: string;
 }
 interface CalendarDemoOptionalProps {
-    classToggle?: string;
+    classChange?: string;
 }
 interface CalendarDemo extends CalendarDemoRequiredProps, CalendarDemoOptionalProps {
 }

@@ -12,7 +12,7 @@ interface CalendarDemoRequiredProps {
 }
 
 interface CalendarDemoOptionalProps {
-  classToggle?: string;
+  classChange?: string;
 }
 
 interface CalendarDemo
@@ -29,6 +29,7 @@ const Calendar = (props: CalendarDemo) => {
         returnFormat={props.returnFormat}
         defaultDate={props.defaultDate}
         labelContent={props.labelContent}
+        classChange={props.classChange}
       />
     </CalendarContextProvider>
   );

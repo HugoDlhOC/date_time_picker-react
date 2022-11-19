@@ -8,6 +8,7 @@ import React from "react";
 import { useContext } from "react";
 import CalendarContext from "../../context/CalendarContext";
 import { PointerEvent } from "react";
+import defineYearsSelect from "../../services/defineYearsSelect";
 
 interface CalendarDemoRequiredProps {
   languageChoice: string;
@@ -19,7 +20,7 @@ interface CalendarDemoRequiredProps {
 }
 
 interface CalendarDemoOptionalProps {
-  classToggle?: string;
+  classChange?: string;
 }
 
 interface CalendarDemo
@@ -40,19 +41,21 @@ const MAX_YEAR = 1000;
  */
 const CalendarComponent = (props: CalendarDemo) => {
   const calendarContext = useContext(CalendarContext);
-
+  console.log(props.classChange);
+  //control clicks if multiples calendar are present
   useEffect(() => {
     const handleOpenCalendar = (e: PointerEvent<HTMLDivElement>) => {
-      console.log(e);
       const calendarsOpened = document.querySelectorAll(
         ".navigation-datepicker.display"
       );
-      console.log(calendarsOpened.length);
+      //@ts-ignore
+      const isClickOnCalendar = e.path.find(
+        (item: any) => item.className === "input-calendar"
+      );
 
       //@ts-ignore
-      if (e.path[0].tagName !== "INPUT" || calendarsOpened.length > 1) {
+      if (calendarsOpened.length > 1 || isClickOnCalendar === undefined)
         calendarContext.setIsOpen(false);
-      }
     };
 
     // @ts-ignore
@@ -83,6 +86,19 @@ const CalendarComponent = (props: CalendarDemo) => {
   if (props.yearMin > props.yearMax) {
     throw new Error("The yearMin value can't be bigger than yearMax value");
   }
+
+  const controlPresentCurrentYear = defineYearsSelect(
+    props.yearMin,
+    props.yearMax
+  );
+
+  const valueControl = controlPresentCurrentYear.filter(
+    (item) => item.value === new Date().getFullYear()
+  );
+  if (valueControl.length === 0)
+    throw new Error(
+      "In your interval of yearMin and yearMax, the current year is not present"
+    );
 
   //LANGUAGE
   const indexListOfLanguage = Object.keys(listOfLanguage).findIndex(
@@ -129,7 +145,13 @@ const CalendarComponent = (props: CalendarDemo) => {
 
   return (
     // @ts-ignore
-    <div className={"input-calendar"}>
+    <div
+      className={
+        props.classChange === undefined
+          ? "input-calendar"
+          : `input-calendar ${props.classChange}`
+      }
+    >
       <label htmlFor={"input-calendar"}>{props.labelContent}</label>
       <input
         type={"text"}
@@ -145,12 +167,7 @@ const CalendarComponent = (props: CalendarDemo) => {
             : "input-calendar-close"
         }
       />
-      <div
-        className={
-          props.classToggle === undefined ? "calendar" : props.classToggle
-        }
-        data-testid={"calendar"}
-      >
+      <div className={"calendar"} data-testid={"calendar"}>
         {/*@ts-ignore*/}
         <Navigation isOpen={calendarContext.isOpen} />
         <CalendarBody />

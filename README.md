@@ -72,7 +72,7 @@ Common props you may want to specify include:
 - `returnFormat` - The returned date format is based on a method of the date-fns library named format. The documentation is at this link: [this link](https://date-fns.org/v2.29.3/docs/format).
 
 ## Customisation
-You can add your class with the props classToggle.
+You can add your class with the props classChange.
 # Mentions
 
 This project uses npm [react-select package](https://www.npmjs.com/package/react-select) to create a drop-down menu with items and offers many features.
