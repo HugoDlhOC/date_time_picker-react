@@ -25,7 +25,7 @@ const Navigation = (props: NavigationDemo) => {
     <nav
       className={
         props.isOpen === true
-          ? "navigation-datepicker"
+          ? "navigation-datepicker display"
           : "navigation-datepicker hide"
       }
     >

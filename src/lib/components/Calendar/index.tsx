@@ -2,16 +2,33 @@ import React from "react";
 import { CalendarContextProvider } from "../../context/CalendarContext";
 import CalendarComponent from "../CalendarComponent";
 
-const Calendar = () => {
+interface CalendarDemoRequiredProps {
+  languageChoice: string;
+  yearMin: number;
+  yearMax: number;
+  returnFormat: string;
+  defaultDate: Date;
+  labelContent: string;
+}
+
+interface CalendarDemoOptionalProps {
+  classToggle?: string;
+}
+
+interface CalendarDemo
+  extends CalendarDemoRequiredProps,
+    CalendarDemoOptionalProps {}
+
+const Calendar = (props: CalendarDemo) => {
   return (
     <CalendarContextProvider>
       <CalendarComponent
-        languageChoice={"fr"}
-        yearMin={2001}
-        yearMax={2130}
-        returnFormat={"dd/MM/yyyy"}
-        defaultDate={new Date()}
-        labelContent={"date"}
+        languageChoice={props.languageChoice}
+        yearMin={props.yearMin}
+        yearMax={props.yearMax}
+        returnFormat={props.returnFormat}
+        defaultDate={props.defaultDate}
+        labelContent={props.labelContent}
       />
     </CalendarContextProvider>
   );

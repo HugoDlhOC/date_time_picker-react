@@ -8,9 +8,30 @@ import Calendar from "./lib/components/Calendar";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Calendar />
-    <Calendar />
-    <Calendar />
+    <Calendar
+      yearMax={2020}
+      yearMin={2000}
+      returnFormat={"MM/dd/yyy"}
+      defaultDate={new Date()}
+      labelContent={"Date of birth"}
+      languageChoice={"enUS"}
+    />
+    <Calendar
+      yearMax={2030}
+      yearMin={2000}
+      returnFormat={"MM/dd/yy"}
+      defaultDate={new Date()}
+      labelContent={"Date of start"}
+      languageChoice={"ru"}
+    />
+    <Calendar
+      yearMax={2040}
+      yearMin={2000}
+      returnFormat={"dd/MM/yy"}
+      defaultDate={new Date()}
+      labelContent={"Date of sales"}
+      languageChoice={"af"}
+    />
   </React.StrictMode>
 );
 

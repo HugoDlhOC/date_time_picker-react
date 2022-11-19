@@ -7,26 +7,25 @@ var PreviousButton_1 = tslib_1.__importDefault(require("../PreviousButton"));
 var MonthSelect_1 = tslib_1.__importDefault(require("../MonthSelect"));
 var YearSelect_1 = tslib_1.__importDefault(require("../YearSelect"));
 var prop_types_1 = tslib_1.__importDefault(require("prop-types"));
-var react_redux_1 = require("react-redux");
-var react_1 = tslib_1.__importDefault(require("react"));
+var react_1 = tslib_1.__importStar(require("react"));
+var CalendarContext_1 = tslib_1.__importDefault(require("../../context/CalendarContext"));
 /**
  * This component represents the whole navigation of the calendar, directional arrows to go to the month before or the month after, and the home button. The 2 selects (months and years) are also present.
  * @param isOpen
  * @returns JSX
  */
 var Navigation = function (props) {
-    var date = (0, react_redux_1.useSelector)(function (state) { return state.calendar.date; });
-    var dateConvert = new Date(date);
-    var yearMin = (0, react_redux_1.useSelector)(function (state) { return state.calendar.yearMin; });
-    var yearMax = (0, react_redux_1.useSelector)(function (state) { return state.calendar.yearMax; });
+    var calendarContext = (0, react_1.useContext)(CalendarContext_1["default"]);
+    var dateConvert = new Date(calendarContext.date);
     return (react_1["default"].createElement("nav", { className: props.isOpen === true
-            ? "navigation-datepicker"
+            ? "navigation-datepicker display"
             : "navigation-datepicker hide" },
-        dateConvert.getFullYear() === yearMin && dateConvert.getMonth() === 0 ? ("") : (react_1["default"].createElement(PreviousButton_1["default"], null)),
+        dateConvert.getFullYear() === calendarContext.yearMin &&
+            dateConvert.getMonth() === 0 ? ("") : (react_1["default"].createElement(PreviousButton_1["default"], null)),
         react_1["default"].createElement(HomeButton_1["default"], null),
         react_1["default"].createElement(MonthSelect_1["default"], null),
         react_1["default"].createElement(YearSelect_1["default"], null),
-        dateConvert.getFullYear() === yearMax &&
+        dateConvert.getFullYear() === calendarContext.yearMax &&
             dateConvert.getMonth() === 11 ? ("") : (react_1["default"].createElement(NextButton_1["default"], null))));
 };
 exports["default"] = Navigation;

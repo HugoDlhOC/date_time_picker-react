@@ -1,12 +1,12 @@
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
-import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { changeLanguage, changeReturnFormat, defineYearsInterval, openCalendar, defineReturnDate, } from "../../feature/calendarSlice";
 import { format } from "date-fns";
 import { useEffect } from "react";
 import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
+import { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 var MAX_YEAR = 1000;
 /**
  * This component represents the entire calendar.
@@ -20,6 +20,22 @@ var MAX_YEAR = 1000;
  * @returns JSX
  */
 var CalendarComponent = function (props) {
+    var calendarContext = useContext(CalendarContext);
+    useEffect(function () {
+        var handleOpenCalendar = function (e) {
+            console.log(e);
+            var calendarsOpened = document.querySelectorAll(".navigation-datepicker.display");
+            console.log(calendarsOpened.length);
+            //@ts-ignore
+            if (e.path[0].tagName !== "INPUT" || calendarsOpened.length > 1) {
+                calendarContext.setIsOpen(false);
+            }
+        };
+        // @ts-ignore
+        document.body.addEventListener("click", handleOpenCalendar);
+        // @ts-ignore
+        return function () { return document.body.removeEventListener("click", handleOpenCalendar); };
+    }, []);
     //CONTROL
     //YEARS
     var yearMinConvert = parseInt(String(props.yearMin));
@@ -40,49 +56,41 @@ var CalendarComponent = function (props) {
         throw new Error("language not found, inspect date-fns documentation for a list of languages available");
     }
     //redux
-    var dispatch = useDispatch();
-    //redux
     useEffect(function () {
-        dispatch(changeLanguage({ language: props.languageChoice }));
+        calendarContext.setLanguage(props.languageChoice);
         //redux
-        dispatch(changeReturnFormat({ returnFormat: props.returnFormat }));
+        calendarContext.setReturnFormat(props.returnFormat);
         //redux
-        dispatch(defineYearsInterval({ yearMin: yearMinConvert, yearMax: yearMaxConvert }));
+        calendarContext.setYearMin(yearMinConvert);
+        calendarContext.setYearMax(yearMaxConvert);
     }, []);
-    //redux
-    var returnDate = useSelector(function (state) { return state.calendar.returnDate; });
-    //attention : il faut bien prendre compte que le mois de janvier correspond à 0 pour ce props et 11 à décembre, sinon incrémentation d'une année...
     useEffect(function () {
         try {
             if (props.defaultDate === undefined) {
-                dispatch(defineReturnDate({
-                    returnDate: format(new Date(), props.returnFormat)
-                }));
+                calendarContext.setReturnDate(format(new Date(), props.returnFormat));
             }
             else {
-                dispatch(defineReturnDate({
-                    returnDate: format(props.defaultDate, props.returnFormat)
-                }));
+                calendarContext.setReturnDate(format(props.defaultDate, props.returnFormat));
             }
         }
         catch (e) {
             throw new Error("The format passed in props does not conform to the expectations of date-fns, consult the documentation of date-fns.");
         }
     }, [props.defaultDate]);
-    var isOpen = useSelector(function (state) { return state.calendar.isOpen; });
-    var handleOpenCalendar = function () {
-        dispatch(openCalendar({ isOpen: !isOpen }));
-    };
     var onChangeInput = function (e) {
-        dispatch(defineReturnDate({ returnDate: e.target.value }));
+        calendarContext.setReturnDate(e.target.value);
     };
-    return (React.createElement("div", { className: "input-calendar" },
+    return (
+    // @ts-ignore
+    React.createElement("div", { className: "input-calendar" },
         React.createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
-        React.createElement("input", { type: "text", onClick: handleOpenCalendar, 
+        React.createElement("input", { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
-            onChange: onChangeInput, value: returnDate, role: "textbox", id: "input-calendar" }),
+            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", className: calendarContext.isOpen
+                ? "input-calendar-open"
+                : "input-calendar-close" }),
         React.createElement("div", { className: props.classToggle === undefined ? "calendar" : props.classToggle, "data-testid": "calendar" },
-            React.createElement(Navigation, { isOpen: isOpen }),
+            React.createElement(Navigation, { isOpen: calendarContext.isOpen }),
             React.createElement(CalendarBody, null))));
 };
 export default CalendarComponent;

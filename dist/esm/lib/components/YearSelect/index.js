@@ -1,30 +1,23 @@
 import Select from "react-select";
 import defineYearsSelect from "../../services/defineYearsSelect";
-import { useDispatch, useSelector } from "react-redux";
-import { changeDate, defineYearsInterval } from "../../feature/calendarSlice";
-import React from "react";
+import React, { useContext } from "react";
 import configStyleYearSelect from "../../services/configStyleYearSelect";
+import CalendarContext from "../../context/CalendarContext";
 /**
  * An interval has been defined by the developer per props.
  * @returns JSX
  */
 var YearSelect = function () {
-    //redux
-    var dispatch = useDispatch();
-    var date = useSelector(function (state) { return state.calendar.date; });
-    var dateConvert = new Date(date);
-    var yearMin = useSelector(function (state) { return state.calendar.yearMin; });
-    var yearMax = useSelector(function (state) { return state.calendar.yearMax; });
-    var years = defineYearsSelect(yearMin, yearMax);
+    var calendarContext = useContext(CalendarContext);
+    var dateConvert = new Date(calendarContext.date);
+    var years = defineYearsSelect(calendarContext.yearMin, calendarContext.yearMax);
     //change of year
     var handleSelectChangeYear = function (option) {
         var saveDate = dateConvert;
         saveDate.setFullYear(option.value);
-        dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
-        dispatch(defineYearsInterval({
-            yearMin: years[0].value,
-            yearMax: years[years.length - 1].value
-        }));
+        calendarContext.setDate(new Date(saveDate).toISOString());
+        calendarContext.setYearMin(years[0].value);
+        calendarContext.setYearMax(years[years.length - 1].value);
     };
     return (React.createElement("div", null,
         React.createElement("label", { htmlFor: "years" }),

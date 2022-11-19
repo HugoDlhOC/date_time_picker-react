@@ -1,21 +1,16 @@
 import Select from "react-select";
-import { useDispatch, useSelector } from "react-redux";
-import { changeDate } from "../../feature/calendarSlice";
 import * as listOfLanguage from "date-fns/esm/locale";
-import React from "react";
+import React, { useContext } from "react";
 import styleMonthSelect from "../../services/configStyleMonthSelect";
+import CalendarContext from "../../context/CalendarContext";
 /**
  * This component represents the select offering the different months that the user can select.
  * @returns JSX
  */
 var MonthSelect = function () {
-    //redux
-    var dispatch = useDispatch();
-    //redux
-    var date = useSelector(function (state) { return state.calendar.date; });
-    var dateConvert = new Date(date);
-    var choiceUserLanguage = useSelector(function (state) { return state.calendar.language; });
-    var indexListOfLanguage = Object.keys(listOfLanguage).findIndex(function (item) { return item === choiceUserLanguage; });
+    var calendarContext = useContext(CalendarContext);
+    var dateConvert = new Date(calendarContext.date);
+    var indexListOfLanguage = Object.keys(listOfLanguage).findIndex(function (item) { return item === calendarContext.language; });
     //definition of the list of months for the select
     var monthsNames = Array.from(Array(12).keys()).map(function (i) {
         // @ts-ignore
@@ -25,9 +20,9 @@ var MonthSelect = function () {
     monthsNames.map(function (item, index) { return months.push({ label: item, value: index }); });
     //month change
     var handleSelectChangeMonth = function (option) {
-        var saveDate = new Date(date);
+        var saveDate = new Date(calendarContext.date);
         saveDate.setMonth(option.value);
-        dispatch(changeDate({ date: new Date(saveDate).toISOString() }));
+        calendarContext.setDate(new Date(saveDate).toISOString());
     };
     return (React.createElement("div", null,
         React.createElement("label", { htmlFor: "months" }),

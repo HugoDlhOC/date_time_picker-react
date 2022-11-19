@@ -1,22 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { addMonths } from "date-fns";
-import { useDispatch, useSelector } from "react-redux";
-import { changeDate } from "../../feature/calendarSlice";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 /**
  * This component allows to define the behavior of the next arrow. When the user clicks on it, the days of the next month will be displayed.
  * @returns JSX
  */
 var NextButton = function () {
-    //redux
-    var dispatch = useDispatch();
-    var date = useSelector(function (state) { return state.calendar.date; });
-    var dateConvert = new Date(date);
+    var calendarContext = useContext(CalendarContext);
+    var dateConvert = new Date(calendarContext.date);
     //next month button
     var handleNextMonth = function () {
         var saveDate = dateConvert;
-        dispatch(changeDate({ date: addMonths(saveDate, 1).toISOString() }));
+        calendarContext.setDate(addMonths(saveDate, 1).toISOString());
     };
     return (React.createElement("div", null,
         React.createElement("button", { type: "button", onClick: handleNextMonth, className: "button-navigation", id: "button-next-arrow", "data-testid": "button-next-arrow", "aria-label": "Next Month" },

@@ -1,19 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
-import { changeDate } from "../../feature/calendarSlice";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 /**
  * This component represents the Home Button, when the user will click on the Home button, he will be redirected to the current month.
  * @returns JSX
  */
 var HomeButton = function () {
-    //redux
-    var dispatch = useDispatch();
+    var calendarContext = useContext(CalendarContext);
     //home button = returns to the current date
     var handleHome = function () {
         var actualDate = new Date().toISOString();
-        dispatch(changeDate({ date: actualDate }));
+        calendarContext.setDate(actualDate);
     };
     return (React.createElement("div", null,
         React.createElement("button", { onClick: handleHome, className: "button-navigation", "aria-label": "Home Current Month", type: "button" },

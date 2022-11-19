@@ -3,8 +3,11 @@ import React, { createContext, useState } from "react";
 
 export const CalendarContext = createContext(null);
 
-//@ts-ignore
-export const CalendarContextProvider = ({ children }) => {
+interface CalendarContextProviderDemo {
+  children: any;
+}
+
+export const CalendarContextProvider = (props: CalendarContextProviderDemo) => {
   const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState(new Date().toISOString());
   const [language, setLanguage] = useState("enUS");
@@ -31,9 +34,8 @@ export const CalendarContextProvider = ({ children }) => {
   };
 
   return (
-    //@ts-ignore
     <CalendarContext.Provider value={value}>
-      {children}
+      {props.children}
     </CalendarContext.Provider>
   );
 };

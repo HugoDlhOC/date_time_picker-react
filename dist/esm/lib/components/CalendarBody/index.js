@@ -3,23 +3,16 @@ import allSundayCurrentMonth from "../../services/allSundayCurrentMonth";
 import sortWeeksCalendar from "../../services/sortWeeksCalendar";
 import DaysNamesWeek from "../DaysNamesWeek";
 import { format } from "date-fns";
-import { useDispatch, useSelector } from "react-redux";
-import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 /**
  * This component represents the body of the calendar (all selecting days).
  * @returns JSX
  */
 var CalendarBody = function () {
-    //redux
-    var dispatch = useDispatch();
-    //redux
-    var isOpen = useSelector(function (state) { return state.calendar.isOpen; });
-    //redux
-    var date = useSelector(function (state) { return state.calendar.date; });
-    //redux
-    var returnFormat = useSelector(function (state) { return state.calendar.returnFormat; });
-    var objDate = new Date(date);
+    var calendarContext = useContext(CalendarContext);
+    // @ts-ignore
+    var objDate = new Date(calendarContext.date);
     //number of days in the current month
     var totalOfDaysThisMonth = allDaysCurrentMonth(objDate);
     //determine the number of Sundays in the month
@@ -41,11 +34,16 @@ var CalendarBody = function () {
                 break;
         }
         clickDate.setDate(dayNumber);
-        dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
-        //redux
-        dispatch(openCalendar({ isOpen: false }));
+        //dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
+        // @ts-ignore
+        calendarContext.setReturnDate(format(clickDate, calendarContext.returnFormat));
+        //context
+        // @ts-ignore
+        calendarContext.setIsOpen(false);
     };
-    return (React.createElement("div", { className: isOpen === true ? "body-calendar" : "body-calendar hide" },
+    return (
+    //@ts-ignore
+    React.createElement("div", { className: calendarContext.isOpen === true ? "body-calendar" : "body-calendar hide" },
         React.createElement(DaysNamesWeek, null),
         React.createElement("div", { className: "first-days-cells" },
             React.createElement("div", { className: "row" },

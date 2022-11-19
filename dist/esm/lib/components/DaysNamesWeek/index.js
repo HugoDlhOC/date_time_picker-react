@@ -1,14 +1,13 @@
-import { useSelector } from "react-redux";
 import * as listOfLanguage from "date-fns/esm/locale";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 /**
  * This component represents all the days of the week.
  * @returns JSX
  */
 var DaysNamesWeek = function () {
-    //redux
-    var choiceUserLanguage = useSelector(function (state) { return state.calendar.language; });
-    var indexListOfLanguage = Object.keys(listOfLanguage).findIndex(function (item) { return item === choiceUserLanguage; });
+    var calendarContext = useContext(CalendarContext);
+    var indexListOfLanguage = Object.keys(listOfLanguage).findIndex(function (item) { return item === calendarContext.language; });
     var weekdays = Array.from(Array(7).keys()).map(function (i) {
         // @ts-ignore
         return listOfLanguage[Object.keys(listOfLanguage)[indexListOfLanguage]].localize.day(i, {

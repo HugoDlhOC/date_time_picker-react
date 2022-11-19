@@ -7,6 +7,7 @@ import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
 import { useContext } from "react";
 import CalendarContext from "../../context/CalendarContext";
+import { PointerEvent } from "react";
 
 interface CalendarDemoRequiredProps {
   languageChoice: string;
@@ -39,6 +40,27 @@ const MAX_YEAR = 1000;
  */
 const CalendarComponent = (props: CalendarDemo) => {
   const calendarContext = useContext(CalendarContext);
+
+  useEffect(() => {
+    const handleOpenCalendar = (e: PointerEvent<HTMLDivElement>) => {
+      console.log(e);
+      const calendarsOpened = document.querySelectorAll(
+        ".navigation-datepicker.display"
+      );
+      console.log(calendarsOpened.length);
+
+      //@ts-ignore
+      if (e.path[0].tagName !== "INPUT" || calendarsOpened.length > 1) {
+        calendarContext.setIsOpen(false);
+      }
+    };
+
+    // @ts-ignore
+    document.body.addEventListener("click", handleOpenCalendar);
+
+    // @ts-ignore
+    return () => document.body.removeEventListener("click", handleOpenCalendar);
+  }, []);
 
   //CONTROL
   //YEARS
@@ -83,7 +105,6 @@ const CalendarComponent = (props: CalendarDemo) => {
     calendarContext.setYearMax(yearMaxConvert);
   }, []);
 
-  //attention : il faut bien prendre compte que le mois de janvier correspond à 0 pour ce props et 11 à décembre, sinon incrémentation d'une année...
   useEffect(() => {
     try {
       if (props.defaultDate === undefined) {
@@ -100,12 +121,6 @@ const CalendarComponent = (props: CalendarDemo) => {
     }
   }, [props.defaultDate]);
 
-  //const isOpen = useSelector((state: RootState) => state.calendar.isOpen);
-
-  const handleOpenCalendar = () => {
-    calendarContext.setIsOpen(!calendarContext.isOpen);
-  };
-
   const onChangeInput = (e: {
     target: { value: SetStateAction<undefined> };
   }) => {
@@ -118,12 +133,17 @@ const CalendarComponent = (props: CalendarDemo) => {
       <label htmlFor={"input-calendar"}>{props.labelContent}</label>
       <input
         type={"text"}
-        onClick={handleOpenCalendar}
+        onClick={() => calendarContext.setIsOpen(!calendarContext.isOpen)}
         // @ts-ignore
         onChange={onChangeInput}
         value={calendarContext.returnDate}
         role={"textbox"}
         id={"input-calendar"}
+        className={
+          calendarContext.isOpen
+            ? "input-calendar-open"
+            : "input-calendar-close"
+        }
       />
       <div
         className={

@@ -13,7 +13,6 @@ import CalendarContext from "../../context/CalendarContext";
 const CalendarBody = () => {
   const calendarContext = useContext(CalendarContext);
 
-  //const objDate = new Date(date);
   // @ts-ignore
   const objDate = new Date(calendarContext.date);
 
