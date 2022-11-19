@@ -4,9 +4,8 @@ import PreviousButton from "../PreviousButton";
 import MonthSelect from "../MonthSelect";
 import YearSelect from "../YearSelect";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 
 interface NavigationDemo {
   isOpen: boolean;
@@ -18,10 +17,9 @@ interface NavigationDemo {
  * @returns JSX
  */
 const Navigation = (props: NavigationDemo) => {
-  const date = useSelector((state: RootState) => state.calendar.date);
-  const dateConvert = new Date(date);
-  const yearMin = useSelector((state: RootState) => state.calendar.yearMin);
-  const yearMax = useSelector((state: RootState) => state.calendar.yearMax);
+  const calendarContext = useContext(CalendarContext);
+
+  const dateConvert = new Date(calendarContext.date);
 
   return (
     <nav
@@ -31,7 +29,8 @@ const Navigation = (props: NavigationDemo) => {
           : "navigation-datepicker hide"
       }
     >
-      {dateConvert.getFullYear() === yearMin && dateConvert.getMonth() === 0 ? (
+      {dateConvert.getFullYear() === calendarContext.yearMin &&
+      dateConvert.getMonth() === 0 ? (
         ""
       ) : (
         <PreviousButton />
@@ -39,7 +38,7 @@ const Navigation = (props: NavigationDemo) => {
       <HomeButton />
       <MonthSelect />
       <YearSelect />
-      {dateConvert.getFullYear() === yearMax &&
+      {dateConvert.getFullYear() === calendarContext.yearMax &&
       dateConvert.getMonth() === 11 ? (
         ""
       ) : (

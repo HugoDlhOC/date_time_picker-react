@@ -1,20 +1,16 @@
-import { useSelector } from "react-redux";
 import * as listOfLanguage from "date-fns/esm/locale";
-import { RootState } from "../../app/store";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 
 /**
  * This component represents all the days of the week.
  * @returns JSX
  */
 const DaysNamesWeek = () => {
-  //redux
-  const choiceUserLanguage = useSelector(
-    (state: RootState) => state.calendar.language
-  );
+  const calendarContext = useContext(CalendarContext);
 
   const indexListOfLanguage = Object.keys(listOfLanguage).findIndex(
-    (item) => item === choiceUserLanguage
+    (item) => item === calendarContext.language
   );
 
   const weekdays = Array.from(Array(7).keys()).map((i) => {

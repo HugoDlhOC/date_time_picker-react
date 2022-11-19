@@ -1,4 +1,4 @@
-import { render as reduxRender, screen } from "@testing-library/react";
+/*import { render as reduxRender, screen } from "@testing-library/react";
 import CalendarComponent from "../lib/components/CalendarComponent";
 import { Provider } from "react-redux";
 import { store } from "../lib/app/store";
@@ -94,4 +94,4 @@ describe("Given I am on a page", () => {
       );
     });
   });
-});
+});*/

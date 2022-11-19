@@ -3,31 +3,19 @@ import allSundayCurrentMonth from "../../services/allSundayCurrentMonth";
 import sortWeeksCalendar from "../../services/sortWeeksCalendar";
 import DaysNamesWeek from "../DaysNamesWeek";
 import { format } from "date-fns";
-import { useDispatch, useSelector } from "react-redux";
-import { defineReturnDate, openCalendar } from "../../feature/calendarSlice";
-import { RootState } from "../../app/store";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 
 /**
  * This component represents the body of the calendar (all selecting days).
  * @returns JSX
  */
 const CalendarBody = () => {
-  //redux
-  const dispatch = useDispatch();
+  const calendarContext = useContext(CalendarContext);
 
-  //redux
-  const isOpen = useSelector((state: RootState) => state.calendar.isOpen);
-
-  //redux
-  const date = useSelector((state: RootState) => state.calendar.date);
-
-  //redux
-  const returnFormat = useSelector(
-    (state: RootState) => state.calendar.returnFormat
-  );
-
-  const objDate = new Date(date);
+  //const objDate = new Date(date);
+  // @ts-ignore
+  const objDate = new Date(calendarContext.date);
 
   //number of days in the current month
   const totalOfDaysThisMonth = allDaysCurrentMonth(objDate);
@@ -63,14 +51,24 @@ const CalendarBody = () => {
 
     clickDate.setDate(dayNumber);
 
-    dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
+    //dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
+    // @ts-ignore
+    calendarContext.setReturnDate(
+      format(clickDate, calendarContext.returnFormat)
+    );
 
-    //redux
-    dispatch(openCalendar({ isOpen: false }));
+    //context
+    // @ts-ignore
+    calendarContext.setIsOpen(false);
   };
 
   return (
-    <div className={isOpen === true ? "body-calendar" : "body-calendar hide"}>
+    //@ts-ignore
+    <div
+      className={
+        calendarContext.isOpen === true ? "body-calendar" : "body-calendar hide"
+      }
+    >
       <DaysNamesWeek />
       <div className={"first-days-cells"}>
         <div className={"row"}>

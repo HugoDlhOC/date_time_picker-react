@@ -1,19 +1,12 @@
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
-import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import {
-  changeLanguage,
-  changeReturnFormat,
-  defineYearsInterval,
-  openCalendar,
-  defineReturnDate,
-} from "../../feature/calendarSlice";
 import { format } from "date-fns";
 import { SetStateAction, useEffect } from "react";
-import { RootState } from "../../app/store";
 import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
+import { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 
 interface CalendarDemoRequiredProps {
   languageChoice: string;
@@ -45,6 +38,8 @@ const MAX_YEAR = 1000;
  * @returns JSX
  */
 const CalendarComponent = (props: CalendarDemo) => {
+  const calendarContext = useContext(CalendarContext);
+
   //CONTROL
   //YEARS
   const yearMinConvert: number = parseInt(String(props.yearMin));
@@ -79,38 +74,23 @@ const CalendarComponent = (props: CalendarDemo) => {
   }
 
   //redux
-  const dispatch = useDispatch();
-
-  //redux
   useEffect(() => {
-    dispatch(changeLanguage({ language: props.languageChoice }));
+    calendarContext.setLanguage(props.languageChoice);
     //redux
-    dispatch(changeReturnFormat({ returnFormat: props.returnFormat }));
+    calendarContext.setReturnFormat(props.returnFormat);
     //redux
-    dispatch(
-      defineYearsInterval({ yearMin: yearMinConvert, yearMax: yearMaxConvert })
-    );
+    calendarContext.setYearMin(yearMinConvert);
+    calendarContext.setYearMax(yearMaxConvert);
   }, []);
-
-  //redux
-  const returnDate = useSelector(
-    (state: RootState) => state.calendar.returnDate
-  );
 
   //attention : il faut bien prendre compte que le mois de janvier correspond à 0 pour ce props et 11 à décembre, sinon incrémentation d'une année...
   useEffect(() => {
     try {
       if (props.defaultDate === undefined) {
-        dispatch(
-          defineReturnDate({
-            returnDate: format(new Date(), props.returnFormat),
-          })
-        );
+        calendarContext.setReturnDate(format(new Date(), props.returnFormat));
       } else {
-        dispatch(
-          defineReturnDate({
-            returnDate: format(props.defaultDate, props.returnFormat),
-          })
+        calendarContext.setReturnDate(
+          format(props.defaultDate, props.returnFormat)
         );
       }
     } catch (e) {
@@ -120,19 +100,20 @@ const CalendarComponent = (props: CalendarDemo) => {
     }
   }, [props.defaultDate]);
 
-  const isOpen = useSelector((state: RootState) => state.calendar.isOpen);
+  //const isOpen = useSelector((state: RootState) => state.calendar.isOpen);
 
   const handleOpenCalendar = () => {
-    dispatch(openCalendar({ isOpen: !isOpen }));
+    calendarContext.setIsOpen(!calendarContext.isOpen);
   };
 
   const onChangeInput = (e: {
     target: { value: SetStateAction<undefined> };
   }) => {
-    dispatch(defineReturnDate({ returnDate: e.target.value }));
+    calendarContext.setReturnDate(e.target.value);
   };
 
   return (
+    // @ts-ignore
     <div className={"input-calendar"}>
       <label htmlFor={"input-calendar"}>{props.labelContent}</label>
       <input
@@ -140,7 +121,7 @@ const CalendarComponent = (props: CalendarDemo) => {
         onClick={handleOpenCalendar}
         // @ts-ignore
         onChange={onChangeInput}
-        value={returnDate}
+        value={calendarContext.returnDate}
         role={"textbox"}
         id={"input-calendar"}
       />
@@ -150,7 +131,8 @@ const CalendarComponent = (props: CalendarDemo) => {
         }
         data-testid={"calendar"}
       >
-        <Navigation isOpen={isOpen} />
+        {/*@ts-ignore*/}
+        <Navigation isOpen={calendarContext.isOpen} />
         <CalendarBody />
       </div>
     </div>

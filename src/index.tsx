@@ -1,19 +1,20 @@
-import CalendarComponent from "./lib/components/CalendarComponent";
-import { Provider } from "react-redux";
-import { store } from "./lib/app/store";
 import React from "react";
+import ReactDOM from "react-dom/client";
+import "./lib/css/style.css";
+import reportWebVitals from "./reportWebVitals";
+import Calendar from "./lib/components/Calendar";
 
-export const Calendar = () => {
-  return (
-    <Provider store={store}>
-      <CalendarComponent
-        languageChoice={"fr"}
-        yearMin={2001}
-        yearMax={2120}
-        returnFormat={"dd/MM/yyyy"}
-        defaultDate={new Date()}
-        labelContent={"Date"}
-      />
-    </Provider>
-  );
-};
+// @ts-ignore
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <Calendar />
+    <Calendar />
+    <Calendar />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

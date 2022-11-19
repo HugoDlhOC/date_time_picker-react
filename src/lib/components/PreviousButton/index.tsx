@@ -1,25 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { subMonths } from "date-fns";
-import { useDispatch, useSelector } from "react-redux";
-import { changeDate } from "../../feature/calendarSlice";
-import { RootState } from "../../app/store";
-import React from "react";
+import React, { useContext } from "react";
+import CalendarContext from "../../context/CalendarContext";
 
 /**
  * This component allows to define the behavior of the previous arrow. When the user clicks on it, the days of the previous month will be displayed.
  * @returns JSX
  */
 const PreviousButton = () => {
-  //redux
-  const dispatch = useDispatch();
-  const date = useSelector((state: RootState) => state.calendar.date);
-  const dateConvert = new Date(date);
+  const calendarContext = useContext(CalendarContext);
+
+  const dateConvert = new Date(calendarContext.date);
 
   //previous month button
   const handlePreviousMonth = () => {
     let saveDate = dateConvert;
-    dispatch(changeDate({ date: subMonths(saveDate, 1).toISOString() }));
+
+    calendarContext.setDate(subMonths(saveDate, 1).toISOString());
   };
   return (
     <div>
