@@ -64,7 +64,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 150px;
 }
 .input-calendar .calendar {
   position: absolute;
