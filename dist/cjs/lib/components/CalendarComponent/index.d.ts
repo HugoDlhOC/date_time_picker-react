@@ -1,5 +1,4 @@
 /// <reference types="react" />
-import PropTypes from "prop-types";
 interface CalendarDemoRequiredProps {
     languageChoice: string;
     yearMin: number;
@@ -7,6 +6,7 @@ interface CalendarDemoRequiredProps {
     returnFormat: string;
     defaultDate: Date;
     labelContent: string;
+    nameInput: string;
 }
 interface CalendarDemoOptionalProps {
     classChange?: string;
@@ -22,15 +22,8 @@ interface CalendarDemo extends CalendarDemoRequiredProps, CalendarDemoOptionalPr
  * @param classChange
  * @param defaultDate
  * @param labelContent
+ * @param nameInput
  * @returns JSX
  */
-declare const CalendarComponent: {
-    (props: CalendarDemo): JSX.Element;
-    propTypes: {
-        languageChoice: PropTypes.Requireable<any>;
-        yearMin: PropTypes.Requireable<number>;
-        yearMax: PropTypes.Requireable<number>;
-        returnFormat: PropTypes.Requireable<string>;
-    };
-};
+declare const CalendarComponent: (props: CalendarDemo) => JSX.Element;
 export default CalendarComponent;

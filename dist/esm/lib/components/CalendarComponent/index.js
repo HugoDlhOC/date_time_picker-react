@@ -1,6 +1,5 @@
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
-import PropTypes from "prop-types";
 import { format } from "date-fns";
 import { useEffect } from "react";
 import * as listOfLanguage from "date-fns/esm/locale";
@@ -18,6 +17,7 @@ var MAX_YEAR = 1000;
  * @param classChange
  * @param defaultDate
  * @param labelContent
+ * @param nameInput
  * @returns JSX
  */
 var CalendarComponent = function (props) {
@@ -110,7 +110,7 @@ var CalendarComponent = function (props) {
         React.createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
         React.createElement("input", { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
-            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", className: calendarContext.isOpen
+            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", name: props.nameInput, className: calendarContext.isOpen
                 ? "input-calendar-open"
                 : "input-calendar-close" }),
         React.createElement("div", { className: "calendar", "data-testid": "calendar" },
@@ -118,10 +118,4 @@ var CalendarComponent = function (props) {
             React.createElement(CalendarBody, null))));
 };
 export default CalendarComponent;
-CalendarComponent.propTypes = {
-    languageChoice: PropTypes.any,
-    yearMin: PropTypes.number,
-    yearMax: PropTypes.number,
-    returnFormat: PropTypes.string
-};
 //# sourceMappingURL=index.js.map

@@ -9,6 +9,7 @@ interface CalendarDemoRequiredProps {
   returnFormat: string;
   defaultDate: Date;
   labelContent: string;
+  nameInput: string;
 }
 
 interface CalendarDemoOptionalProps {
@@ -30,6 +31,7 @@ const Calendar = (props: CalendarDemo) => {
         defaultDate={props.defaultDate}
         labelContent={props.labelContent}
         classChange={props.classChange}
+        nameInput={props.nameInput}
       />
     </CalendarContextProvider>
   );

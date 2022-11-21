@@ -1,6 +1,5 @@
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
-import PropTypes from "prop-types";
 import { format } from "date-fns";
 import { SetStateAction, useEffect } from "react";
 import * as listOfLanguage from "date-fns/esm/locale";
@@ -17,6 +16,7 @@ interface CalendarDemoRequiredProps {
   returnFormat: string;
   defaultDate: Date;
   labelContent: string;
+  nameInput: string;
 }
 
 interface CalendarDemoOptionalProps {
@@ -37,6 +37,7 @@ const MAX_YEAR = 1000;
  * @param classChange
  * @param defaultDate
  * @param labelContent
+ * @param nameInput
  * @returns JSX
  */
 const CalendarComponent = (props: CalendarDemo) => {
@@ -179,6 +180,7 @@ const CalendarComponent = (props: CalendarDemo) => {
         role={"textbox"}
         id={"input-calendar"}
         data-testid={"input-calendar"}
+        name={props.nameInput}
         className={
           calendarContext.isOpen
             ? "input-calendar-open"
@@ -195,10 +197,3 @@ const CalendarComponent = (props: CalendarDemo) => {
 };
 
 export default CalendarComponent;
-
-CalendarComponent.propTypes = {
-  languageChoice: PropTypes.any,
-  yearMin: PropTypes.number,
-  yearMax: PropTypes.number,
-  returnFormat: PropTypes.string,
-};
