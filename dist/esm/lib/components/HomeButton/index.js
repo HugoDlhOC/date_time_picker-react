@@ -14,7 +14,7 @@ var HomeButton = function () {
         calendarContext.setDate(actualDate);
     };
     return (React.createElement("div", null,
-        React.createElement("button", { onClick: handleHome, className: "button-navigation", "aria-label": "Home Current Month", type: "button" },
+        React.createElement("button", { onClick: handleHome, className: "button-navigation", "aria-label": "Home Current Month", type: "button", "data-testid": "button-home-navigation" },
             React.createElement(FontAwesomeIcon, { icon: faHome, className: "button-navigation--icon", size: "lg", color: "white" }))));
 };
 export default HomeButton;

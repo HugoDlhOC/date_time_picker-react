@@ -17,7 +17,7 @@ var HomeButton = function () {
         calendarContext.setDate(actualDate);
     };
     return (react_1["default"].createElement("div", null,
-        react_1["default"].createElement("button", { onClick: handleHome, className: "button-navigation", "aria-label": "Home Current Month", type: "button" },
+        react_1["default"].createElement("button", { onClick: handleHome, className: "button-navigation", "aria-label": "Home Current Month", type: "button", "data-testid": "button-home-navigation" },
             react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faHome, className: "button-navigation--icon", size: "lg", color: "white" }))));
 };
 exports["default"] = HomeButton;

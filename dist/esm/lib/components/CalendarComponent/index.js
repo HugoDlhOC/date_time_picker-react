@@ -26,15 +26,27 @@ var CalendarComponent = function (props) {
     useEffect(function () {
         var handleOpenCalendar = function (e) {
             var calendarsOpened = document.querySelectorAll(".navigation-datepicker.display");
+            var controlClassPresent = [];
             //@ts-ignore
-            var isClickOnCalendar = e.path.find(function (item) {
-                return item.className !== undefined
-                    ? item.className.includes("input-calendar")
-                    : undefined;
-            });
-            //@ts-ignore
-            if (calendarsOpened.length > 1 || isClickOnCalendar === undefined) {
-                calendarContext.setIsOpen(false);
+            if (e.path !== undefined) {
+                //@ts-ignore
+                e.path.forEach(function (item) {
+                    if (item.classList !== undefined) {
+                        item.classList.forEach(function (itemClass) {
+                            if (itemClass.includes("input-calendar")) {
+                                controlClassPresent.push(true);
+                            }
+                        });
+                    }
+                });
+                //@ts-ignore
+                if (calendarsOpened.length > 1 ||
+                    controlClassPresent.find(function (item) { return item === true; }) === undefined) {
+                    calendarContext.setIsOpen(false);
+                }
+            }
+            else {
+                calendarContext.setIsOpen(true);
             }
         };
         // @ts-ignore
@@ -98,7 +110,7 @@ var CalendarComponent = function (props) {
         React.createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
         React.createElement("input", { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
-            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", className: calendarContext.isOpen
+            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", className: calendarContext.isOpen
                 ? "input-calendar-open"
                 : "input-calendar-close" }),
         React.createElement("div", { className: "calendar", "data-testid": "calendar" },
