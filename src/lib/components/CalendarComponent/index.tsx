@@ -41,23 +41,37 @@ const MAX_YEAR = 1000;
  */
 const CalendarComponent = (props: CalendarDemo) => {
   const calendarContext = useContext(CalendarContext);
+
   //control clicks if multiples calendar are present
   useEffect(() => {
     const handleOpenCalendar = (e: PointerEvent<HTMLDivElement>) => {
       const calendarsOpened = document.querySelectorAll(
         ".navigation-datepicker.display"
       );
+      let controlClassPresent: Array<any> = [];
 
       //@ts-ignore
-      const isClickOnCalendar = e.path.find((item: any) =>
-        item.className !== undefined
-          ? item.className.includes("input-calendar")
-          : undefined
-      );
+      if (e.path !== undefined) {
+        //@ts-ignore
+        e.path.forEach((item: any) => {
+          if (item.classList !== undefined) {
+            item.classList.forEach((itemClass: any) => {
+              if (itemClass.includes("input-calendar")) {
+                controlClassPresent.push(true);
+              }
+            });
+          }
+        });
 
-      //@ts-ignore
-      if (calendarsOpened.length > 1 || isClickOnCalendar === undefined) {
-        calendarContext.setIsOpen(false);
+        //@ts-ignore
+        if (
+          calendarsOpened.length > 1 ||
+          controlClassPresent.find((item) => item === true) === undefined
+        ) {
+          calendarContext.setIsOpen(false);
+        }
+      } else {
+        calendarContext.setIsOpen(true);
       }
     };
 
@@ -164,6 +178,7 @@ const CalendarComponent = (props: CalendarDemo) => {
         value={calendarContext.returnDate}
         role={"textbox"}
         id={"input-calendar"}
+        data-testid={"input-calendar"}
         className={
           calendarContext.isOpen
             ? "input-calendar-open"

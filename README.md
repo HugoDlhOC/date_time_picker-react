@@ -14,6 +14,7 @@ Features include:
 - As a developer, you have the possibility to customize the calendar via the class-toggle
 - The returned date will have the format you want. This format is based on method of date-fns library
 
+Link npm package : [link](https://www.npmjs.com/package/@hugo.delahaye53/react-datepicker).
 # Installation and usage
 
 The easiest way to use react-select is to install it from npm and build it into your app with Webpack.

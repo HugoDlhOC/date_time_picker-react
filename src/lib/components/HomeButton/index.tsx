@@ -24,6 +24,7 @@ const HomeButton = () => {
         className={"button-navigation"}
         aria-label="Home Current Month"
         type={"button"}
+        data-testid={"button-home-navigation"}
       >
         <FontAwesomeIcon
           icon={faHome}
