@@ -6,7 +6,7 @@ interface CalendarDemoRequiredProps {
     returnFormat: string;
     defaultDate: Date;
     labelContent: string;
-    nameInput: string;
+    nameField: string;
 }
 interface CalendarDemoOptionalProps {
     classChange?: string;

@@ -10,6 +10,7 @@ var react_2 = tslib_1.__importDefault(require("react"));
 var react_3 = require("react");
 var CalendarContext_1 = tslib_1.__importDefault(require("../../context/CalendarContext"));
 var defineYearsSelect_1 = tslib_1.__importDefault(require("../../services/defineYearsSelect"));
+var formik_1 = require("formik");
 var MAX_YEAR = 1000;
 /**
  * This component represents the entire calendar.
@@ -20,10 +21,11 @@ var MAX_YEAR = 1000;
  * @param classChange
  * @param defaultDate
  * @param labelContent
- * @param nameInput
+ * @param nameField
  * @returns JSX
  */
 var CalendarComponent = function (props) {
+    var field = (0, formik_1.useField)(props.nameField)[0];
     var calendarContext = (0, react_3.useContext)(CalendarContext_1["default"]);
     //control clicks if multiples calendar are present
     (0, react_1.useEffect)(function () {
@@ -111,11 +113,11 @@ var CalendarComponent = function (props) {
             ? "input-calendar"
             : "input-calendar ".concat(props.classChange) },
         react_2["default"].createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
-        react_2["default"].createElement("input", { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
+        react_2["default"].createElement("input", tslib_1.__assign({}, field, { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
-            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", name: props.nameInput, className: calendarContext.isOpen
+            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", className: calendarContext.isOpen
                 ? "input-calendar-open"
-                : "input-calendar-close" }),
+                : "input-calendar-close" })),
         react_2["default"].createElement("div", { className: "calendar", "data-testid": "calendar" },
             react_2["default"].createElement(Navigation_1["default"], { isOpen: calendarContext.isOpen }),
             react_2["default"].createElement(CalendarBody_1["default"], null))));

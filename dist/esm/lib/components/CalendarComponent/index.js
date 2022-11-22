@@ -1,3 +1,4 @@
+import { __assign } from "tslib";
 import Navigation from "../Navigation";
 import CalendarBody from "../CalendarBody";
 import { format } from "date-fns";
@@ -7,6 +8,7 @@ import React from "react";
 import { useContext } from "react";
 import CalendarContext from "../../context/CalendarContext";
 import defineYearsSelect from "../../services/defineYearsSelect";
+import { useField } from "formik";
 var MAX_YEAR = 1000;
 /**
  * This component represents the entire calendar.
@@ -17,10 +19,11 @@ var MAX_YEAR = 1000;
  * @param classChange
  * @param defaultDate
  * @param labelContent
- * @param nameInput
+ * @param nameField
  * @returns JSX
  */
 var CalendarComponent = function (props) {
+    var field = useField(props.nameField)[0];
     var calendarContext = useContext(CalendarContext);
     //control clicks if multiples calendar are present
     useEffect(function () {
@@ -108,11 +111,11 @@ var CalendarComponent = function (props) {
             ? "input-calendar"
             : "input-calendar ".concat(props.classChange) },
         React.createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
-        React.createElement("input", { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
+        React.createElement("input", __assign({}, field, { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
-            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", name: props.nameInput, className: calendarContext.isOpen
+            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", className: calendarContext.isOpen
                 ? "input-calendar-open"
-                : "input-calendar-close" }),
+                : "input-calendar-close" })),
         React.createElement("div", { className: "calendar", "data-testid": "calendar" },
             React.createElement(Navigation, { isOpen: calendarContext.isOpen }),
             React.createElement(CalendarBody, null))));
