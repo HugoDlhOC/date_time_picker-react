@@ -26,7 +26,7 @@ var MonthSelect = function () {
     };
     return (React.createElement("div", null,
         React.createElement("label", { htmlFor: "months" }),
-        React.createElement(Select, { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months", styles: styleMonthSelect })));
+        React.createElement(Select, { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: calendarContext.idMonthSelect, "aria-label": "months", styles: styleMonthSelect })));
 };
 export default MonthSelect;
 //# sourceMappingURL=index.js.map

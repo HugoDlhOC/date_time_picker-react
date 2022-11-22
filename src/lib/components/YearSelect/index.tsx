@@ -45,7 +45,7 @@ const YearSelect = () => {
         isSearchable={false}
         isClearable={false}
         data-testid={"years-select"}
-        id={"years"}
+        id={calendarContext.idYearSelect}
         aria-label={"years"}
         styles={configStyleYearSelect}
       />

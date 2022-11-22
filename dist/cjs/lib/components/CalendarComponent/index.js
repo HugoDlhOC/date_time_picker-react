@@ -21,10 +21,13 @@ var MAX_YEAR = 1000;
  * @param defaultDate
  * @param labelContent
  * @param nameInput
+ * @param idCalendar
  * @returns JSX
  */
 var CalendarComponent = function (props) {
     var calendarContext = (0, react_3.useContext)(CalendarContext_1["default"]);
+    calendarContext.setIdMonthSelect(props.idMonthSelect);
+    calendarContext.setIdYearSelect(props.idYearSelect);
     //control clicks if multiples calendar are present
     (0, react_1.useEffect)(function () {
         var handleOpenCalendar = function (e) {
@@ -110,10 +113,10 @@ var CalendarComponent = function (props) {
     react_2["default"].createElement("div", { className: props.classChange === undefined
             ? "input-calendar"
             : "input-calendar ".concat(props.classChange) },
-        react_2["default"].createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
+        react_2["default"].createElement("label", { htmlFor: props.idCalendar }, props.labelContent),
         react_2["default"].createElement("input", { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
-            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", name: props.nameInput, className: calendarContext.isOpen
+            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: props.idCalendar, "data-testid": "input-calendar", name: props.nameInput, className: calendarContext.isOpen
                 ? "input-calendar-open"
                 : "input-calendar-close" }),
         react_2["default"].createElement("div", { className: "calendar", "data-testid": "calendar" },

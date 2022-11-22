@@ -26,7 +26,7 @@ var YearSelect = function () {
         react_1["default"].createElement("label", { htmlFor: "years" }),
         react_1["default"].createElement(react_select_1["default"], { defaultValue: years.find(function (item) { return item.value === 2022; }), 
             //@ts-ignore
-            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select", id: "years", "aria-label": "years", styles: configStyleYearSelect_1["default"] })));
+            onChange: handleSelectChangeYear, value: years.find(function (item) { return item.value === dateConvert.getFullYear(); }), options: years, isSearchable: false, isClearable: false, "data-testid": "years-select", id: calendarContext.idYearSelect, "aria-label": "years", styles: configStyleYearSelect_1["default"] })));
 };
 exports["default"] = YearSelect;
 //# sourceMappingURL=index.js.map

@@ -15,6 +15,8 @@ export const CalendarContextProvider = (props: CalendarContextProviderDemo) => {
   const [yearMin, setYearMin] = useState(new Date().getFullYear() - 50);
   const [yearMax, setYearMax] = useState(new Date().getFullYear() + 50);
   const [returnFormat, setReturnFormat] = useState("MM/dd/yyyy");
+  const [idYearSelect, setIdYearSelect] = useState("years");
+  const [idMonthSelect, setIdMonthSelect] = useState("months");
 
   const value = {
     isOpen,
@@ -31,6 +33,10 @@ export const CalendarContextProvider = (props: CalendarContextProviderDemo) => {
     setYearMax,
     returnFormat,
     setReturnFormat,
+    idYearSelect,
+    setIdYearSelect,
+    idMonthSelect,
+    setIdMonthSelect,
   };
 
   return (

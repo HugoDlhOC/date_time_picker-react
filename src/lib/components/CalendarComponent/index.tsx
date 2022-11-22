@@ -17,6 +17,9 @@ interface CalendarDemoRequiredProps {
   defaultDate: Date;
   labelContent: string;
   nameInput: string;
+  idCalendar: string;
+  idMonthSelect: string;
+  idYearSelect: string;
 }
 
 interface CalendarDemoOptionalProps {
@@ -38,10 +41,14 @@ const MAX_YEAR = 1000;
  * @param defaultDate
  * @param labelContent
  * @param nameInput
+ * @param idCalendar
  * @returns JSX
  */
 const CalendarComponent = (props: CalendarDemo) => {
   const calendarContext = useContext(CalendarContext);
+
+  calendarContext.setIdMonthSelect(props.idMonthSelect);
+  calendarContext.setIdYearSelect(props.idYearSelect);
 
   //control clicks if multiples calendar are present
   useEffect(() => {
@@ -170,7 +177,7 @@ const CalendarComponent = (props: CalendarDemo) => {
           : `input-calendar ${props.classChange}`
       }
     >
-      <label htmlFor={"input-calendar"}>{props.labelContent}</label>
+      <label htmlFor={props.idCalendar}>{props.labelContent}</label>
       <input
         type={"text"}
         onClick={() => calendarContext.setIsOpen(!calendarContext.isOpen)}
@@ -178,7 +185,7 @@ const CalendarComponent = (props: CalendarDemo) => {
         onChange={onChangeInput}
         value={calendarContext.returnDate}
         role={"textbox"}
-        id={"input-calendar"}
+        id={props.idCalendar}
         data-testid={"input-calendar"}
         name={props.nameInput}
         className={

@@ -15,6 +15,9 @@ describe("Given I am on a page", () => {
           defaultDate={new Date()}
           labelContent={"Date"}
           nameInput={"calendar"}
+          idCalendar={"input-calendar"}
+          idYearSelect={"years"}
+          idMonthSelect={"months"}
         />
       );
 
@@ -35,6 +38,9 @@ describe("Given I am on a page", () => {
             defaultDate={new Date()}
             labelContent={"Date"}
             nameInput={"calendar"}
+            idCalendar={"input-calendar"}
+            idYearSelect={"years"}
+            idMonthSelect={"months"}
           />
         );
       }).toThrow(
@@ -53,6 +59,9 @@ describe("Given I am on a page", () => {
             defaultDate={new Date()}
             labelContent={"Date"}
             nameInput={"calendar"}
+            idCalendar={"input-calendar"}
+            idYearSelect={"years"}
+            idMonthSelect={"months"}
           />
         );
       }).toThrow(
@@ -71,6 +80,9 @@ describe("Given I am on a page", () => {
             defaultDate={new Date()}
             labelContent={"Date"}
             nameInput={"calendar"}
+            idCalendar={"input-calendar"}
+            idYearSelect={"years"}
+            idMonthSelect={"months"}
           />
         );
       }).toThrow(
@@ -89,6 +101,9 @@ describe("Given I am on a page", () => {
             defaultDate={new Date()}
             labelContent={"Date"}
             nameInput={"calendar"}
+            idCalendar={"input-calendar"}
+            idYearSelect={"years"}
+            idMonthSelect={"months"}
           />
         );
       }).toThrow(
@@ -107,6 +122,9 @@ describe("Given I am on a page", () => {
             defaultDate={new Date()}
             labelContent={"Date"}
             nameInput={"calendar"}
+            idCalendar={"input-calendar"}
+            idYearSelect={"years"}
+            idMonthSelect={"months"}
           />
         );
       }).toThrow(
@@ -124,6 +142,9 @@ describe("Given I am on a page", () => {
           defaultDate={new Date()}
           labelContent={"Date"}
           nameInput={"calendar"}
+          idCalendar={"input-calendar"}
+          idYearSelect={"years"}
+          idMonthSelect={"months"}
         />
       );
 
@@ -163,6 +184,9 @@ describe("Given I am on a page", () => {
           defaultDate={new Date()}
           labelContent={"Date"}
           nameInput={"calendar"}
+          idCalendar={"input-calendar"}
+          idYearSelect={"years"}
+          idMonthSelect={"months"}
         />
       );
 
@@ -202,6 +226,9 @@ describe("Given I am on a page", () => {
           defaultDate={new Date()}
           labelContent={"Date"}
           nameInput={"calendar"}
+          idCalendar={"input-calendar"}
+          idYearSelect={"years"}
+          idMonthSelect={"months"}
         />
       );
 

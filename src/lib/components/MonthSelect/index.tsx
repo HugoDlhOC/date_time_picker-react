@@ -55,7 +55,7 @@ const MonthSelect = () => {
         isSearchable={false}
         isClearable={false}
         data-testid={"months-select"}
-        id={"months"}
+        id={calendarContext.idMonthSelect}
         aria-label={"months"}
         styles={styleMonthSelect}
       />

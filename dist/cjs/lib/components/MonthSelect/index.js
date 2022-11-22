@@ -29,7 +29,7 @@ var MonthSelect = function () {
     };
     return (react_1["default"].createElement("div", null,
         react_1["default"].createElement("label", { htmlFor: "months" }),
-        react_1["default"].createElement(react_select_1["default"], { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: "months", "aria-label": "months", styles: configStyleMonthSelect_1["default"] })));
+        react_1["default"].createElement(react_select_1["default"], { defaultValue: months.find(function (item) { return item.value === dateConvert.getMonth(); }), value: months.find(function (item) { return item.value === dateConvert.getMonth(); }), onChange: handleSelectChangeMonth, options: months, isSearchable: false, isClearable: false, "data-testid": "months-select", id: calendarContext.idMonthSelect, "aria-label": "months", styles: configStyleMonthSelect_1["default"] })));
 };
 exports["default"] = MonthSelect;
 //# sourceMappingURL=index.js.map
