@@ -165,6 +165,8 @@ const CalendarComponent = (props: CalendarDemo) => {
     return field.onChange(newEvent);
   };
 
+  field.value = calendarContext.returnDate;
+
   return (
     // @ts-ignore
     <div
@@ -181,7 +183,6 @@ const CalendarComponent = (props: CalendarDemo) => {
         onClick={() => calendarContext.setIsOpen(!calendarContext.isOpen)}
         // @ts-ignore
         onChange={onChangeInput}
-        value={calendarContext.returnDate}
         role={"textbox"}
         id={"input-calendar"}
         data-testid={"input-calendar"}

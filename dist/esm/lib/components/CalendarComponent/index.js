@@ -107,6 +107,7 @@ var CalendarComponent = function (props) {
         calendarContext.setReturnDate(e.target.value);
         return field.onChange(newEvent);
     };
+    field.value = calendarContext.returnDate;
     return (
     // @ts-ignore
     React.createElement("div", { className: props.classChange === undefined
@@ -115,7 +116,7 @@ var CalendarComponent = function (props) {
         React.createElement("label", { htmlFor: "input-calendar" }, props.labelContent),
         React.createElement("input", __assign({}, field, { type: "text", onClick: function () { return calendarContext.setIsOpen(!calendarContext.isOpen); }, 
             // @ts-ignore
-            onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", className: calendarContext.isOpen
+            onChange: onChangeInput, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", className: calendarContext.isOpen
                 ? "input-calendar-open"
                 : "input-calendar-close" })),
         React.createElement("div", { className: "calendar", "data-testid": "calendar" },
