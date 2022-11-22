@@ -160,7 +160,9 @@ const CalendarComponent = (props: CalendarDemo) => {
   const onChangeInput = (e: {
     target: { value: SetStateAction<undefined> };
   }) => {
+    let newEvent = e;
     calendarContext.setReturnDate(e.target.value);
+    return field.onChange(newEvent);
   };
 
   return (

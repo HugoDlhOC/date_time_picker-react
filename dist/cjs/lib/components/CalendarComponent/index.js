@@ -105,7 +105,9 @@ var CalendarComponent = function (props) {
         }
     }, [props.defaultDate]);
     var onChangeInput = function (e) {
+        var newEvent = e;
         calendarContext.setReturnDate(e.target.value);
+        return field.onChange(newEvent);
     };
     return (
     // @ts-ignore
