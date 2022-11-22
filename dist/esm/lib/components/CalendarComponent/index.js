@@ -98,7 +98,7 @@ var CalendarComponent = function (props) {
         catch (e) {
             throw new Error("The format passed in props does not conform to the expectations of date-fns, consult the documentation of date-fns.");
         }
-    }, [props.defaultDate]);
+    }, []);
     var onChangeInput = function (e) {
         calendarContext.setReturnDate(e.target.value);
     };

@@ -153,7 +153,7 @@ const CalendarComponent = (props: CalendarDemo) => {
         "The format passed in props does not conform to the expectations of date-fns, consult the documentation of date-fns."
       );
     }
-  }, [props.defaultDate]);
+  }, []);
 
   const onChangeInput = (e: {
     target: { value: SetStateAction<undefined> };
