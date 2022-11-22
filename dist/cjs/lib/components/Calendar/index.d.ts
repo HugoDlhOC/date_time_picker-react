@@ -7,9 +7,6 @@ interface CalendarDemoRequiredProps {
     defaultDate: Date;
     labelContent: string;
     nameInput: string;
-    idCalendar: string;
-    idMonthSelect: string;
-    idYearSelect: string;
 }
 interface CalendarDemoOptionalProps {
     classChange?: string;

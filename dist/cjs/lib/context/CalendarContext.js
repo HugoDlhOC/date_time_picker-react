@@ -13,8 +13,6 @@ var CalendarContextProvider = function (props) {
     var _e = (0, react_1.useState)(new Date().getFullYear() - 50), yearMin = _e[0], setYearMin = _e[1];
     var _f = (0, react_1.useState)(new Date().getFullYear() + 50), yearMax = _f[0], setYearMax = _f[1];
     var _g = (0, react_1.useState)("MM/dd/yyyy"), returnFormat = _g[0], setReturnFormat = _g[1];
-    var _h = (0, react_1.useState)("years"), idYearSelect = _h[0], setIdYearSelect = _h[1];
-    var _j = (0, react_1.useState)("months"), idMonthSelect = _j[0], setIdMonthSelect = _j[1];
     var value = {
         isOpen: isOpen,
         setIsOpen: setIsOpen,
@@ -29,11 +27,7 @@ var CalendarContextProvider = function (props) {
         yearMax: yearMax,
         setYearMax: setYearMax,
         returnFormat: returnFormat,
-        setReturnFormat: setReturnFormat,
-        idYearSelect: idYearSelect,
-        setIdYearSelect: setIdYearSelect,
-        idMonthSelect: idMonthSelect,
-        setIdMonthSelect: setIdMonthSelect
+        setReturnFormat: setReturnFormat
     };
     return (react_1["default"].createElement(exports.CalendarContext.Provider, { value: value }, props.children));
 };
