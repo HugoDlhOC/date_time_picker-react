@@ -14,6 +14,7 @@ interface CalendarDemoRequiredProps {
 
 interface CalendarDemoOptionalProps {
   classChange?: string;
+  handleDateChanged?: (e: any) => string;
 }
 
 interface CalendarDemo
@@ -32,6 +33,7 @@ const Calendar = (props: CalendarDemo) => {
         labelContent={props.labelContent}
         classChange={props.classChange}
         nameInput={props.nameInput}
+        handleDateChanged={props.handleDateChanged}
       />
     </CalendarContextProvider>
   );

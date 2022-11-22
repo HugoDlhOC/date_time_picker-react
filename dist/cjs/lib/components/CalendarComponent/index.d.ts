@@ -10,6 +10,7 @@ interface CalendarDemoRequiredProps {
 }
 interface CalendarDemoOptionalProps {
     classChange?: string;
+    handleDateChanged?: (e: any) => string;
 }
 interface CalendarDemo extends CalendarDemoRequiredProps, CalendarDemoOptionalProps {
 }
