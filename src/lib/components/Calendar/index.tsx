@@ -9,12 +9,12 @@ interface CalendarDemoRequiredProps {
   returnFormat: string;
   defaultDate: Date;
   labelContent: string;
-  nameInput: string;
 }
 
 interface CalendarDemoOptionalProps {
   classChange?: string;
-  handleDateChanged?: (e: any) => string;
+  nameInput?: string;
+  handleDateChanged?: (e: any) => void;
 }
 
 interface CalendarDemo

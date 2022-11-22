@@ -63,6 +63,8 @@ Common props you may want to specify include:
 - `defaultDate` - define the date display by default in the input
 - `labelContent` - define the text of the label
 - `classChange` - give your own class for custom the calendar (props not required)
+- `nameInput` - choice name attribute for input (props not required)
+- `handleDateChanged` - return value when the returnValue on input change (props not required)
 
 
 ## More explication for many props
