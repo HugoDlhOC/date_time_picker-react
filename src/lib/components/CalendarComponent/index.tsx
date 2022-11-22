@@ -8,7 +8,6 @@ import { useContext } from "react";
 import CalendarContext from "../../context/CalendarContext";
 import { PointerEvent } from "react";
 import defineYearsSelect from "../../services/defineYearsSelect";
-import { useField } from "formik";
 
 interface CalendarDemoRequiredProps {
   languageChoice: string;
@@ -17,7 +16,7 @@ interface CalendarDemoRequiredProps {
   returnFormat: string;
   defaultDate: Date;
   labelContent: string;
-  nameField: string;
+  nameInput: string;
 }
 
 interface CalendarDemoOptionalProps {
@@ -38,11 +37,10 @@ const MAX_YEAR = 1000;
  * @param classChange
  * @param defaultDate
  * @param labelContent
- * @param nameField
+ * @param nameInput
  * @returns JSX
  */
 const CalendarComponent = (props: CalendarDemo) => {
-  const [field] = useField(props.nameField);
   const calendarContext = useContext(CalendarContext);
 
   //control clicks if multiples calendar are present
@@ -160,12 +158,8 @@ const CalendarComponent = (props: CalendarDemo) => {
   const onChangeInput = (e: {
     target: { value: SetStateAction<undefined> };
   }) => {
-    let newEvent = e;
     calendarContext.setReturnDate(e.target.value);
-    return field.onChange(newEvent);
   };
-
-  field.value = calendarContext.returnDate;
 
   return (
     // @ts-ignore
@@ -178,14 +172,15 @@ const CalendarComponent = (props: CalendarDemo) => {
     >
       <label htmlFor={"input-calendar"}>{props.labelContent}</label>
       <input
-        {...field}
         type={"text"}
         onClick={() => calendarContext.setIsOpen(!calendarContext.isOpen)}
         // @ts-ignore
         onChange={onChangeInput}
+        value={calendarContext.returnDate}
         role={"textbox"}
         id={"input-calendar"}
         data-testid={"input-calendar"}
+        name={props.nameInput}
         className={
           calendarContext.isOpen
             ? "input-calendar-open"

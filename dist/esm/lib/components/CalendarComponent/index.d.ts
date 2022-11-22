@@ -6,7 +6,7 @@ interface CalendarDemoRequiredProps {
     returnFormat: string;
     defaultDate: Date;
     labelContent: string;
-    nameField: string;
+    nameInput: string;
 }
 interface CalendarDemoOptionalProps {
     classChange?: string;
@@ -22,7 +22,7 @@ interface CalendarDemo extends CalendarDemoRequiredProps, CalendarDemoOptionalPr
  * @param classChange
  * @param defaultDate
  * @param labelContent
- * @param nameField
+ * @param nameInput
  * @returns JSX
  */
 declare const CalendarComponent: (props: CalendarDemo) => JSX.Element;

@@ -14,7 +14,7 @@ describe("Given I am on a page", () => {
           returnFormat={"dd/MM/yyyy"}
           defaultDate={new Date()}
           labelContent={"Date"}
-          nameField={"calendar"}
+          nameInput={"calendar"}
         />
       );
 
@@ -34,7 +34,7 @@ describe("Given I am on a page", () => {
             returnFormat={"dd/MM/yyyy"}
             defaultDate={new Date()}
             labelContent={"Date"}
-            nameField={"calendar"}
+            nameInput={"calendar"}
           />
         );
       }).toThrow(
@@ -52,7 +52,7 @@ describe("Given I am on a page", () => {
             returnFormat={"dd/MM/yyyy"}
             defaultDate={new Date()}
             labelContent={"Date"}
-            nameField={"calendar"}
+            nameInput={"calendar"}
           />
         );
       }).toThrow(
@@ -70,7 +70,7 @@ describe("Given I am on a page", () => {
             returnFormat={"dd/MM/yyyy"}
             defaultDate={new Date()}
             labelContent={"Date"}
-            nameField={"calendar"}
+            nameInput={"calendar"}
           />
         );
       }).toThrow(
@@ -88,7 +88,7 @@ describe("Given I am on a page", () => {
             returnFormat={"day/month/years"}
             defaultDate={new Date()}
             labelContent={"Date"}
-            nameField={"calendar"}
+            nameInput={"calendar"}
           />
         );
       }).toThrow(
@@ -106,7 +106,7 @@ describe("Given I am on a page", () => {
             returnFormat={"dd/MM/yyyy"}
             defaultDate={new Date()}
             labelContent={"Date"}
-            nameField={"calendar"}
+            nameInput={"calendar"}
           />
         );
       }).toThrow(
@@ -123,7 +123,7 @@ describe("Given I am on a page", () => {
           returnFormat={"dd/MM/yyyy"}
           defaultDate={new Date()}
           labelContent={"Date"}
-          nameField={"calendar"}
+          nameInput={"calendar"}
         />
       );
 
@@ -162,7 +162,7 @@ describe("Given I am on a page", () => {
           returnFormat={"dd/MM/yyyy"}
           defaultDate={new Date()}
           labelContent={"Date"}
-          nameField={"calendar"}
+          nameInput={"calendar"}
         />
       );
 
@@ -201,7 +201,7 @@ describe("Given I am on a page", () => {
           returnFormat={"dd/MM/yyyy"}
           defaultDate={new Date()}
           labelContent={"Date"}
-          nameField={"calendar"}
+          nameInput={"calendar"}
         />
       );
 
