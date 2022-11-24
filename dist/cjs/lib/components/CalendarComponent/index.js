@@ -26,37 +26,9 @@ var MAX_YEAR = 1000;
 var CalendarComponent = function (props) {
     var calendarContext = (0, react_3.useContext)(CalendarContext_1["default"]);
     //control clicks if multiples calendar are present
-    (0, react_1.useEffect)(function () {
-        var handleOpenCalendar = function (e) {
-            var calendarsOpened = document.querySelectorAll(".navigation-datepicker.display");
-            var controlClassPresent = [];
-            //@ts-ignore
-            if (e.path !== undefined) {
-                //@ts-ignore
-                e.path.forEach(function (item) {
-                    if (item.classList !== undefined) {
-                        item.classList.forEach(function (itemClass) {
-                            if (itemClass.includes("input-calendar")) {
-                                controlClassPresent.push(true);
-                            }
-                        });
-                    }
-                });
-                //@ts-ignore
-                if (calendarsOpened.length > 1 ||
-                    controlClassPresent.find(function (item) { return item === true; }) === undefined) {
-                    calendarContext.setIsOpen(false);
-                }
-            }
-            else {
-                calendarContext.setIsOpen(true);
-            }
-        };
-        // @ts-ignore
-        document.body.addEventListener("click", handleOpenCalendar);
-        // @ts-ignore
-        return function () { return document.body.removeEventListener("click", handleOpenCalendar); };
-    }, []);
+    var handleOnBlur = function () {
+        calendarContext.setIsOpen(!calendarContext.isOpen);
+    };
     //CONTROL
     //YEARS
     var yearMinConvert = parseInt(String(props.yearMin));
@@ -116,7 +88,7 @@ var CalendarComponent = function (props) {
             // @ts-ignore
             onChange: onChangeInput, value: calendarContext.returnDate, role: "textbox", id: "input-calendar", "data-testid": "input-calendar", name: props.nameInput, className: calendarContext.isOpen
                 ? "input-calendar-open"
-                : "input-calendar-close" }),
+                : "input-calendar-close", onBlur: handleOnBlur }),
         react_2["default"].createElement("div", { className: "calendar", "data-testid": "calendar" },
             react_2["default"].createElement(Navigation_1["default"], { isOpen: calendarContext.isOpen }),
             react_2["default"].createElement(CalendarBody_1["default"], null))));
