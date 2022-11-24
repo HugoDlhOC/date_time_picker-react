@@ -6,7 +6,6 @@ import * as listOfLanguage from "date-fns/esm/locale";
 import React from "react";
 import { useContext } from "react";
 import CalendarContext from "../../context/CalendarContext";
-import { PointerEvent } from "react";
 import defineYearsSelect from "../../services/defineYearsSelect";
 
 interface CalendarDemoRequiredProps {
@@ -45,44 +44,9 @@ const CalendarComponent = (props: CalendarDemo) => {
   const calendarContext = useContext(CalendarContext);
 
   //control clicks if multiples calendar are present
-  useEffect(() => {
-    const handleOpenCalendar = (e: PointerEvent<HTMLDivElement>) => {
-      const calendarsOpened = document.querySelectorAll(
-        ".navigation-datepicker.display"
-      );
-      let controlClassPresent: Array<any> = [];
-
-      //@ts-ignore
-      if (e.path !== undefined) {
-        //@ts-ignore
-        e.path.forEach((item: any) => {
-          if (item.classList !== undefined) {
-            item.classList.forEach((itemClass: any) => {
-              if (itemClass.includes("input-calendar")) {
-                controlClassPresent.push(true);
-              }
-            });
-          }
-        });
-
-        //@ts-ignore
-        if (
-          calendarsOpened.length > 1 ||
-          controlClassPresent.find((item) => item === true) === undefined
-        ) {
-          calendarContext.setIsOpen(false);
-        }
-      } else {
-        calendarContext.setIsOpen(true);
-      }
-    };
-
-    // @ts-ignore
-    document.body.addEventListener("click", handleOpenCalendar);
-
-    // @ts-ignore
-    return () => document.body.removeEventListener("click", handleOpenCalendar);
-  }, []);
+  const handleOnBlur = () => {
+    calendarContext.setIsOpen(!calendarContext.isOpen);
+  };
 
   //CONTROL
   //YEARS
@@ -188,6 +152,7 @@ const CalendarComponent = (props: CalendarDemo) => {
             ? "input-calendar-open"
             : "input-calendar-close"
         }
+        onBlur={handleOnBlur}
       />
       <div className={"calendar"} data-testid={"calendar"}>
         {/*@ts-ignore*/}
