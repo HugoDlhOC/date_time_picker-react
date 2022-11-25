@@ -139,7 +139,6 @@ const CalendarComponent = (props: CalendarDemo) => {
 
   //unique id
   const idCalendar = nanoid();
-  console.log(idCalendar);
 
   return (
     <div
