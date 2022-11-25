@@ -134,8 +134,9 @@ const CalendarComponent = (props: CalendarDemo) => {
     target: { value: SetStateAction<undefined> };
   }) => {
     calendarContext.setReturnDate(e.target.value);
-    props.handleDateChanged(e.target.value);
   };
+
+  props.handleDateChanged(calendarContext.returnDate);
 
   //unique id
   const idCalendar = nanoid();
