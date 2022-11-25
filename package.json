@@ -1,6 +1,6 @@
 {
   "name": "@hugo.delahaye53/react-datepicker",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": "React-DatePicker, created by Hugo DELAHAYE aims to provide your project with the possibility to have a calendar based on an Input, visually identifiable.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
