@@ -3,6 +3,7 @@ import defineYearsSelect from "../../services/defineYearsSelect";
 import React, { useContext } from "react";
 import configStyleYearSelect from "../../services/configStyleYearSelect";
 import CalendarContext from "../../context/CalendarContext";
+import { nanoid } from "nanoid";
 
 /**
  * An interval has been defined by the developer per props.
@@ -33,9 +34,12 @@ const YearSelect = () => {
     calendarContext.setYearMax(years[years.length - 1].value);
   };
 
+  //unique id
+  const idYearSelect = nanoid();
+
   return (
     <div>
-      <label htmlFor={"years"}></label>
+      <label htmlFor={idYearSelect}></label>
       <Select
         defaultValue={years.find((item) => item.value === 2022)}
         //@ts-ignore
@@ -45,7 +49,7 @@ const YearSelect = () => {
         isSearchable={false}
         isClearable={false}
         data-testid={"years-select"}
-        id={"years"}
+        id={idYearSelect}
         aria-label={"years"}
         styles={configStyleYearSelect}
       />

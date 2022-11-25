@@ -13,7 +13,6 @@ import CalendarContext from "../../context/CalendarContext";
 const CalendarBody = () => {
   const calendarContext = useContext(CalendarContext);
 
-  // @ts-ignore
   const objDate = new Date(calendarContext.date);
 
   //number of days in the current month
@@ -50,19 +49,14 @@ const CalendarBody = () => {
 
     clickDate.setDate(dayNumber);
 
-    //dispatch(defineReturnDate({ returnDate: format(clickDate, returnFormat) }));
-    // @ts-ignore
     calendarContext.setReturnDate(
       format(clickDate, calendarContext.returnFormat)
     );
 
-    //context
-    // @ts-ignore
     calendarContext.setIsOpen(false);
   };
 
   return (
-    //@ts-ignore
     <div
       className={
         calendarContext.isOpen === true ? "body-calendar" : "body-calendar hide"

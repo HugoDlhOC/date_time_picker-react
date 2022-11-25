@@ -34,7 +34,7 @@ Then use it in your app:
 ```js
 import React from 'react';
 import {Calendar} from "@hugo.delahaye53/react-datepicker";
-import "@hugo.delahaye53/react-datepicker/dist/cjs/styles/style.css";
+import "@hugo.delahaye53/react-datepicker/dist/esm/styles/style.css";
 
 export default function App() {
   return (
@@ -76,6 +76,10 @@ Common props you may want to specify include:
 
 ## Customisation
 You can add your class with the props classChange.
+Don't forget import this file :
+```js
+import "@hugo.delahaye53/react-datepicker/dist/esm/styles/style.css";
+```
 # Mentions
 
 This project uses npm [react-select package](https://www.npmjs.com/package/react-select) to create a drop-down menu with items and offers many features.

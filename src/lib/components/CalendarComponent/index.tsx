@@ -7,6 +7,7 @@ import React from "react";
 import { useContext } from "react";
 import CalendarContext from "../../context/CalendarContext";
 import defineYearsSelect from "../../services/defineYearsSelect";
+import { nanoid } from "nanoid";
 
 interface CalendarDemoRequiredProps {
   languageChoice: string;
@@ -27,6 +28,12 @@ interface CalendarDemo
   extends CalendarDemoRequiredProps,
     CalendarDemoOptionalProps {}
 
+interface FocusEvent<T = Element> {
+  currentTarget: any;
+  relatedTarget: EventTarget | null;
+  target: EventTarget & T;
+}
+
 const MAX_YEAR = 1000;
 /**
  * This component represents the entire calendar.
@@ -44,8 +51,14 @@ const CalendarComponent = (props: CalendarDemo) => {
   const calendarContext = useContext(CalendarContext);
 
   //control clicks if multiples calendar are present
-  const handleOnBlur = () => {
-    calendarContext.setIsOpen(!calendarContext.isOpen);
+  const handleOnBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const currentTarget = e.currentTarget;
+
+    requestAnimationFrame(() => {
+      if (!currentTarget.contains(document.activeElement)) {
+        calendarContext.setIsOpen(false);
+      }
+    });
   };
 
   //CONTROL
@@ -94,12 +107,9 @@ const CalendarComponent = (props: CalendarDemo) => {
     );
   }
 
-  //redux
   useEffect(() => {
     calendarContext.setLanguage(props.languageChoice);
-    //redux
     calendarContext.setReturnFormat(props.returnFormat);
-    //redux
     calendarContext.setYearMin(yearMinConvert);
     calendarContext.setYearMax(yearMaxConvert);
   }, []);
@@ -127,16 +137,21 @@ const CalendarComponent = (props: CalendarDemo) => {
     props.handleDateChanged(e.target.value);
   };
 
+  //unique id
+  const idCalendar = nanoid();
+  console.log(idCalendar);
+
   return (
-    // @ts-ignore
     <div
       className={
         props.classChange === undefined
           ? "input-calendar"
           : `input-calendar ${props.classChange}`
       }
+      //@ts-ignore
+      onBlur={handleOnBlur}
     >
-      <label htmlFor={"input-calendar"}>{props.labelContent}</label>
+      <label htmlFor={idCalendar}>{props.labelContent}</label>
       <input
         type={"text"}
         onClick={() => calendarContext.setIsOpen(!calendarContext.isOpen)}
@@ -144,7 +159,7 @@ const CalendarComponent = (props: CalendarDemo) => {
         onChange={onChangeInput}
         value={calendarContext.returnDate}
         role={"textbox"}
-        id={"input-calendar"}
+        id={idCalendar}
         data-testid={"input-calendar"}
         name={props.nameInput}
         className={
@@ -152,10 +167,8 @@ const CalendarComponent = (props: CalendarDemo) => {
             ? "input-calendar-open"
             : "input-calendar-close"
         }
-        onBlur={handleOnBlur}
       />
       <div className={"calendar"} data-testid={"calendar"}>
-        {/*@ts-ignore*/}
         <Navigation isOpen={calendarContext.isOpen} />
         <CalendarBody />
       </div>

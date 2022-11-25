@@ -3,6 +3,7 @@ import * as listOfLanguage from "date-fns/esm/locale";
 import React, { useContext } from "react";
 import styleMonthSelect from "../../services/configStyleMonthSelect";
 import CalendarContext from "../../context/CalendarContext";
+import { nanoid } from "nanoid";
 
 /**
  * This component represents the select offering the different months that the user can select.
@@ -42,9 +43,12 @@ const MonthSelect = () => {
     calendarContext.setDate(new Date(saveDate).toISOString());
   };
 
+  //unique id
+  const idMonthSelect = nanoid();
+
   return (
     <div>
-      <label htmlFor={"months"}></label>
+      <label htmlFor={idMonthSelect}></label>
       <Select
         defaultValue={months.find(
           (item) => item.value === dateConvert.getMonth()
@@ -55,7 +59,7 @@ const MonthSelect = () => {
         isSearchable={false}
         isClearable={false}
         data-testid={"months-select"}
-        id={"months"}
+        id={idMonthSelect}
         aria-label={"months"}
         styles={styleMonthSelect}
       />
