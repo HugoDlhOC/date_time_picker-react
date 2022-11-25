@@ -83,7 +83,3 @@ import "@hugo.delahaye53/react-datepicker/dist/esm/styles/style.css";
 # Mentions
 
 This project uses npm [react-select package](https://www.npmjs.com/package/react-select) to create a drop-down menu with items and offers many features.
-
-## License
-
-Common Licence. Copyright (c) Hugo DELAHAYE 2022.

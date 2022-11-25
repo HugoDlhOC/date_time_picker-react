@@ -164,8 +164,8 @@ const CalendarComponent = (props: CalendarDemo) => {
         name={props.nameInput}
         className={
           calendarContext.isOpen
-            ? "input-calendar-open"
-            : "input-calendar-close"
+            ? "input-element input-calendar-open"
+            : "input-element input-calendar-close"
         }
       />
       <div className={"calendar"} data-testid={"calendar"}>
