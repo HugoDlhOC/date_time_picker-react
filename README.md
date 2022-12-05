@@ -33,10 +33,12 @@ Then use it in your app:
 
 ```js
 import React from 'react';
+import { useState } from "react";
 import {Calendar} from "@hugo.delahaye53/react-datepicker";
 import "@hugo.delahaye53/react-datepicker/dist/esm/styles/style.css";
 
 export default function App() {
+  const [date, setDate] = useState();
   return (
     <div className="App">
       <Calendar
@@ -46,6 +48,7 @@ export default function App() {
         returnFormat={"MM/dd/yyyy"}
         defaultDate={new Date()}
         labelContent={"Date"}
+        handleDateChanged={(date) => setDate(date)}
       />
     </div>
   );
@@ -62,9 +65,9 @@ Common props you may want to specify include:
 - `returnFormat` - define the output format of the expected date
 - `defaultDate` - define the date display by default in the input
 - `labelContent` - define the text of the label
+- `handleDateChanged` - return value when the returnValue on input change
 - `classChange` - give your own class for custom the calendar (props not required)
 - `nameInput` - choice name attribute for input (props not required)
-- `handleDateChanged` - return value when the returnValue on input change (props not required)
 
 
 ## More explication for many props
